@@ -1,84 +1,133 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>BayGorn1</title>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        <div class="about">
-            <a class="bg_links social portfolio" href="https://www.rafaelalucas.com" target="_blank">
-               <span class="icon"></span>
-            </a>
-            <a class="bg_links social dribbble" href="https://dribbble.com/rafaelalucas" target="_blank">
-               <span class="icon"></span>
-            </a>
-            <a class="bg_links social linkedin" href="https://www.linkedin.com/in/rafaelalucas/" target="_blank">
-               <span class="icon"></span>
-            </a>
-            <a class="bg_links logo"></a>
-         </div>
-         <!-- end about -->
-         
-             <nav>
-                 <div class="menu">
-                     <p class="website_name">LOGO</p>
-                     <div class="menu_links">
-                         <a href="" class="link">about</a>
-                         <a href="" class="link">projects</a>
-                         <a href="" class="link">contacts</a>
-                     </div>
-                     <div class="menu_icon">
-                         <span class="icon"></span>
-                     </div>
-                 </div>
-             </nav>
-         
-             <section class="wrapper">
-         
-                 <div class="container">
-         
-                     <div id="scene" class="scene" data-hover-only="false">
-         
-         
-                         <div class="circle" data-depth="1.2"></div>
-         
-                         <div class="one" data-depth="0.9">
-                             <div class="content">
-                                 <span class="piece"></span>
-                                 <span class="piece"></span>
-                                 <span class="piece"></span>
-                             </div>
-                         </div>
-         
-                         <div class="two" data-depth="0.60">
-                             <div class="content">
-                                 <span class="piece"></span>
-                                 <span class="piece"></span>
-                                 <span class="piece"></span>
-                             </div>
-                         </div>
-         
-                         <div class="three" data-depth="0.40">
-                             <div class="content">
-                                 <span class="piece"></span>
-                                 <span class="piece"></span>
-                                 <span class="piece"></span>
-                             </div>
-                         </div>
-         
-                         <p class="p404" data-depth="0.50">404</p>
-                         <p class="p404" data-depth="0.10">404</p>
-         
-                     </div>
-         
-                     <div class="text">
-                         <article>
-                             <p>Uh oh! Looks like you got lost. <br>Go back to the homepage if you dare!</p>
-                             <button>i dare!</button>
-                         </article>
-                     </div>
-         
-                 </div>
-             </section>
-    </body>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BayGorn1 - 404</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background-color: #0f0f0f;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    canvas#bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: #00ffe0;
+      text-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0;
+    }
+
+    h1 {
+      font-size: 10rem;
+      margin-bottom: 1rem;
+      animation: glow 2s infinite alternate;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    button {
+      background: none;
+      border: 2px solid #00ffe0;
+      padding: 12px 28px;
+      border-radius: 8px;
+      color: #00ffe0;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0 inset;
+    }
+
+    button:hover {
+      background-color: #00ffe033;
+      transform: scale(1.05);
+      box-shadow: 0 0 15px #00ffe0, 0 0 30px #00ffe0 inset;
+    }
+
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 10px #00ffe0, 0 0 20px #00ffe0;
+      }
+      to {
+        text-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="bg"></canvas>
+  <div class="container">
+    <h1>404</h1>
+    <p>Page not found.</p>
+    <button onclick="goHome()">Back to mainpage</button>
+  </div>
+
+  <script>
+    // Chuyển hướng về trang chủ
+    function goHome() {
+      window.location.href = "/";
+    }
+
+    // Particle background
+    const canvas = document.getElementById("bg");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    let particles = [];
+
+    for (let i = 0; i < 100; i++) {
+      particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        size: Math.random() * 2 + 1,
+        speedX: (Math.random() - 0.5) * 0.8,
+        speedY: (Math.random() - 0.5) * 0.8,
+      });
+    }
+
+    function drawParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#00ffe0";
+      particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fill();
+        p.x += p.speedX;
+        p.y += p.speedY;
+
+        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+      });
+      requestAnimationFrame(drawParticles);
+    }
+
+    drawParticles();
+
+    // Resize canvas
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
 </html>
