@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BayGorn1 - Tin Tức</title>
-<<<<<<< HEAD
-=======
     <link rel="stylesheet" href="news.css">
->>>>>>> 63e3d3a (chinh sua thanh folder newspage)
 </head>
 <body>
     <section class="tin-tuc">
