@@ -1,0 +1,40 @@
+/* Cho phần wrapper canh giữa với khoảng cách lề */
+.wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 40px; /* Khoảng cách lề trái và phải */
+  }
+  
+  /* Cài đặt Grid */
+  .grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Cột trái rộng gấp đôi cột phải */
+    grid-template-rows: repeat(4, auto); /* Cột phải chia làm 4 hàng */
+    gap: 20px;
+    height: 500px; /* Tuỳ chỉnh theo mong muốn chiều cao chung */
+    background-color: #f0f0f0;
+    padding: 20px;
+  }
+  
+  /* Cột trái – cao hơn 3 hàng nhưng nhỏ hơn 4 hàng */
+  .left {
+    grid-column: 1 / 2;
+    grid-row: 1 / span 3.5; /* chiếm 3.5 hàng */
+    background-color: lightblue;
+    padding: 20px;
+    border-radius: 8px;
+  }
+  
+  /* Các hàng bên phải */
+  .right-1, .right-2, .right-3, .right-4 {
+    grid-column: 2 / 3;
+    background-color: #ddd;
+    padding: 15px;
+    border-radius: 8px;
+  }
+  
+  .right-1 { grid-row: 1 / 2; }
+  .right-2 { grid-row: 2 / 3; }
+  .right-3 { grid-row: 3 / 4; }
+  .right-4 { grid-row: 4 / 5; }
+  

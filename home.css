@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+
+.hero {
+  height: 100vh;
+  background: url('image.png') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 999;
+  font-size: 3rem;
+  color: white;
+  font-weight: bold;
+  animation: fadeIn 1.5s ease-in-out;
+  text-align: center;
+  padding: 0 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6); /* nền tối mờ */
+  z-index: 1;
+}
+
+.News{
+  max-width: 1000px;
+  margin: 0px auto;
+  padding: 0px 40px;
+
+}
+
+.grid{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: repeat(4,auto);
+  gap: 20px;
+  height: 500px;
+  padding: 20px;
+}
+
+.left{
+  grid-column: 1/2;
+  grid-row: 1 / span 3.5;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.right-1, .right-2, .right-3, .right-4{
+  grid-column: 2/3;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.right-1{grid-row: 1/2; }
+.right-2{grid-row: 2/3; }
+.right-3{grid-row: 3/4; }
+.right-4{grid-row: 4/5; }
+
+.News .left .left-img{
+  width: max-content;
+  min-width: auto;
+}
