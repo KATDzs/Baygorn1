@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BayGorn1 - Tin Tức</title>
+<<<<<<< HEAD
+=======
+    <link rel="stylesheet" href="news.css">
+>>>>>>> 63e3d3a (chinh sua thanh folder newspage)
 </head>
 <body>
     <section class="tin-tuc">
@@ -30,41 +34,6 @@
             <?php endforeach; ?>
         </div>
     </section>
-    <script>
-        const slider = document.getElementById("slider");
-        const dots = document.querySelectorAll(".dot");
-        function getCardWidth() {
-            const card = document.querySelector(".news-card");
-            return card ? card.offsetWidth + 20 : 320;
-        }
-        function scrollSlider(direction) {
-            const cardWidth = getCardWidth();
-            let currentIndex = Math.round(slider.scrollLeft / cardWidth);
-            let nextIndex = currentIndex + direction;
-            nextIndex = Math.max(0, Math.min(nextIndex, dots.length - 1));
-            goToSlide(nextIndex);
-        }
-
-        function goToSlide(index) {
-            const cardWidth = getCardWidth();
-            slider.scrollTo({
-                left: index * cardWidth,
-                behavior: "smooth"
-            });
-            updateDots(index);
-        }
-
-        function updateDots(activeIndex) {
-            dots.forEach((dot, i) => {
-                dot.classList.toggle("active", i === activeIndex);
-            });
-        }
-
-        slider.addEventListener("scroll", () => {
-            const cardWidth = getCardWidth();
-            const index = Math.round(slider.scrollLeft / cardWidth);
-            updateDots(index);
-        });
-    </script>
+    <script src="news.js"></script>
 </body>
 </html>
