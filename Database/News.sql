@@ -1,0 +1,9 @@
+CREATE DATABASE News
+CREATE TABLE news (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    title NVARCHAR(255) NOT NULL,
+    description NVARCHAR(MAX),
+    img NVARCHAR(500),
+    link NVARCHAR(500),
+    created_at DATETIME DEFAULT GETDATE()
+);
