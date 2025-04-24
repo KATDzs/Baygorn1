@@ -36,6 +36,12 @@ header("Pragma: no-cache");
     <section class="news-section">
       <div class="section-header">
         <h1 class="section-title">Chuyện gì đang xảy ra vậy?</h1>
+        <a href="#" class="view-all-btn">
+          Xem tất cả
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+          </svg>
+        </a>
       </div>
 
       <div class="news-grid">
@@ -43,12 +49,12 @@ header("Pragma: no-cache");
         <div class="featured-news">
           <a href="#" class="news-link">
             <div class="news-image">
-              <img src="../img/white.png" alt="Main Image">
+              <img src="../img/news/ryze-faker.jpg" alt="Ryze x Faker">
             </div>
             <div class="news-overlay">
               <div class="news-content">
-                <h3>Ngước Lên Cao! | Trailer Ryze x Faker - Liên Minh Huyền Thoại: TC</h3>
                 <span class="news-tag">TIN TỨC</span>
+                <h3>Ngước Lên Cao! | Trailer Ryze x Faker - Liên Minh Huyền Thoại: TC</h3>
               </div>
             </div>
           </a>
@@ -58,7 +64,7 @@ header("Pragma: no-cache");
         <div class="news-list">
           <a href="#" class="news-item">
             <div class="news-item-image">
-              <img src="../img/white.png" alt="News 1">
+              <img src="../img/news/hoa-linh.jpg" alt="Hoa Linh Lục Địa">
             </div>
             <div class="news-item-content">
               <h4>Hoa Linh Lục Địa, Loạn Đấu & Nội Dung Khác...</h4>
@@ -68,17 +74,17 @@ header("Pragma: no-cache");
 
           <a href="#" class="news-item">
             <div class="news-item-image">
-              <img src="../img/white.png" alt="News 2">
+              <img src="../img/news/here-tomorrow.jpg" alt="Here, Tomorrow">
             </div>
             <div class="news-item-content">
-              <h4>Here, Tomorrow (ft Lilas, Kevin Penkin) - Phim Ngắn Mùa 2 2025...</h4>
+              <h4>Here, Tomorrow (ft Lilas, Kevin Penkin) - Phim Ngắn Mùa 2 2025</h4>
               <span class="news-item-tag">TIN TỨC</span>
             </div>
           </a>
 
           <a href="#" class="news-item">
             <div class="news-item-image">
-              <img src="../img/white.png" alt="News 3">
+              <img src="../img/news/van-cuoc.jpg" alt="Ván Cược Đen Tối">
             </div>
             <div class="news-item-content">
               <h4>Ván Cược Đen Tối | Phim Ngắn Mùa 1 năm 2025 - Liên Minh Huyền Thoại</h4>
@@ -88,10 +94,10 @@ header("Pragma: no-cache");
 
           <a href="#" class="news-item">
             <div class="news-item-image">
-              <img src="../img/white.png" alt="News 4">
+              <img src="../img/news/dtcl.jpg" alt="ĐTCL">
             </div>
             <div class="news-item-content">
-              <h4>Lịch Trình Phát Triển ĐTCL: Thành Phố Công Nghệ | Video Từ Đội Ngũ...</h4>
+              <h4>Lịch Trình Phát Triển ĐTCL: Thành Phố Công Nghệ | Video Từ Đội Ngũ</h4>
               <span class="news-item-tag">TIN TỨC</span>
             </div>
           </a>
@@ -104,6 +110,12 @@ header("Pragma: no-cache");
       <div class="content-wrapper">
         <div class="section-header">
           <h2 class="section-title">Trò chơi của chúng tôi</h2>
+          <a href="#" class="view-all-btn">
+            Xem tất cả
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+            </svg>
+          </a>
         </div>
 
         <div class="games-grid">
@@ -201,3 +213,4 @@ header("Pragma: no-cache");
   </script>
 </body>
 </html>
+    
