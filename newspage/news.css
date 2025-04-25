@@ -34,6 +34,7 @@ h2 {
 .news-card {
     display: block;
     min-width: 300px;
+    max-width: 300px; /* hoặc auto tùy */
     background: #222;
     border-radius: 10px;
     overflow: hidden;
@@ -41,6 +42,9 @@ h2 {
     transition: transform 0.3s;
     text-decoration: none;
     color: inherit;
+    height: 475px; /* 👈 Giới hạn chiều cao */
+    display: flex;
+    flex-direction: column;
 }
 
 .news-card:hover {
@@ -49,8 +53,12 @@ h2 {
 
 .news-card img {
     width: 100%;
-    height: 180px;
+    height: 300px; /* Chiều cao cố định để khung đều */
     object-fit: cover;
+    object-position: center;
+    display: block;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 .news-content {

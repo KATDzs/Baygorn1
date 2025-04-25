@@ -17,10 +17,10 @@
     <?php
     $news = [
         [
-            'title' => 'Tin tức 1',
-            'description' => 'Mô tả tin tức 1',
-            'img' => 'https://via.placeholder.com/300x200',
-            'link' => '#'
+            'title' => 'Minecraft Spring Update',
+            'description' => '​Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!​',
+            'img' => '../img/minecraftupdate.png',
+            'link' => '../newspage/news1.php'
         ],
         [
             'title' => 'Tin tức 2',
