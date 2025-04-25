@@ -23,10 +23,10 @@
             'link' => '../newspage/news1.php'
         ],
         [
-            'title' => 'Tin tức 2',
-            'description' => 'Mô tả tin tức 2',
-            'img' => 'https://via.placeholder.com/300x200',
-            'link' => '#'
+            'title' => 'Roblox Update 2025',
+            'description' => 'Cập nhật và tối ưu các tính năng cùng nhiều phần quà hấp dẫn đang đợi bạn tới chơi!',
+            'img' => '../img/roblox.jpg',
+            'link' => '../newspage/news2.php'
         ],
         [
             'title' => 'Tin tức 3',
