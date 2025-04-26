@@ -19,20 +19,20 @@
         [
             'title' => 'Minecraft Spring Update',
             'description' => '​Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!​',
-            'img' => '../img/minecraftupdate.png',
+            'img' => '../img/minecraftupdate.jpg',
             'link' => '../newspage/news1.php'
         ],
         [
             'title' => 'Roblox Update 2025',
             'description' => 'Cập nhật và tối ưu các tính năng cùng nhiều phần quà hấp dẫn đang đợi bạn tới chơi!',
-            'img' => '../img/roblox.jpg',
+            'img' => '../img/brainrotevolution.webp',
             'link' => '../newspage/news2.php'
         ],
         [
-            'title' => 'Tin tức 3',
-            'description' => 'Mô tả tin tức 3',
-            'img' => 'https://via.placeholder.com/300x200',
-            'link' => '#'
+            'title' => 'ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll',
+            'description' => 'Bản cập nhật 14.2 mang tính cân bằng cao, cùng sự tối ưu hệ thống mới cho game thủ.',
+            'img' => '../img/tftupdate.avif',
+            'link' => '../newspage/news3.php'
         ]
     ];
     ?>

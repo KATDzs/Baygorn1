@@ -17,9 +17,6 @@
     <main class="news-content">
         <article class="news-article">
             <h1>Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!</h1>
-            <div class="news-image-wrapper">
-                <img src="../img/minecraft.jpg" alt="Minecraft Spring Update">
-            </div>
             <p class="news-date">Ngày 25 tháng 3 năm 2025</p>
             <p class="news-intro">Mojang đã phát hành bản cập nhật Minecraft Java Edition 1.21.5 với tên gọi "Spring to Life" - bản cập nhật mùa xuân đầu tiên của năm, mang đến nhiều thay đổi hấp dẫn về sinh vật, thực vật và âm thanh môi trường, giúp thế giới Minecraft trở nên sống động và chân thực hơn bao giờ hết.</p>
             
