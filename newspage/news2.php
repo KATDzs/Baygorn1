@@ -16,60 +16,54 @@
     <?php include '../header/header.html'; ?>
     <main class="news-content">
         <article class="news-article">
-            <h1>Roblox cập nhật lớn đầu năm 2025: Tính năng, công cụ và an toàn người dùng</h1>
-            <p class="news-date">Ngày 25 tháng 4 năm 2025</p>
-            <p class="news-intro">Roblox vừa tung ra một loạt cập nhật đáng chú ý dành cho cả người chơi lẫn nhà phát triển. Dưới đây là tổng hợp chi tiết những điểm nổi bật.</p>
-            
+            <h1>Brainrot Evolution - Khi Roblox không còn là chính nó</h1>
+            <p class="news-date">Ngày 26 tháng 4 năm 2025</p>
+            <p class="news-intro">Brainrot Evolution đang gây bão trong cộng đồng Roblox, thổi bùng làn sóng meme hóa, sáng tạo nội dung điên rồ và cả... những cuộc tranh cãi nảy lửa. Cùng khám phá hiện tượng thú vị (và hơi hỗn loạn) này!</p>
+
             <section class="news-section">
-                <h2>🧩 Cập nhật cho Nhà Phát Triển (Dev)</h2>
-
-                <h3>🆕 Season Pass Package (Gói vé mùa)</h3>
-                <p>Cho phép nhà phát triển tạo hệ thống vé mùa tương tự như Fortnite hoặc Apex Legends với:</p>
+                <h2>🧠 Brainrot Evolution là gì?</h2>
+                <p>Brainrot Evolution là tên gọi không chính thức cho phong trào sáng tạo nội dung Roblox "dị", "bất chấp logic", và đôi khi cực kỳ vô nghĩa. Các trò chơi, meme, video TikTok theo phong cách Brainrot thường có đặc trưng như:</p>
                 <ul>
-                    <li>Giá cả linh hoạt (miễn phí hoặc trả phí).</li>
-                    <li>Thời gian mùa tùy chỉnh.</li>
-                    <li>UI tùy chỉnh và nhiệm vụ cụ thể.</li>
-                    <li>Phần thưởng gồm vật phẩm, coin, XP,...</li>
+                    <li>Nhân vật biến dạng, bay nhảy loạn xạ.</li>
+                    <li>Gameplay phi lý, đôi khi không có mục tiêu cụ thể.</li>
+                    <li>Chất lượng đồ họa thấp cố ý để tăng độ "tấu hài".</li>
+                    <li>Âm thanh méo mó, lặp đi lặp lại.</li>
                 </ul>
-                <p><strong>✅ Mục tiêu:</strong> Tăng mức độ gắn bó của người chơi và doanh thu từ nội dung cao cấp.</p>
-
-                <h3>🎁 Engagement Rewards Package</h3>
-                <p>Cho phép thiết lập phần thưởng theo thời gian chơi hoặc đăng nhập hằng ngày. Có sẵn công cụ UI và logic sẵn có.</p>
-                <p><strong>✅ Tác dụng:</strong> Tăng tương tác và tần suất người chơi quay lại.</p>
-
-                <h3>📹 Công cụ quay video nâng cấp</h3>
-                <p>Video ghi hình trong Roblox Studio nay được lưu ở định dạng <strong>MP4</strong> thay vì WMV, giúp dễ chia sẻ và chỉnh sửa hơn.</p>
-                <p>Chất lượng hình ảnh cao hơn, giảm tình trạng giật lag khi quay video hướng dẫn/trailer.</p>
+                <p><strong>✅ Vì sao hot?</strong> Brainrot tạo cảm giác mới lạ, giải trí nhẹ nhàng và dễ dàng viral trên mạng xã hội.</p>
             </section>
 
             <section class="news-section">
-                <h2>🌍 Định giá theo Khu vực (Regional Pricing)</h2>
-                <p>Roblox giờ đây cho phép các nhà phát triển đặt giá bán vật phẩm tùy theo khu vực địa lý.</p>
-                <p>Ví dụ: Một chiếc áo có thể được bán với giá $5 Robux tại Mỹ nhưng chỉ $2 Robux tại Việt Nam.</p>
-                <p><strong>✅ Tác dụng:</strong> Giá phù hợp với thu nhập của người dùng từng quốc gia → tăng doanh thu, giảm rào cản tiếp cận.</p>
+                <h2>🔥 Những trò chơi Brainrot nổi bật</h2>
+                <h3>🐸 Skibidi Toilet Evolution</h3>
+                <p>Trò chơi lấy cảm hứng từ meme Skibidi Toilet, nơi người chơi... chiến đấu cùng toilet có đầu người trong bối cảnh kỳ quái.</p>
+
+                <h3>🚶 Ohio Simulator 3</h3>
+                <p>Một thế giới hỗn loạn, nơi mọi hành động đều có thể dẫn tới... đại họa: từ nhặt một viên đá đến bước ra khỏi nhà.</p>
+
+                <h3>🎶 Sound Effect Battles</h3>
+                <p>Game PvP mà vũ khí chính là... tiếng hét, tiếng meme Internet, và những đoạn âm thanh hỗn loạn.</p>
             </section>
 
             <section class="news-section">
-                <h2>👗 Dress to Impress – Cập nhật “Petal” (Sắp ra mắt)</h2>
-                <p><strong>Ngày ra mắt:</strong> 26/4/2025</p>
-                <p>Bản cập nhật theo chủ đề mùa xuân với:</p>
+                <h2>📈 Tác động đến cộng đồng Roblox</h2>
                 <ul>
-                    <li>Trang phục hoa lá, lễ hội.</li>
-                    <li>Hoạt ảnh tạo dáng mới.</li>
-                    <li>Giao diện chấm điểm cải tiến và mượt hơn.</li>
-                    <li>Event đặc biệt với item giới hạn.</li>
+                    <li>Giới trẻ đổ xô tạo game "nhảm nhưng vui".</li>
+                    <li>Content creator (YouTube, TikTok) săn lùng nội dung Brainrot để làm video viral.</li>
+                    <li>Roblox Studio chứng kiến sự bùng nổ dự án nhỏ lẻ, siêu sáng tạo.</li>
+                    <li>Tranh cãi giữa "giá trị nghệ thuật" và "trò rác" trong cộng đồng.</li>
                 </ul>
+                <p><strong>✅ Kết quả:</strong> Brainrot vừa thổi luồng gió mới cho Roblox, vừa làm dấy lên câu hỏi về hướng đi lâu dài của nền tảng này.</p>
             </section>
 
             <section class="news-section">
-                <h2>🛡️ Tăng cường an toàn cho trẻ em & phụ huynh</h2>
-                <h3>🧑‍👩‍👦 Công cụ kiểm soát mới cho phụ huynh</h3>
+                <h2>🔮 Tương lai nào cho Brainrot Evolution?</h2>
+                <p>Một số dự đoán cho xu hướng này:</p>
                 <ul>
-                    <li>Chặn bạn bè cụ thể trong danh sách của con.</li>
-                    <li>Phê duyệt hành động như mua vật phẩm hoặc tham gia trò chơi.</li>
-                    <li>Xem lịch sử hoạt động và giám sát chi tiêu Robux.</li>
+                    <li>Roblox có thể hỗ trợ thêm công cụ dễ làm game hài/hỗn loạn.</li>
+                    <li>Các nhà phát triển indie sẽ pha trộn Brainrot với các yếu tố chuyên sâu hơn để tạo ra những trò chơi vừa vui nhộn vừa sáng tạo.</li>
+                    <li>Brainrot sẽ tiến hóa hoặc "hạ nhiệt" khi người chơi tìm kiếm trải nghiệm mới sau cơn sốt đầu tiên.</li>
                 </ul>
-                <p><strong>✅ Tác dụng:</strong> Tăng cường kiểm soát và bảo vệ trẻ nhỏ khi sử dụng Roblox.</p>
+                <p>Dù tương lai ra sao, Brainrot Evolution đã đánh dấu một kỷ nguyên độc đáo, nơi trí tưởng tượng (và sự điên rồ) bay xa hơn bao giờ hết trong thế giới Roblox.</p>
             </section>
         </article>
     </main>
