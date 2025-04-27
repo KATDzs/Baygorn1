@@ -1,0 +1,1010 @@
+/* Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+    background: #120406;
+    color: #fff;
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 5%;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.logo {
+    color: #ff0000;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+nav a.active {
+    color: #ff0000;
+}
+
+.login-btn {
+    background-color: #ff0000;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+}
+
+/* Shop Content */
+.shop-content {
+    padding-top: 80px;
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.shop-hero {
+    position: relative;
+    background: linear-gradient(120deg, #1a0000 60%, #0a0a0a 100%);
+    min-height: 340px;
+    display: flex;
+    align-items: center;
+    padding: 48px 5% 32px 5%;
+    border-bottom: 2px solid #b30000;
+}
+
+.hero-content {
+    z-index: 2;
+    max-width: 600px;
+}
+
+.hero-content h2 {
+    color: #ff0000;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.hero-content h1 {
+    font-size: 3.2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.hero-content p {
+    color: #eee;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+.btn {
+    background: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 24px;
+    padding: 0.7rem 1.8rem;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px #b3000033;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #ff0000;
+    color: #fff;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: url('../img/zombie-bg.jpg') center/cover no-repeat;
+    opacity: 0.18;
+    z-index: 1;
+}
+
+/* About Shop Section */
+.about-shop {
+    background: linear-gradient(120deg, #1a0000 60%, #181818 100%);
+    padding: 48px 5% 48px 5%;
+    margin-top: 48px;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px #b3000033;
+    max-width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.about-content {
+    max-width: 700px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.about-content h2 {
+    color: #ff0000;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.about-content p {
+    color: #eee;
+    font-size: 1.2rem;
+    line-height: 1.7;
+}
+
+/* Game Recommendations Section */
+.game-recommendations {
+    padding: 4rem 5%;
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.view-all {
+    color: #ff0000;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Slider Styles */
+.slider-section {
+    position: relative;
+    margin: 0 !important;
+    padding: 32px 5% 32px 5%;
+    overflow: hidden;
+    min-height: 320px;
+    background: #181818 !important;
+    border-radius: 18px;
+    box-shadow: none;
+    margin: 0;
+}
+
+.slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #fff;
+    font-size: 1.1rem;
+    margin: 0 !important;
+}
+
+.slider-header .dot {
+    width: 14px;
+    height: 14px;
+    background: #b30000;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 8px;
+}
+
+.slider-header .select-all {
+    color: #fff;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+}
+
+.slider-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 0 !important;
+}
+
+.slider-btn {
+    background: #b30000;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.slider-btn:hover {
+    background: #ff0000;
+}
+
+.slider-frame {
+    position: relative;
+    z-index: 3;
+    width: 380px;
+    height: 480px;
+    overflow: hidden;
+    border-radius: 18px;
+    border: 3px solid #b30000;
+    background: #181818;
+    box-shadow: 0 0 32px #b3000033;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0 !important;
+}
+
+.slider-card {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    overflow: hidden;
+    background: none;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.slider-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.slider-card-info {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    width: 100%;
+    background: linear-gradient(0deg, #1a0000 90%, transparent 100%);
+    padding: 22px 0 18px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0;
+}
+
+.slider-card .title {
+    color: #fff;
+    font-weight: 900;
+    font-size: 1.35rem;
+    margin: 0 0 6px 0;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #000a;
+}
+
+.slider-card .price {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 1.15rem;
+    margin: 0;
+    text-align: center;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px #000a;
+}
+
+.detail-section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 420px;
+    padding: 64px 5% 48px 5%;
+    background: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden;
+    box-shadow: none;
+}
+
+.detail-bg-img {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s;
+    filter: brightness(1) blur(0.3px);
+}
+
+.detail-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, #1a0000 60%, #0a0a0a 100%), linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(255,0,0,0.4) 100%);
+    opacity: 0.92;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    transition: opacity 0.3s;
+}
+
+.detail-info, .detail-info * {
+    position: relative;
+    z-index: 3;
+}
+
+.detail-info .category {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.detail-info h2 {
+    font-size: 2.4rem;
+    margin: 0.5rem 0 1rem 0;
+    color: #fff;
+    font-weight: 800;
+}
+
+.detail-info .meta {
+    color: #ccc;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.detail-info .desc {
+    color: #eee;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+}
+
+.detail-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.7rem;
+}
+
+.detail-btns-row {
+    display: flex;
+    flex-direction: row;
+    gap: 0.7rem;
+    width: 100%;
+}
+
+.detail-btns .btn {
+    background: #b30000;
+    color: #fff;
+    border-radius: 20px;
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.detail-btns .btn:hover {
+    background: #ff0000;
+}
+
+.detail-thumb {
+    flex: 1;
+    min-width: 120px;
+    max-width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.detail-thumb img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 2px 16px #b3000033;
+}
+
+.detail-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.detail-top .top-trending {
+    color: #fff;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+
+.detail-top .mini-thumb {
+    width: 80px;
+    border-radius: 8px;
+    margin-left: 16px;
+}
+
+.slider-blur-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 700px;
+    height: 540px;
+    transform: translate(-50%, -50%) scale(1.35);
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    filter: blur(28px) brightness(0.7);
+    z-index: 1;
+    border-radius: 32px;
+    transition: background-image 0.5s cubic-bezier(.4,0,.2,1);
+    pointer-events: none;
+}
+
+/* Featured Game Section */
+.featured-game {
+    padding: 4rem 5%;
+    background: linear-gradient(to right, #0a0a0a 60%, transparent), url('../img/white.png');
+    background-size: cover;
+    background-position: right center;
+    min-height: 600px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.details-slider-container {
+    position: relative;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+.details-slider {
+    flex: 1;
+    min-width: 350px;
+    max-width: 500px;
+    background: rgba(20,20,20,0.97);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px #000a;
+    color: #fff;
+    margin: 0 24px;
+    padding: 32px 28px 28px 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    z-index: 20;
+    position: relative;
+    animation: fadeInBox 0.5s;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 0, 0, 0.2);
+    will-change: transform, opacity;
+    backface-visibility: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.details-slider:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(255, 0, 0, 0.2);
+}
+
+.details-slider .category {
+    color: #ff0000;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.details-slider h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.details-slider .meta-info {
+    color: #aaa;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.details-slider .description {
+    font-size: 1.1rem;
+    color: #eee;
+    margin-bottom: 1rem;
+}
+
+.details-slider .features {
+    margin-bottom: 1rem;
+}
+
+.details-slider .features h3 {
+    color: #ff0000;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+}
+
+.details-slider .features ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.details-slider .features li {
+    color: #fff;
+    margin-bottom: 0.4rem;
+    padding-left: 1.2rem;
+    position: relative;
+}
+
+.details-slider .features li:before {
+    content: "•";
+    color: #ff0000;
+    position: absolute;
+    left: 0;
+}
+
+.details-slider .price-tag {
+    font-size: 2rem;
+    color: #ff0000;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.details-slider .action-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.details-slider .pre-order-now, .details-slider .add-to-cart {
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.details-slider .pre-order-now {
+    background: linear-gradient(45deg, #ff0000, #cc0000);
+    border: none;
+    color: white;
+    flex: 2;
+}
+
+.details-slider .add-to-cart {
+    background: transparent;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+    flex: 1;
+}
+
+.details-slider .pre-order-now:hover {
+    background: linear-gradient(45deg, #cc0000, #ff0000);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.4);
+}
+
+.details-slider .add-to-cart:hover {
+    background: rgba(255, 0, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 0, 0, 0.2);
+}
+
+/* Animation Keyframes */
+@keyframes fadeInBox {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .game-card {
+        flex: 0 0 calc(33.333% - 13.333px);
+    }
+
+    .game-card img {
+        height: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 3rem;
+    }
+
+    .game-card {
+        flex: 0 0 calc(50% - 10px);
+    }
+
+    .game-card img {
+        height: 250px;
+    }
+
+    .featured-game {
+        background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../img/white.png');
+    }
+
+    .game-details h2 {
+        font-size: 2rem;
+    }
+
+    .price-tag {
+        font-size: 2rem;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .pre-order-now, .add-to-cart {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .game-card {
+        flex: 0 0 calc(100% - 40px);
+    }
+
+    .game-card img {
+        height: 200px;
+    }
+
+    .meta-info span {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    .slider-container {
+        padding: 0 30px;
+    }
+
+    .slider-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .details-slider-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .details-slider {
+        min-width: 220px;
+        max-width: 100vw;
+        margin: 0;
+        padding: 18px 10px 10px 10px;
+    }
+}
+
+/* Footer */
+footer {
+    padding: 2rem 5%;
+    background-color: #000;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.creator, .battle-choose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.creator span:first-child, .battle-choose span:first-child {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.creator span:last-child, .battle-choose span:last-child {
+    color: #ff0000;
+    font-weight: bold;
+}
+
+/* Đảm bảo hiệu ứng slider hoạt động */
+.game-slider.transitioning {
+    transition: transform 0.5s cubic-bezier(.77,0,.18,1) !important;
+}
+
+.game-recommendations-layout {
+    padding: 4rem 5%;
+    overflow: hidden;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #ff0000;
+    padding-bottom: 0.5rem;
+}
+
+.section-header h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.section-header .view-all {
+    color: #ff0000;
+    background: transparent;
+    border: 2px solid #ff0000;
+    border-radius: 20px;
+    padding: 0.4rem 1.5rem;
+    font-weight: bold;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+.section-header .view-all:hover {
+    background: #ff0000;
+    color: #fff;
+}
+
+/* Hiệu ứng poster giữa nổi bật hơn */
+.game-card {
+    opacity: 0.5;
+    transform: scale(0.92);
+    transition: all 0.3s cubic-bezier(.77,0,.18,1);
+}
+.game-card.active {
+    opacity: 1;
+    transform: scale(1.08);
+    z-index: 20;
+    box-shadow: 0 0 40px #ff000099;
+}
+
+/* Responsive cho slider và box chi tiết */
+@media (max-width: 900px) {
+    .slider-container, .featured-game {
+        width: 100%;
+        max-width: 100vw;
+    }
+}
+
+/* Responsive chỉnh lại cho các section mới */
+@media (max-width: 900px) {
+    .about-shop {
+        padding: 24px 2% 24px 2%;
+    }
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+
+/* XÓA HOÀN TOÀN DANH MỤC GAME CATEGORIES */
+.game-categories, .cat, .cat.active { display: none !important; }
+
+/* --- CSS chuyển từ shoppage.php --- */
+.hero-zombie {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 420px;
+    padding: 64px 5% 48px 5%;
+    background: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    overflow: hidden;
+    box-shadow: none;
+}
+.hero-bg-img {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-image 0.5s;
+    filter: brightness(1) blur(0.3px);
+}
+.hero-zombie::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, #1a0000 60%, #0a0a0a 100%), linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(255,0,0,0.4) 100%);
+    opacity: 0.92;
+    z-index: 2;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+    transition: opacity 0.3s;
+}
+.hero-zombie-content {
+    position: relative;
+    z-index: 3;
+    max-width: 540px;
+    text-align: left;
+}
+.hero-zombie-content h2 {
+    font-size: 1.2rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 8px #000a;
+}
+.hero-zombie-content h1 {
+    font-size: 3.5rem;
+    color: #fff;
+    font-weight: 900;
+    margin-bottom: 1.2rem;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 16px #000a;
+}
+.hero-zombie-content p {
+    color: #eee;
+    font-size: 1.15rem;
+    margin-bottom: 2rem;
+    text-shadow: 0 2px 8px #000a;
+}
+.hero-zombie-btns { display: flex; gap: 1rem; }
+.hero-zombie-btns .btn { background: #b30000; color: #fff; border: none; border-radius: 24px; padding: 0.6rem 1.5rem; font-weight: bold; font-size: 1rem; text-decoration: none; transition: background 0.2s; cursor: pointer; }
+.hero-zombie-btns .btn:hover { background: #ff0000; }
+/* --- Hết CSS chuyển từ shoppage.php --- */
+
+/* Hiệu ứng chuyển đổi card slider */
+.slider-card.fade-out {
+    opacity: 0;
+    transform: translateX(-40px) scale(0.96);
+    transition: opacity 0.35s, transform 0.35s;
+}
+.slider-card.fade-in {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+    transition: opacity 0.35s, transform 0.35s;
+}
+
+#sliderCardContainer {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.slider-title-custom {
+    display: flex;
+    align-items: center;
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 8px #000a;
+    margin-left: 0;
+}
+.slider-title-custom::before {
+    content: '';
+    display: inline-block;
+    width: 6px;
+    height: 2.2rem;
+    background: linear-gradient(180deg, #ff003c 0%, #ff003c 100%);
+    border-radius: 2px;
+    margin-right: 12px;
+    margin-bottom: 2px;
+}
+
+.btn-order-now {
+    background: linear-gradient(45deg, #ff003c, #b30000);
+    color: #fff;
+    font-weight: 900;
+    font-size: 1.1rem;
+    border-radius: 24px;
+    padding: 0.7rem 2.2rem;
+    box-shadow: 0 2px 16px #ff003c33;
+    border: none;
+    margin-right: 0.7rem;
+    transition: background 0.2s, transform 0.2s;
+}
+.btn-order-now:hover {
+    background: linear-gradient(45deg, #b30000, #ff003c);
+    transform: translateY(-2px) scale(1.04);
+}
+.btn-preorder {
+    background: #fff;
+    color: #ff003c;
+    font-weight: 900;
+    font-size: 1.1rem;
+    border-radius: 24px;
+    padding: 0.7rem 2.2rem;
+    border: 2px solid #ff003c;
+    box-shadow: 0 2px 16px #ff003c22;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+.btn-preorder:hover {
+    background: #ff003c;
+    color: #fff;
+    transform: translateY(-2px) scale(1.04);
+}
+.detail-price {
+    margin-right: 0;
+    margin-bottom: 0.2rem;
+    align-self: flex-start;
+}
+
+@media (max-width: 600px) {
+    .detail-btns-row {
+        flex-direction: column;
+        gap: 0.5rem;
+        width: 100%;
+    }
+    .btn-order-now, .btn-preorder {
+        width: 100%;
+        text-align: center;
+    }
+} 
