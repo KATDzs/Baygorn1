@@ -31,7 +31,9 @@
                 </ul>
                 <p><strong>✅ Vì sao hot?</strong> Brainrot tạo cảm giác mới lạ, giải trí nhẹ nhàng và dễ dàng viral trên mạng xã hội.</p>
             </section>
-
+            <div class="news-image-wrapper">
+                <img src="../img/brainrotevolution.webp" alt="minecraftupdate">
+            </div>
             <section class="news-section">
                 <h2>🔥 Những trò chơi Brainrot nổi bật</h2>
                 <h3>🐸 Skibidi Toilet Evolution</h3>

@@ -23,7 +23,7 @@
             'link' => '../newspage/news1.php'
         ],
         [
-            'title' => 'Roblox Update 2025',
+            'title' => 'Roblox Brainrot Evolution Update',
             'description' => 'Cập nhật và tối ưu các tính năng cùng nhiều phần quà hấp dẫn đang đợi bạn tới chơi!',
             'img' => '../img/brainrotevolution.webp',
             'link' => '../newspage/news2.php'
@@ -33,7 +33,19 @@
             'description' => 'Bản cập nhật 14.2 mang tính cân bằng cao, cùng sự tối ưu hệ thống mới cho game thủ.',
             'img' => '../img/tftupdate.avif',
             'link' => '../newspage/news3.php'
-        ]
+        ],
+        [
+            'title' => 'Palworld bùng nổ! Game sinh tồn bắt quái vật đang làm mưa làm gió toàn cầu',
+            'description' => 'Tựa game sinh tồn thế giới mở Palworld, kết hợp giữa bắt quái vật và xây dựng căn cứ, đang gây bão toàn cầu với lối chơi sáng tạo!',
+            'img' => '../img/brainrotevolution.webp',
+            'link' => '../newspage/news4.php'
+        ],
+        [
+            'title' => 'LEGION - Biểu tượng của kỷ nguyên đen tối',
+            'description' => 'LEGION tồn tại trong một thế giới nơi các thành phố đã bị nuốt chửng bởi mạng lưới siêu máy tính. Các tập đoàn khổng lồ kiểm soát từng nhịp thở của nhân loại.',
+            'img' => '../img/game_i_am_legion.jpg',
+            'link' => '../newspage/news5.php'
+        ],
     ];
     ?>
 
