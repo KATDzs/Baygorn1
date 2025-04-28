@@ -24,10 +24,12 @@
             </div>
             <section class="news-section">
                 <h2>🌿 Những điểm nổi bật trong bản cập nhật</h2>
-                
+
                 <h3>🐄 Biến thể động vật theo vùng khí hậu</h3>
                 <p>Lần đầu tiên, các loài vật nuôi như lợn, bò và gà có thêm các biến thể "ấm" và "lạnh", tùy thuộc vào biome mà chúng sinh sống. Ví dụ, ở vùng lạnh, bạn sẽ thấy gà xám và bò lông dài, trong khi ở vùng ấm, gà nâu và lợn có màu sắc khác biệt. Ngoài ra, gà còn có thể đẻ trứng màu xanh (biến thể lạnh) và nâu (biến thể ấm).</p>
-                
+                <div class="news-image-wrapper">
+                <img src="../img/minecraftupdate1.jpg" alt="minecraftupdate">
+            </div>
                 <h3>🐺 Âm thanh sói đa dạng</h3>
                 <p>Sói giờ đây có 7 biến thể âm thanh khác nhau như "Big", "Cute", "Puglin", "Angry", "Grumpy", "Sad" và "Classic", mang đến trải nghiệm âm thanh phong phú và độc đáo cho mỗi con sói trong game.</p>
                 
@@ -44,7 +46,9 @@
                     <li>Short Dry Grass và Tall Dry Grass: Cỏ khô ngắn và cao, mọc ở Desert và Badlands.</li>
                     <li>Cactus Flower: Hoa mọc trên xương rồng, có thể dùng để chế tạo thuốc nhuộm hồng.</li>
                 </ul>
-                
+                <div class="news-image-wrapper">
+                <img src="../img/minecraftupdate2.jpg" alt="minecraftupdate">
+            </div>
                 <h3>🔊 Âm thanh môi trường mới</h3>
                 <p>Desert và Badlands giờ đây có âm thanh môi trường mới như tiếng gió thổi qua cát và đất sét, tăng cường cảm giác chân thực khi khám phá các vùng đất này.</p>
                 

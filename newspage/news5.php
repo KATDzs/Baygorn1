@@ -33,7 +33,9 @@
 
                 <h3>🛡️ Chiến binh mạng</h3>
                 <p>Mỗi thành viên LEGION là một chiến binh mang giáp ảo hóa, có thể chiến đấu trong không gian số lẫn thế giới thực. Công nghệ và bản lĩnh quyết định ai sẽ đứng vững.</p>
-
+                <div class="news-image-wrapper">
+                <img src="../img/iamlegion.jpg" alt="I AM LEGION">
+            </div>
                 <h3>🔴 Biểu tượng: I AM LEGION</h3>
                 <p>"Chúng ta là nhiều, nhưng là một. Chúng ta không có khuôn mặt, không có tên tuổi, chỉ có sứ mệnh." - Đó là lời thề bất diệt của LEGION.</p>
 

@@ -19,7 +19,9 @@
             <h1>ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll</h1>
             <p class="news-date">16/04/2025</p>
             <p class="news-intro">Bản cập nhật 14.2 mang tính cân bằng cao, với trọng tâm là giảm sức mạnh Hack, buff chiến thuật reroll và tăng tính ổn định cho meta Thành Phố Công Nghệ. Ngoài ra, còn có nhiều thay đổi lớn liên quan đến các tướng, trang bị, và các cơ chế trong trò chơi giúp thay đổi phong cách chơi và tăng tính chiến thuật trong các trận đấu.</p>
-
+            <div class="news-image-wrapper">
+                <img src="../img/tftupdate1.jpg" alt="tft">
+            </div>
             <section class="news-section">
                 <h2>🔧 Cơ chế Hack và Kho Vũ Khí</h2>
                 <p>Bản cập nhật 14.2 tập trung vào việc điều chỉnh cơ chế Hack, giảm đi sự bá đạo của nó và tăng cường tính công bằng cho mọi người chơi. Bên cạnh đó, Kho Vũ Khí cũng được làm mới để mang đến sự thay đổi thú vị trong các lựa chọn của người chơi.</p>
@@ -38,7 +40,9 @@
                     <li><b>Kim Ngưu:</b> Kim Ngưu đã nhận được buff mạnh ở mốc 4 và 6 đơn vị. Sự thay đổi này tạo ra một lợi thế lớn cho đội hình này trong các giai đoạn đầu và giữa trận, giúp người chơi tạo ra sự đột biến lớn trong các vòng đấu.</li>
                 </ul>
                 <p>Những điều chỉnh này không chỉ làm cho mỗi tộc mạnh mẽ hơn mà còn giúp tăng cường sự đa dạng trong meta, mở ra nhiều lựa chọn khác nhau cho người chơi khi xây dựng đội hình.</p>
-
+                <div class="news-image-wrapper">
+                <img src="../img/tftupdate.avif" alt="tft1">
+                </div>
                 <h2>💥 Tướng: Cập nhật lớn cho reroll</h2>
                 <p>Các tướng là phần không thể thiếu trong mọi đội hình ĐTCL, và bản cập nhật này đã mang đến những điều chỉnh đáng chú ý, đặc biệt là đối với chiến thuật reroll. Việc thay đổi các tướng sẽ giúp người chơi có thêm nhiều lựa chọn khi tham gia trận đấu.</p>
                 <ul>
