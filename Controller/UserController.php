@@ -104,7 +104,7 @@ class UserController {
 // Handle requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
-    include('db_connection.php');
+    include('../model/db_connection.php');
     
     $userController = new UserController($conn);
     $response = [];

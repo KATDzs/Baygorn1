@@ -7,12 +7,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Shop - Baygorn Games</title>
-    <link rel="stylesheet" href="../header/header.css">
-    <link rel="stylesheet" href="../footer/footer.css">
-    <link rel="stylesheet" href="shoppage.css">
+    <link rel="stylesheet" href="../asset/css/header.css">
+    <link rel="stylesheet" href="../asset/css/footer.css">
+    <link rel="stylesheet" href="../asset/css/shoppage.css">
 </head>
 <body>
-    <?php include '../header/header.html'; ?>
+    <?php include '../layout/header.html'; ?>
 
     <main>
         <!-- Hero Section -->
@@ -68,7 +68,7 @@
                 detailTitle: 'ROBLOX - SANDBOX',
                 detailDesc: 'Roblox là một vũ trụ ảo nơi bạn có thể sáng tạo, chia sẻ trải nghiệm và phiêu lưu cùng bạn bè.',
                 price: '$19.99',
-                img: '../img/game_roblox.jpg',
+                img: '../asset/img/game_roblox.jpg',
                 category: 'SANDBOX',
                 meta: 'Release: 2006 | Genre: Sandbox'
             },
@@ -79,7 +79,7 @@
                 detailTitle: 'MINECRAFT - SANDBOX',
                 detailDesc: 'Khám phá, xây dựng và sinh tồn trong thế giới khối vuông vô tận của Minecraft.',
                 price: '$29.99',
-                img: '../img/minecraft.jpg',
+                img: '../asset/img/minecraft.jpg',
                 category: 'SANDBOX',
                 meta: 'Release: 2011 | Genre: Sandbox'
             },
@@ -90,7 +90,7 @@
                 detailTitle: 'TFT - AUTO CHESS',
                 detailDesc: 'Xây dựng đội hình mạnh mẽ, chiến đấu và leo rank trong TFT.',
                 price: '$9.99',
-                img: '../img/game_tft_1.jpg',
+                img: '../asset/img/game_tft_1.jpg',
                 category: 'AUTO CHESS',
                 meta: 'Release: 2019 | Genre: Auto Chess'
             },
@@ -101,7 +101,7 @@
                 detailTitle: 'I AM LEGION STAND - ACTION',
                 detailDesc: 'Sinh tồn, chiến đấu và khám phá bí ẩn trong thế giới hậu tận thế.',
                 price: '$39.99',
-                img: '../img/game_i_am_legion.jpg',
+                img: '../asset/img/game_i_am_legion.jpg',
                 category: 'ACTION',
                 meta: 'Release: 2023 | Genre: Action'
             },
@@ -112,7 +112,7 @@
                 detailTitle: 'PALWORLD - ADVENTURE',
                 detailDesc: 'Bắt, huấn luyện Pal và khám phá thế giới rộng lớn đầy thử thách.',
                 price: '$49.99',
-                img: '../img/game_palworld.jpeg',
+                img: '../asset/img/game_palworld.jpeg',
                 category: 'ADVENTURE',
                 meta: 'Release: 2024 | Genre: Adventure'
             }
@@ -190,6 +190,6 @@
         });
     </script>
 
-    <?php include '../footer/footer.html'; ?>
+    <?php include '../layout/footer.html'; ?>
 </body>
 </html> 

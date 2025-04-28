@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BayGorn1 - Tin Tức</title>
-    <link rel="stylesheet" href="../header/header.css">
-    <link rel="stylesheet" href="news.css">
-    <link rel="stylesheet" href="../footer/footer.css">
+    <link rel="stylesheet" href="../asset/css/header.css">
+    <link rel="stylesheet" href="../asset/css/news.css">
+    <link rel="stylesheet" href="../asset/css/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="newstyle.css">
+    <link rel="stylesheet" href="../asset/css/newstyle.css">
 </head>
 <body>
-    <?php include '../header/header.html'; ?>
+    <?php include '../layout/header.html'; ?>
     <main class="news-content">
         <article class="news-article">
             <h1>Brainrot Evolution - Khi Roblox không còn là chính nó</h1>
@@ -68,7 +68,7 @@
         </article>
     </main>
     
-    <?php include '../footer/footer.html'; ?>
-    <script src="news.js"></script>
+    <?php include '../layout/footer.html'; ?>
+    <script src="../asset/js/news.js"></script>
 </body>
 </html>

@@ -1,6 +1,6 @@
 <?php
 session_start();
-include('db_connection.php');
+include('../model/db_connection.php');
 
 class AuthController {
     private $conn;

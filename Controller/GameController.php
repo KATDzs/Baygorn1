@@ -76,7 +76,7 @@ class GameController {
 
 // Handle requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    include('db_connection.php');
+    include('../model/db_connection.php');
     
     $gameController = new GameController($conn);
     $response = [];

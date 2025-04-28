@@ -49,7 +49,7 @@ body {
 /* Hero Section */
 .hero {
   height: 100vh;
-  background: url('../img/image.png') center/cover no-repeat;
+  background: url('../asset/img/riot_style_white_image.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;

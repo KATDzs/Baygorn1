@@ -126,7 +126,7 @@ nav a.active {
 .hero-bg {
     position: absolute;
     top: 0; left: 0; right: 0; bottom: 0;
-    background: url('../img/zombie-bg.jpg') center/cover no-repeat;
+    background: url('../asset/img/zombie-bg.jpg') center/cover no-repeat;
     opacity: 0.18;
     z-index: 1;
 }
@@ -482,7 +482,7 @@ nav a.active {
 /* Featured Game Section */
 .featured-game {
     padding: 4rem 5%;
-    background: linear-gradient(to right, #0a0a0a 60%, transparent), url('../img/white.png');
+    background: linear-gradient(to right, #0a0a0a 60%, transparent), url('../asset/img/white.png');
     background-size: cover;
     background-position: right center;
     min-height: 600px;
@@ -681,7 +681,7 @@ nav a.active {
     }
 
     .featured-game {
-        background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../img/white.png');
+        background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('../asset/img/white.png');
     }
 
     .game-details h2 {

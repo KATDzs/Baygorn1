@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BayGorn1 - Tin Tức</title>
-    <link rel="stylesheet" href="../header/header.css">
-    <link rel="stylesheet" href="news.css">
-    <link rel="stylesheet" href="../footer/footer.css">
+    <link rel="stylesheet" href="../asset/css/header.css">
+    <link rel="stylesheet" href="../asset/css/news.css">
+    <link rel="stylesheet" href="../asset/css/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="newstyle.css">
+    <link rel="stylesheet" href="../asset/css/newstyle.css">
 </head>
 <body>
-    <?php include '../header/header.html'; ?>
+    <?php include '../layout/header.html'; ?>
     <main class="news-content">
         <article class="news-article">
             <h1>Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!</h1>
@@ -32,7 +32,7 @@
                 <h3>🌳 Cây đổ và hiệu ứng lá rơi</h3>
                 <p>Cây đổ xuất hiện như một yếu tố trang trí mới, có thể được tìm thấy ở các biome tương ứng với loại gỗ của chúng. Ngoài ra, tất cả các loại lá cây giờ đây có hiệu ứng hạt lá rơi, tăng thêm sự sống động cho môi trường.</p>
                 
-                <h3>🌸 Thực vật mới</h3>
+                <h3>Thực vật mới</h3>
                 <p>Bản cập nhật bổ sung nhiều loại thực vật mới như:</p>
                 <ul>
                     <li>Firefly Bush: Xuất hiện gần nước ở các biome như Swamp, Mangrove Swamp và Badlands, phát sáng vào ban đêm.</li>
@@ -63,7 +63,7 @@
         </article>
     </main>
     
-    <?php include '../footer/footer.html'; ?>
-    <script src="news.js"></script>
+    <?php include '../layout/footer.html'; ?>
+    <script src="../asset/js/news.js"></script>
 </body>
 </html>

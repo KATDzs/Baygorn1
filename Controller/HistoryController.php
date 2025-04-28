@@ -51,7 +51,7 @@ class HistoryController {
 // Handle requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     session_start();
-    include('db_connection.php');
+    include('../model/db_connection.php');
     
     $historyController = new HistoryController($conn);
     $response = [];

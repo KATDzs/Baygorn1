@@ -4,35 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>BayGorn1 - Tin Tức</title>
-    <link rel="stylesheet" href="../header/header.css">
-    <link rel="stylesheet" href="news.css">
-    <link rel="stylesheet" href="../footer/footer.css">
+    <link rel="stylesheet" href="../asset/css/header.css">
+    <link rel="stylesheet" href="../asset/css/news.css">
+    <link rel="stylesheet" href="../asset/css/footer.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include '../header/header.html'; ?>
+    <?php include '../layout/header.html'; ?>
 
     <?php
     $news = [
         [
             'title' => 'Minecraft Spring Update',
             'description' => '​Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!​',
-            'img' => '../img/minecraftupdate.jpg',
-            'link' => '../newspage/news1.php'
+            'img' => '../asset/img/minecraftupdate.jpg',
+            'link' => 'news1.php'
         ],
         [
             'title' => 'Roblox Update 2025',
             'description' => 'Cập nhật và tối ưu các tính năng cùng nhiều phần quà hấp dẫn đang đợi bạn tới chơi!',
-            'img' => '../img/brainrotevolution.webp',
-            'link' => '../newspage/news2.php'
+            'img' => '../asset/img/brainrotevolution.webp',
+            'link' => 'news2.php'
         ],
         [
             'title' => 'ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll',
             'description' => 'Bản cập nhật 14.2 mang tính cân bằng cao, cùng sự tối ưu hệ thống mới cho game thủ.',
-            'img' => '../img/tftupdate.avif',
-            'link' => '../newspage/news3.php'
+            'img' => '../asset/img/tftupdate.avif',
+            'link' => 'news3.php'
         ]
     ];
     ?>
@@ -62,7 +62,7 @@
         </div>
     </section>
 
-    <?php include '../footer/footer.html'; ?>
-    <script src="news.js"></script>
+    <?php include '../layout/footer.html'; ?>
+    <script src="../asset/js/news.js"></script>
 </body>
 </html>

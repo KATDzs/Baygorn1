@@ -11,15 +11,15 @@ header("Pragma: no-cache");
   <title>Trang chủ Riot Games Việt Nam</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Trang chủ chính thức của Riot Games Việt Nam">
-  <link rel="stylesheet" href="home.css?v=<?php echo time(); ?>">
-  <link rel="stylesheet" href="../header/header.css">
-  <link rel="stylesheet" href="../footer/footer.css">
+  <link rel="stylesheet" href="../asset/css/home.css?v=<?php echo time(); ?>">
+  <link rel="stylesheet" href="../asset/css/header.css">
+  <link rel="stylesheet" href="../asset/css/footer.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <?php include '../header/header.html'; ?>
+  <?php include '../layout/header.html'; ?>
   
   <main>
     <!-- Hero Section -->
@@ -36,7 +36,7 @@ header("Pragma: no-cache");
     <section class="news-section">
       <div class="section-header">
         <h1 class="section-title">Chuyện gì đang xảy ra vậy?</h1>
-        <a href="../newspage/news.php" class="view-all-btn">
+        <a href="../news/news.php" class="view-all-btn">
           Xem tất cả
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
@@ -47,9 +47,9 @@ header("Pragma: no-cache");
       <div class="news-grid">
         <!-- Main Left Block -->
         <div class="featured-news">
-          <a href="../newspage/news1.php" class="news-link">
+          <a href="../news/news1.php" class="news-link">
             <div class="news-image">
-              <img src="../img/minecraft.jpg" alt="new_update_minecraft">
+              <img src="../asset/img/minecraft.jpg" alt="new_update_minecraft">
             </div>
             <div class="news-overlay">
               <div class="news-content">
@@ -65,9 +65,9 @@ header("Pragma: no-cache");
 
         <!-- Right Column -->
         <div class="news-list">
-          <a href="../newspage/news2.php" class="news-item">
+          <a href="../news/news2.php" class="news-item">
             <div class="news-item-image">
-              <img src="../img/roblox.jpg" alt="news_Brainrot Evolution">
+              <img src="../asset/img/roblox.jpg" alt="news_Brainrot Evolution">
             </div>
             <div class="news-item-content">
               <h3>Brainrot Evolution - Khi Roblox không còn là chính nó</h3>
@@ -76,9 +76,9 @@ header("Pragma: no-cache");
             </div>
           </a>
 
-          <a href="../newspage/news3.php" class="news-item">
+          <a href="../news/news3.php" class="news-item">
             <div class="news-item-image">
-              <img src="../img/tftupdate.avif" alt="game_TFT">
+              <img src="../asset/img/tftupdate.avif" alt="game_TFT">
             </div>
             <div class="news-item-content">
               <h3>ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll</h3>
@@ -88,7 +88,7 @@ header("Pragma: no-cache");
 
           <a href="#" class="news-item">
             <div class="news-item-image">
-              <img src="../img/news/van-cuoc.jpg" alt="Ván Cược Đen Tối">
+              <img src="../asset/img/news/van-cuoc.jpg" alt="Ván Cược Đen Tối">
             </div>
             <div class="news-item-content">
               <h4>Ván Cược Đen Tối | Phim Ngắn Mùa 1 năm 2025 - Liên Minh Huyền Thoại</h4>
@@ -98,7 +98,7 @@ header("Pragma: no-cache");
 
           <a href="#" class="news-item">
             <div class="news-item-image">
-              <img src="../img/news/dtcl.jpg" alt="ĐTCL">
+              <img src="../asset/img/news/dtcl.jpg" alt="ĐTCL">
             </div>
             <div class="news-item-content">
               <h4>Lịch Trình Phát Triển ĐTCL: Thành Phố Công Nghệ | Video Từ Đội Ngũ</h4>
@@ -114,7 +114,7 @@ header("Pragma: no-cache");
       <div class="content-wrapper">
         <div class="section-header">
           <h2 class="section-title">Trò chơi của chúng tôi</h2>
-          <a href="../shoppage/shoppage.php" class="view-all-btn">
+          <a href="../shopgame/shoppage.php" class="view-all-btn">
             Xem tất cả
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
               <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
@@ -125,7 +125,7 @@ header("Pragma: no-cache");
         <div class="games-grid">
           <a href="#" class="game-card">
             <div class="game-image">
-              <img src="../img/game_tft_1.jpg" alt="League of Legends">
+              <img src="../asset/img/game_tft_1.jpg" alt="League of Legends">
             </div>
             <div class="game-overlay">
               <div class="game-content">
@@ -138,7 +138,7 @@ header("Pragma: no-cache");
 
           <a href="#" class="game-card">
             <div class="game-image">
-              <img src="../img/white.png" alt="Valorant">
+              <img src="../asset/img/white.png" alt="Valorant">
             </div>
             <div class="game-overlay">
               <div class="game-content">
@@ -151,7 +151,7 @@ header("Pragma: no-cache");
 
           <a href="#" class="game-card">
             <div class="game-image">
-              <img src="../img/white.png" alt="Teamfight Tactics">
+              <img src="../asset/img/white.png" alt="Teamfight Tactics">
             </div>
             <div class="game-overlay">
               <div class="game-content">
@@ -164,7 +164,7 @@ header("Pragma: no-cache");
 
           <a href="#" class="game-card">
             <div class="game-image">
-              <img src="../img/white.png" alt="Wild Rift">
+              <img src="../asset/img/white.png" alt="Wild Rift">
             </div>
             <div class="game-overlay">
               <div class="game-content">
@@ -179,7 +179,7 @@ header("Pragma: no-cache");
     </section>
   </main>
 
-  <?php include '../footer/footer.html'; ?>
+  <?php include '../layout/footer.html'; ?>
 
   <script>
     // Add smooth scrolling

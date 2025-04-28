@@ -144,7 +144,8 @@ class AdminController {
 // Handle requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET' || $_SERVER['REQUEST_METHOD'] === 'POST') {
     session_start();
-    include('db_connection.php');
+    // Remove this line since db_connection is already loaded
+    // include('../model/db_connection.php');
     
     $adminController = new AdminController($conn);
     $response = [];
