@@ -36,10 +36,15 @@ class HomeController extends BaseController {
 
     // Trang About
     public function about() {
-        $this->view('home/about', [
-            'title' => 'Về chúng tôi',
-            'css_files' => ['about']
-        ]);
+        try {
+            $this->view('about/about', [
+                'title' => 'Về chúng tôi',
+                'css_files' => ['about', 'header', 'footer']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     // Trang Game

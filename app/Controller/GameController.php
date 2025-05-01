@@ -1,67 +1,81 @@
 <?php
-class GameController {
+class GameController extends BaseController {
     private $gameModel;
     private $categoryModel;
 
-    public function __construct() {
-        // Không cần gọi session_start() ở đây vì đã được gọi trong index.php
-        require_once 'core/db_connection.php';
-        require_once 'model/GameModel.php';
-        require_once 'model/CategoryModel.php';
-        
-        global $conn;
-        $this->gameModel = new GameModel($conn);
-        $this->categoryModel = new CategoryModel($conn);
+    public function __construct($conn) {
+        parent::__construct($conn);
+        $this->gameModel = $this->loadModel('GameModel');
+        $this->categoryModel = $this->loadModel('CategoryModel');
     }
 
     public function index() {
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $limit = 12;
-        $offset = ($page - 1) * $limit;
-        
-        $games = $this->gameModel->getAllGames($limit, $offset);
-        $totalGames = $this->gameModel->getTotalGames();
-        $totalPages = ceil($totalGames / $limit);
-        
-        // Load layout
-        require_once 'view/layout/header.php';
-        require_once 'view/shopgame/shoppage.php';
-        require_once 'view/layout/footer.php';
+        try {
+            $games = $this->gameModel->getAllGames();
+            $categories = $this->categoryModel->getAllCategories();
+            
+            $this->view('shopgame/shoppage', [
+                'title' => 'Danh sách game',
+                'games' => $games,
+                'categories' => $categories,
+                'css_files' => ['shoppage']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     public function detail($id) {
-        $game = $this->gameModel->getGameById($id);
-        if (!$game) {
-            header('Location: /Baygorn1/game');
-            exit;
+        try {
+            $game = $this->gameModel->getGameById($id);
+            if (!$game) {
+                $this->view('error/404');
+                return;
+            }
+            
+            $this->view('game/detail', [
+                'title' => $game['name'],
+                'game' => $game,
+                'css_files' => ['game']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
         }
-        
-        $relatedGames = $this->gameModel->getRelatedGames($id);
-        
-        // Load layout
-        require_once 'view/layout/header.php';
-        require_once 'view/shopgame/detail.php';
-        require_once 'view/layout/footer.php';
     }
 
     public function search() {
-        $keyword = $_GET['keyword'] ?? '';
-        $category = $_GET['category'] ?? '';
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        
-        $limit = 12;
-        $offset = ($page - 1) * $limit;
-        
-        $games = $this->gameModel->searchGames($keyword, $category, $limit, $offset);
-        $totalGames = $this->gameModel->getSearchCount($keyword, $category);
-        $totalPages = ceil($totalGames / $limit);
-        
-        $categories = $this->categoryModel->getAllCategories();
-        
-        // Load layout
-        require_once 'view/layout/header.php';
-        require_once 'view/shopgame/shoppage.php';
-        require_once 'view/layout/footer.php';
+        try {
+            $keyword = $_GET['keyword'] ?? '';
+            $games = $this->gameModel->searchGames($keyword);
+            
+            $this->view('game/search', [
+                'title' => 'Tìm kiếm game',
+                'games' => $games,
+                'keyword' => $keyword,
+                'css_files' => ['game']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
+    }
+
+    public function category($categoryId) {
+        try {
+            $games = $this->gameModel->getGamesByCategory($categoryId);
+            
+            $this->view('game/category', [
+                'title' => 'Danh mục game',
+                'games' => $games,
+                'categoryId' => $categoryId,
+                'css_files' => ['game']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     public function add() {

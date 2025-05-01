@@ -1,53 +1,57 @@
 <?php
-class HistoryController {
+class HistoryController extends BaseController {
     private $historyModel;
     private $gameModel;
-    private $userModel;
 
-    public function __construct() {
-        require_once 'core/db_connection.php';
-        require_once 'model/HistoryModel.php';
-        require_once 'model/GameModel.php';
-        require_once 'model/UserModel.php';
-        
-        global $conn;
-        $this->historyModel = new HistoryModel($conn);
-        $this->gameModel = new GameModel($conn);
-        $this->userModel = new UserModel($conn);
-    }
-
-    private function checkAuth() {
-        if (!isset($_SESSION['user_id'])) {
-            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                header('Location: /Baygorn1/auth/login');
-                exit;
-            } else {
-                $this->sendJsonResponse(['success' => false, 'message' => 'Please login first']);
-            }
-        }
-        return $_SESSION['user_id'];
-    }
-
-    private function sendJsonResponse($data) {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit();
+    public function __construct($conn) {
+        parent::__construct($conn);
+        $this->historyModel = $this->loadModel('HistoryModel');
+        $this->gameModel = $this->loadModel('GameModel');
     }
 
     public function index() {
-        $userId = $this->checkAuth();
-        
-        $limit = 10;
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $offset = ($page - 1) * $limit;
-        
-        $history = $this->historyModel->getUserHistory($userId, $limit, $offset);
-        $total = $this->historyModel->getTotalPurchases($userId);
-        $totalPages = ceil($total / $limit);
-        
-        require_once 'view/layout/header.php';
-        require_once 'view/history/index.php';
-        require_once 'view/layout/footer.php';
+        try {
+            $userId = $this->requireLogin();
+            $histories = $this->historyModel->getUserHistory($userId);
+            
+            foreach ($histories as &$history) {
+                $game = $this->gameModel->getGameById($history['game_id']);
+                $history['game'] = $game;
+            }
+            
+            $this->view('history/index', [
+                'title' => 'Lịch sử mua hàng',
+                'histories' => $histories,
+                'css_files' => ['history']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
+    }
+
+    public function detail($id) {
+        try {
+            $userId = $this->requireLogin();
+            $history = $this->historyModel->getHistoryById($id);
+            
+            if (!$history || $history['user_id'] != $userId) {
+                $this->view('error/404');
+                return;
+            }
+            
+            $game = $this->gameModel->getGameById($history['game_id']);
+            $history['game'] = $game;
+            
+            $this->view('history/detail', [
+                'title' => 'Chi tiết đơn hàng',
+                'history' => $history,
+                'css_files' => ['history']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     public function api() {

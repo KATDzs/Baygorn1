@@ -12,27 +12,47 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <?php include 'view/layout/header.php'; ?>
-
     <?php
+    if (!defined('ROOT_PATH')) {
+        define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+    }
+
+    // Set page title and CSS files
+    $title = 'BayGorn1 - Tin Tức';
+    $css_files = ['news', 'footer'];
+
+    require_once ROOT_PATH . '/view/layout/header.php';
+
     $news = [
         [
             'title' => 'Minecraft Spring Update',
             'description' => '​Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!​',
             'img' => '/Baygorn1/asset/img/minecraftupdate.jpg',
-            'link' => 'news1.php'
+            'link' => '/Baygorn1/news/news1'
         ],
         [
             'title' => 'Roblox Update 2025',
             'description' => 'Cập nhật và tối ưu các tính năng cùng nhiều phần quà hấp dẫn đang đợi bạn tới chơi!',
             'img' => '/Baygorn1/asset/img/brainrotevolution.webp',
-            'link' => 'news2.php'
+            'link' => '/Baygorn1/news/news2'
         ],
         [
-            'title' => 'ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll',
+            'title' => 'ĐTCL 14.2: Cân Bằng Meta',
             'description' => 'Bản cập nhật 14.2 mang tính cân bằng cao, cùng sự tối ưu hệ thống mới cho game thủ.',
             'img' => '/Baygorn1/asset/img/tftupdate.avif',
-            'link' => 'news3.php'
+            'link' => '/Baygorn1/news/news3'
+        ],
+        [
+            'title' => 'Tin tức 4',
+            'description' => 'Mô tả ngắn gọn về tin tức 4...',
+            'img' => '/Baygorn1/asset/img/news/news4.jpg',
+            'link' => '/Baygorn1/news/news4'
+        ],
+        [
+            'title' => 'Tin tức 5',
+            'description' => 'Mô tả ngắn gọn về tin tức 5...',
+            'img' => '/Baygorn1/asset/img/news/news5.jpg',
+            'link' => '/Baygorn1/news/news5'
         ]
     ];
     ?>
@@ -62,7 +82,7 @@
         </div>
     </section>
 
-    <?php include 'view/layout/footer.php'; ?>
+    <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
     <script src="/Baygorn1/asset/js/news.js"></script>
 </body>
 </html>

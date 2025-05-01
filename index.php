@@ -6,6 +6,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 // Define base path
 define('BASE_PATH', __DIR__);
+define('APP_ROOT', __DIR__);
 
 // Load configuration
 $config = require_once 'config.php';
@@ -57,9 +58,17 @@ try {
 $url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : 'home';
 $urlArr = explode('/', $url);
 
-// Default controller and action
-$controllerName = ucfirst($urlArr[0]);
-$action = isset($urlArr[1]) ? $urlArr[1] : 'index';
+// Map special routes
+if ($urlArr[0] === 'shopgame') {
+    $controllerName = 'Game';
+} else if ($urlArr[0] === 'about') {
+    $controllerName = 'Home';
+    $action = 'about';
+} else {
+    $controllerName = ucfirst($urlArr[0]);
+}
+
+$action = isset($urlArr[1]) && $urlArr[0] !== 'about' ? $urlArr[1] : ($urlArr[0] === 'about' ? 'about' : 'index');
 
 // Clean parameters
 $params = array_slice($urlArr, 2);

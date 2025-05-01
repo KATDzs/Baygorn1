@@ -1,5 +1,5 @@
 <?php
-class AdminController {
+class AdminController extends BaseController {
     private $userModel;
     private $gameModel;
     private $orderModel;
@@ -7,13 +7,12 @@ class AdminController {
     private $newsModel;
 
     public function __construct($conn) {
-        $this->checkAdminAuth();
-        
-        $this->userModel = new UserModel($conn);
-        $this->gameModel = new GameModel($conn);
-        $this->orderModel = new OrderModel($conn);
-        $this->categoryModel = new CategoryModel($conn);
-        $this->newsModel = new NewsModel($conn);
+        parent::__construct($conn);
+        $this->userModel = $this->loadModel('UserModel');
+        $this->gameModel = $this->loadModel('GameModel');
+        $this->orderModel = $this->loadModel('OrderModel');
+        $this->categoryModel = $this->loadModel('CategoryModel');
+        $this->newsModel = $this->loadModel('NewsModel');
     }
 
     // Kiểm tra quyền admin
@@ -30,12 +29,26 @@ class AdminController {
 
     // Trang dashboard
     public function index() {
+        try {
+            $this->requireAdmin();
         $stats = $this->getDashboardStats();
-        require_once 'view/admin/dashboard.php';
+            
+            $this->view('admin/dashboard', [
+                'title' => 'Dashboard',
+                'stats' => $stats,
+                'css_files' => ['admin']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     // Quản lý người dùng
     public function users() {
+        try {
+            $this->requireAdmin();
+            
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
@@ -45,9 +58,15 @@ class AdminController {
         $totalPages = ceil($total / $limit);
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            require_once 'view/admin/users.php';
+                $this->view('admin/users', [
+                    'title' => 'Quản lý người dùng',
+                    'users' => $users,
+                    'currentPage' => $page,
+                    'totalPages' => $totalPages,
+                    'css_files' => ['admin']
+                ]);
         } else {
-            $this->sendJsonResponse([
+                $this->json([
             'success' => true,
             'data' => [
                 'users' => $users,
@@ -55,11 +74,18 @@ class AdminController {
                     'totalPages' => $totalPages
                 ]
             ]);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
         }
     }
 
     // Quản lý game
     public function games() {
+        try {
+            $this->requireAdmin();
+            
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 10;
         $offset = ($page - 1) * $limit;
@@ -69,9 +95,15 @@ class AdminController {
         $totalPages = ceil($total / $limit);
 
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            require_once 'view/admin/games.php';
+                $this->view('admin/games', [
+                    'title' => 'Quản lý game',
+                    'games' => $games,
+                    'currentPage' => $page,
+                    'totalPages' => $totalPages,
+                    'css_files' => ['admin']
+                ]);
         } else {
-            $this->sendJsonResponse([
+                $this->json([
                 'success' => true,
                 'data' => [
                     'games' => $games,
@@ -79,6 +111,10 @@ class AdminController {
                     'totalPages' => $totalPages
                 ]
             ]);
+            }
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
         }
     }
 

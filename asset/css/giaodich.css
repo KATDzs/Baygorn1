@@ -1,0 +1,235 @@
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #0f0f0f;
+    color: #f2f2f2;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --riot-red: #e60012;
+    --riot-dark: #1e1e1e;
+    --riot-light: #f2f2f2;
+}
+
+/* Main container styles */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: calc(100vh - 200px); /* Trừ đi chiều cao header và footer */
+}
+
+/* Game detail section */
+.game-detail {
+    display: flex;
+    gap: 30px;
+    background-color: var(--riot-dark);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(230, 0, 18, 0.2);
+    margin-bottom: 30px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.game-image {
+    width: 400px;
+    height: auto;
+    border-radius: 10px;
+    object-fit: cover;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.game-info {
+    flex: 1;
+}
+
+.game-info h1 {
+    color: var(--riot-red);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+/* Game description section */
+.game-description {
+    color: var(--riot-light);
+    line-height: 1.6;
+}
+
+.game-description h3 {
+    color: var(--riot-red);
+    font-size: 1.5rem;
+    margin: 2rem 0 1rem;
+    font-weight: 600;
+}
+
+.game-description p {
+    margin: 0.5rem 0;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.game-description ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.game-description ul li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    line-height: 1.7;
+}
+
+.game-description ul li:before {
+    content: "•";
+    color: var(--riot-red);
+    position: absolute;
+    left: 0;
+    font-size: 1.2rem;
+}
+
+/* Price section */
+.game-price {
+    font-size: 1.5rem;
+    color: var(--riot-red);
+    font-weight: bold;
+    margin: 2rem 0;
+    padding: 1rem 0;
+    border-top: 1px solid rgba(230, 0, 18, 0.2);
+    border-bottom: 1px solid rgba(230, 0, 18, 0.2);
+}
+
+/* Buy button */
+.game-info button {
+    background-color: var(--riot-red);
+    color: var(--riot-light);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 200px;
+}
+
+.game-info button:hover {
+    background-color: #ff1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(230, 0, 18, 0.3);
+}
+
+/* Rating stars */
+.game-description p:has(⭐) {
+    color: #ffd700;
+    font-weight: 500;
+}
+
+/* Transaction form */
+.transaction-form {
+    background-color: var(--riot-dark);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: none;
+}
+
+.transaction-form.active {
+    display: block;
+}
+
+.transaction-form h2 {
+    color: var(--riot-red);
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--riot-light);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #222;
+    color: var(--riot-light);
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--riot-red);
+}
+
+.btn-submit {
+    background-color: var(--riot-red);
+    color: var(--riot-light);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.btn-submit:hover {
+    background-color: #ff1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(230, 0, 18, 0.3);
+}
+
+/* Responsive design */
+@media screen and (max-width: 768px) {
+    .game-detail {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .game-image {
+        width: 100%;
+    }
+
+    .game-info h1 {
+        font-size: 1.8rem;
+    }
+
+    .game-price {
+        font-size: 1.3rem;
+    }
+
+    .game-info button {
+        max-width: 100%;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-detail {
+    animation: fadeIn 0.5s ease-out;
+} 

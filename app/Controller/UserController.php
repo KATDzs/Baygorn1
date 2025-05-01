@@ -1,123 +1,121 @@
 <?php
-class UserController {
+class UserController extends BaseController {
     private $userModel;
     private $orderModel;
     private $historyModel;
 
-    public function __construct() {
-        require_once 'core/db_connection.php';
-        require_once 'model/UserModel.php';
-        require_once 'model/OrderModel.php';
-        require_once 'model/HistoryModel.php';
-        
-        global $conn;
-        $this->userModel = new UserModel($conn);
-        $this->orderModel = new OrderModel($conn);
-        $this->historyModel = new HistoryModel($conn);
-    }
-
-    private function checkAuth() {
-        if (!isset($_SESSION['user_id'])) {
-            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                header('Location: /Baygorn1/auth/login');
-                exit;
-            } else {
-                $this->sendJsonResponse(['success' => false, 'message' => 'Please login first']);
-            }
-        }
-        return $_SESSION['user_id'];
-    }
-
-    private function sendJsonResponse($data) {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit();
+    public function __construct($conn) {
+        parent::__construct($conn);
+        $this->userModel = $this->loadModel('UserModel');
+        $this->orderModel = $this->loadModel('OrderModel');
+        $this->historyModel = $this->loadModel('HistoryModel');
     }
 
     public function index() {
-        $userId = $this->checkAuth();
-        $user = $this->userModel->getUserById($userId);
-        
-        require_once 'view/layout/header.php';
-        require_once 'view/user/profile.php';
-        require_once 'view/layout/footer.php';
+        try {
+            $userId = $this->requireLogin();
+            $user = $this->userModel->getUserById($userId);
+            
+            $this->view('user/profile', [
+                'title' => 'Thông tin cá nhân',
+                'user' => $user,
+                'css_files' => ['user']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     public function history() {
-        $userId = $this->checkAuth();
-        
-        $limit = 10;
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-        $offset = ($page - 1) * $limit;
-        
-        $history = $this->historyModel->getUserHistory($userId, $limit, $offset);
-        $total = $this->historyModel->getTotalPurchases($userId);
-        $totalPages = ceil($total / $limit);
-        
-        require_once 'view/layout/header.php';
-        require_once 'view/user/history.php';
-        require_once 'view/layout/footer.php';
+        try {
+            $userId = $this->requireLogin();
+            
+            $limit = 10;
+            $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+            $offset = ($page - 1) * $limit;
+            
+            $history = $this->historyModel->getUserHistory($userId, $limit, $offset);
+            $total = $this->historyModel->getTotalPurchases($userId);
+            $totalPages = ceil($total / $limit);
+            
+            $this->view('user/history', [
+                'title' => 'Lịch sử mua hàng',
+                'history' => $history,
+                'currentPage' => $page,
+                'totalPages' => $totalPages,
+                'css_files' => ['user']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     public function api() {
-        $userId = $this->checkAuth();
+        try {
+            $userId = $this->requireLogin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if (!isset($_GET['action'])) {
-                $this->sendJsonResponse(['success' => false, 'message' => 'No action specified']);
-                return;
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (!isset($_GET['action'])) {
+                    $this->json(['success' => false, 'message' => 'No action specified']);
+                    return;
+                }
+
+                switch ($_GET['action']) {
+                    case 'profile':
+                        $response = $this->getProfile($userId);
+                        break;
+                    case 'purchase_history':
+                        $limit = $_GET['limit'] ?? 10;
+                        $offset = $_GET['offset'] ?? 0;
+                        $response = $this->getPurchaseHistory($userId, $limit, $offset);
+                        break;
+                    case 'order_history':
+                        $response = $this->getOrderHistory($userId);
+                        break;
+                    default:
+                        $response = ['success' => false, 'message' => 'Invalid action'];
+                }
+            } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (!isset($_POST['action'])) {
+                    $this->json(['success' => false, 'message' => 'No action specified']);
+                    return;
+                }
+
+                switch ($_POST['action']) {
+                    case 'update_profile':
+                        if (!isset($_POST['email']) || !isset($_POST['full_name'])) {
+                            $this->json(['success' => false, 'message' => 'Missing required parameters']);
+                        }
+                        $response = $this->updateProfile(
+                            $userId,
+                            $_POST['email'],
+                            $_POST['full_name']
+                        );
+                        break;
+                    case 'change_password':
+                        if (!isset($_POST['current_password']) || !isset($_POST['new_password'])) {
+                            $this->json(['success' => false, 'message' => 'Missing required parameters']);
+                        }
+                        $response = $this->changePassword(
+                            $userId,
+                            $_POST['current_password'],
+                            $_POST['new_password']
+                        );
+                        break;
+                    default:
+                        $response = ['success' => false, 'message' => 'Invalid action'];
+                }
+            } else {
+                $response = ['success' => false, 'message' => 'Invalid request method'];
             }
 
-            switch ($_GET['action']) {
-                case 'profile':
-                    $response = $this->getProfile($userId);
-                    break;
-                case 'purchase_history':
-                    $limit = $_GET['limit'] ?? 10;
-                    $offset = $_GET['offset'] ?? 0;
-                    $response = $this->getPurchaseHistory($userId, $limit, $offset);
-                    break;
-                case 'order_history':
-                    $response = $this->getOrderHistory($userId);
-                    break;
-                default:
-                    $response = ['success' => false, 'message' => 'Invalid action'];
-            }
-        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_POST['action'])) {
-                $this->sendJsonResponse(['success' => false, 'message' => 'No action specified']);
-                return;
-            }
-
-            switch ($_POST['action']) {
-                case 'update_profile':
-                    if (!isset($_POST['email']) || !isset($_POST['full_name'])) {
-                        $this->sendJsonResponse(['success' => false, 'message' => 'Missing required parameters']);
-                    }
-                    $response = $this->updateProfile(
-                        $userId,
-                        $_POST['email'],
-                        $_POST['full_name']
-                    );
-                    break;
-                case 'change_password':
-                    if (!isset($_POST['current_password']) || !isset($_POST['new_password'])) {
-                        $this->sendJsonResponse(['success' => false, 'message' => 'Missing required parameters']);
-                    }
-                    $response = $this->changePassword(
-                        $userId,
-                        $_POST['current_password'],
-                        $_POST['new_password']
-                    );
-                    break;
-                default:
-                    $response = ['success' => false, 'message' => 'Invalid action'];
-            }
-        } else {
-            $response = ['success' => false, 'message' => 'Invalid request method'];
+            $this->json($response);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->json(['success' => false, 'message' => 'Internal server error']);
         }
-
-        $this->sendJsonResponse($response);
     }
 
     public function getProfile($user_id) {

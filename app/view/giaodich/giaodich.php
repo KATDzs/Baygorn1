@@ -4,33 +4,37 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BayGorn1 - Mua game</title>
-  <link rel="stylesheet" href="/Baygorn1/asset/css/styles.css">
-  <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
-  <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
+  <link rel="stylesheet" href="/asset/css/giaodich.css">
+  <link rel="stylesheet" href="/asset/css/header.css">
+  <link rel="stylesheet" href="/asset/css/footer.css">
 </head>
 <body>
-    <?php 
-    define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
-    include ROOT_PATH . '/view/layout/header.php'; 
-    ?>
+    <?php include APP_ROOT . '/app/view/layout/header.php'; ?>
   <div class="container">
     <div class="game-detail">
       <?php
         // Kết nối database
-        require_once ROOT_PATH . '/core/db_connection.php';
-        global $conn;
+        require_once APP_ROOT . '/core/Database.php';
+        $db = new Database();
+        $conn = $db->getConnection();
         
+        // Kiểm tra kết nối
+        if (!$conn) {
+          die("Kết nối thất bại: " . mysqli_connect_error());
+        }
+
         // Lấy game_id từ URL parameter
         $game_id = isset($_GET['id']) ? $_GET['id'] : 1;
 
         // Query lấy thông tin game
-        $stmt = $conn->prepare("SELECT * FROM games WHERE game_id = ?");
-        $stmt->bind_param("i", $game_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+        $sql = "SELECT * FROM games WHERE game_id = ?";
+        $stmt = mysqli_prepare($conn, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $game_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
         
-        if ($game = $result->fetch_assoc()) {
-          echo "<img src='/Baygorn1/{$game['image_url']}' alt='{$game['title']}' class='game-image'>";
+        if ($game = mysqli_fetch_assoc($result)) {
+          echo "<img src='{$game['image_url']}' alt='{$game['title']}' class='game-image'>";
           echo "<div class='game-info'>";
           echo "<h1>{$game['title']}</h1>";
           echo "<p class='game-description'>{$game['description']}</p>";
@@ -39,11 +43,11 @@
         } else {
           echo "<p>Không tìm thấy game</p>";
         }
-        
-        $stmt->close();
+
+        mysqli_close($conn);
       ?>
     </div>
   </div>
-  <?php include ROOT_PATH . '/view/layout/footer.php'; ?>
+  <?php include APP_ROOT . '/app/view/layout/footer.php'; ?>
 </body>
 </html>

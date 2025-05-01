@@ -53,7 +53,7 @@
 .left {
   display: flex;
   align-items: center;
-  gap: 64px;
+  gap: 48px;
   position: relative;
   z-index: 1;
 }
@@ -94,7 +94,7 @@
 .menu {
   list-style: none;
   display: flex;
-  gap: 40px;
+  gap: 24px;
   margin: 0;
   padding: 0;
   position: relative;
@@ -104,14 +104,14 @@
 .menu-link {
   text-decoration: none;
   color: var(--text-color);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 8px 16px;
+  letter-spacing: 0.05em;
+  padding: 8px 12px;
   position: relative;
   transition: all 0.3s ease;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .menu-link:hover {
@@ -213,5 +213,20 @@
     height: 36px;
     padding: 0 16px;
     font-size: 13px;
+  }
+}
+
+main {
+  margin-top: 80px; /* Chiều cao của navbar */
+  min-height: calc(100vh - 80px);
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  main {
+    margin-top: 64px; /* Chiều cao của navbar trên mobile */
+    min-height: calc(100vh - 64px);
   }
 }

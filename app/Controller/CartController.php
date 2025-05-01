@@ -1,117 +1,112 @@
 <?php
-class CartController {
+class CartController extends BaseController {
     private $cartModel;
     private $gameModel;
 
-    public function __construct() {
-        require_once 'core/db_connection.php';
-        require_once 'model/CartModel.php';
-        require_once 'model/GameModel.php';
-        
-        global $conn;
-        $this->cartModel = new CartModel($conn);
-        $this->gameModel = new GameModel($conn);
-    }
-
-    private function checkAuth() {
-        if (!isset($_SESSION['user_id'])) {
-            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                header('Location: /Baygorn1/auth/login');
-                exit;
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Please login first']);
-                exit;
-            }
-        }
+    public function __construct($conn) {
+        parent::__construct($conn);
+        $this->cartModel = $this->loadModel('CartModel');
+        $this->gameModel = $this->loadModel('GameModel');
     }
 
     public function index() {
-        $this->checkAuth();
-        $userId = $_SESSION['user_id'];
-        
-        $cartItems = $this->cartModel->getCartItems($userId);
-        $total = $this->cartModel->getCartTotal($userId);
-        
-        require_once 'view/layout/header.php';
-        require_once 'view/giaodich/giaodich.php';
-        require_once 'view/layout/footer.php';
+        try {
+            $userId = $this->requireLogin();
+            $cartItems = $this->cartModel->getCartItems($userId);
+            $total = 0;
+            
+            foreach ($cartItems as &$item) {
+                $game = $this->gameModel->getGameById($item['game_id']);
+                $item['game'] = $game;
+                $total += $game['price'] * $item['quantity'];
+            }
+            
+            $this->view('cart/index', [
+                'title' => 'Giỏ hàng',
+                'cartItems' => $cartItems,
+                'total' => $total,
+                'css_files' => ['cart']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     public function add() {
-        $this->checkAuth();
-        $userId = $_SESSION['user_id'];
-        
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $gameId = $_POST['game_id'] ?? 0;
-            $quantity = $_POST['quantity'] ?? 1;
+        try {
+            $userId = $this->requireLogin();
             
-            if ($gameId <= 0) {
-                echo json_encode(['success' => false, 'message' => 'Invalid game ID']);
-                return;
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $gameId = $_POST['game_id'] ?? 0;
+                $quantity = $_POST['quantity'] ?? 1;
+                
+                if ($this->cartModel->addToCart($userId, $gameId, $quantity)) {
+                    $this->redirect('cart');
+                } else {
+                    $error = 'Failed to add item to cart';
+                }
             }
             
-            // Kiểm tra số lượng tồn kho
-            $game = $this->gameModel->getGameById($gameId);
-            if (!$game || $game['stock'] < $quantity) {
-                echo json_encode(['success' => false, 'message' => 'Insufficient stock']);
-                return;
-            }
-            
-            $result = $this->cartModel->addToCart($userId, $gameId, $quantity);
-            if ($result) {
-                echo json_encode(['success' => true, 'message' => 'Added to cart successfully']);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Failed to add to cart']);
-            }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+            $this->view('cart/add', [
+                'title' => 'Thêm vào giỏ hàng',
+                'error' => $error ?? null,
+                'css_files' => ['cart']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
         }
     }
 
     public function update() {
-        $this->checkAuth();
-        $userId = $_SESSION['user_id'];
-        
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $gameId = $_POST['game_id'] ?? 0;
-            $quantity = $_POST['quantity'] ?? 1;
+        try {
+            $userId = $this->requireLogin();
             
-            if ($gameId <= 0) {
-                echo json_encode(['success' => false, 'message' => 'Invalid game ID']);
-                return;
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $cartItemId = $_POST['cart_item_id'] ?? 0;
+                $quantity = $_POST['quantity'] ?? 1;
+                
+                if ($this->cartModel->updateCartItem($cartItemId, $quantity)) {
+                    $this->redirect('cart');
+                } else {
+                    $error = 'Failed to update cart item';
+                }
             }
             
-            // Kiểm tra số lượng tồn kho
-            $game = $this->gameModel->getGameById($gameId);
-            if (!$game || $game['stock'] < $quantity) {
-                echo json_encode(['success' => false, 'message' => 'Insufficient stock']);
-                return;
-            }
-            
-            $result = $this->cartModel->updateQuantity($userId, $gameId, $quantity);
-            if ($result) {
-                echo json_encode(['success' => true, 'message' => 'Cart updated successfully']);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Failed to update cart']);
-            }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+            $this->view('cart/update', [
+                'title' => 'Cập nhật giỏ hàng',
+                'error' => $error ?? null,
+                'css_files' => ['cart']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
         }
     }
 
-    public function clear() {
-        $this->checkAuth();
-        $userId = $_SESSION['user_id'];
-        
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $result = $this->cartModel->clearCart($userId);
-            if ($result) {
-                echo json_encode(['success' => true, 'message' => 'Cart cleared successfully']);
-            } else {
-                echo json_encode(['success' => false, 'message' => 'Failed to clear cart']);
+    public function remove() {
+        try {
+            $userId = $this->requireLogin();
+            
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $cartItemId = $_POST['cart_item_id'] ?? 0;
+                
+                if ($this->cartModel->removeFromCart($cartItemId)) {
+                    $this->redirect('cart');
+                } else {
+                    $error = 'Failed to remove item from cart';
+                }
             }
-        } else {
-            echo json_encode(['success' => false, 'message' => 'Invalid request method']);
+            
+            $this->view('cart/remove', [
+                'title' => 'Xóa khỏi giỏ hàng',
+                'error' => $error ?? null,
+                'css_files' => ['cart']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
         }
     }
 

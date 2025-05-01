@@ -1,114 +1,109 @@
 <?php
-class OrderController {
+class OrderController extends BaseController {
     private $orderModel;
     private $cartModel;
     private $gameModel;
     private $historyModel;
 
-    public function __construct() {
-        require_once 'core/db_connection.php';
-        require_once 'model/OrderModel.php';
-        require_once 'model/CartModel.php';
-        require_once 'model/GameModel.php';
-        require_once 'model/HistoryModel.php';
-        
-        global $conn;
-        $this->orderModel = new OrderModel($conn);
-        $this->cartModel = new CartModel($conn);
-        $this->gameModel = new GameModel($conn);
-        $this->historyModel = new HistoryModel($conn);
-    }
-
-    private function checkAuth() {
-        if (!isset($_SESSION['user_id'])) {
-            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-                header('Location: /Baygorn1/auth/login');
-                exit;
-            } else {
-                $this->sendJsonResponse(['success' => false, 'message' => 'Please login first']);
-            }
-        }
-        return $_SESSION['user_id'];
-    }
-
-    private function sendJsonResponse($data) {
-        header('Content-Type: application/json');
-        echo json_encode($data);
-        exit();
+    public function __construct($conn) {
+        parent::__construct($conn);
+        $this->orderModel = $this->loadModel('OrderModel');
+        $this->cartModel = $this->loadModel('CartModel');
+        $this->gameModel = $this->loadModel('GameModel');
+        $this->historyModel = $this->loadModel('HistoryModel');
     }
 
     public function index() {
-        $userId = $this->checkAuth();
-        
-        $orders = $this->orderModel->getUserOrders($userId);
-        
-        require_once 'view/layout/header.php';
-        require_once 'view/order/index.php';
-        require_once 'view/layout/footer.php';
+        try {
+            $userId = $this->requireLogin();
+            
+            $orders = $this->orderModel->getUserOrders($userId);
+            
+            $this->view('order/index', [
+                'title' => 'Đơn hàng của tôi',
+                'orders' => $orders,
+                'css_files' => ['order']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
+        }
     }
 
     public function detail($orderId) {
-        $userId = $this->checkAuth();
-        
-        $order = $this->orderModel->getOrderById($orderId);
-        if (!$order || $order['user_id'] != $userId) {
-            header('Location: /Baygorn1/order');
-            exit;
+        try {
+            $userId = $this->requireLogin();
+            
+            $order = $this->orderModel->getOrderById($orderId);
+            if (!$order || $order['user_id'] != $userId) {
+                $this->redirect('order');
+            }
+            
+            $details = $this->orderModel->getOrderDetails($orderId);
+            
+            $this->view('order/detail', [
+                'title' => 'Chi tiết đơn hàng #' . $orderId,
+                'order' => $order,
+                'details' => $details,
+                'css_files' => ['order']
+            ]);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->view('error/404');
         }
-        
-        $details = $this->orderModel->getOrderDetails($orderId);
-        
-        require_once 'view/layout/header.php';
-        require_once 'view/order/detail.php';
-        require_once 'view/layout/footer.php';
     }
 
     public function api() {
-        $userId = $this->checkAuth();
+        try {
+            $userId = $this->requireLogin();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if (!isset($_GET['action'])) {
-                $this->sendJsonResponse(['success' => false, 'message' => 'No action specified']);
-                return;
+            if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+                if (!isset($_GET['action'])) {
+                    $this->json(['success' => false, 'message' => 'No action specified']);
+                    return;
+                }
+
+                switch ($_GET['action']) {
+                    case 'details':
+                        if (!isset($_GET['id'])) {
+                            $this->json(['success' => false, 'message' => 'No order ID provided']);
+                        }
+                        $response = $this->getOrderDetails($userId, $_GET['id']);
+                        break;
+                    case 'history':
+                        $response = $this->getUserOrders($userId);
+                        break;
+                    default:
+                        $response = ['success' => false, 'message' => 'Invalid action'];
+                }
+            } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                if (!isset($_POST['action'])) {
+                    $this->json(['success' => false, 'message' => 'No action specified']);
+                    return;
+                }
+
+                switch ($_POST['action']) {
+                    case 'create':
+                        $response = $this->createOrder($userId);
+                        break;
+                    case 'update_status':
+                        if (!isset($_POST['order_id']) || !isset($_POST['status'])) {
+                            $this->json(['success' => false, 'message' => 'Missing required parameters']);
+                        }
+                        $response = $this->updateOrderStatus($userId, $_POST['order_id'], $_POST['status']);
+                        break;
+                    default:
+                        $response = ['success' => false, 'message' => 'Invalid action'];
+                }
+            } else {
+                $response = ['success' => false, 'message' => 'Invalid request method'];
             }
 
-            switch ($_GET['action']) {
-                case 'details':
-                    if (!isset($_GET['id'])) {
-                        $this->sendJsonResponse(['success' => false, 'message' => 'No order ID provided']);
-                    }
-                    $response = $this->getOrderDetails($userId, $_GET['id']);
-                    break;
-                case 'history':
-                    $response = $this->getUserOrders($userId);
-                    break;
-                default:
-                    $response = ['success' => false, 'message' => 'Invalid action'];
-            }
-        } else if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (!isset($_POST['action'])) {
-                $this->sendJsonResponse(['success' => false, 'message' => 'No action specified']);
-                return;
-            }
-
-            switch ($_POST['action']) {
-                case 'create':
-                    $response = $this->createOrder($userId);
-                    break;
-                case 'update_status':
-                    if (!isset($_POST['order_id']) || !isset($_POST['status'])) {
-                        $this->sendJsonResponse(['success' => false, 'message' => 'Missing required parameters']);
-                    }
-                    $response = $this->updateOrderStatus($userId, $_POST['order_id'], $_POST['status']);
-                    break;
-                default:
-                    $response = ['success' => false, 'message' => 'Invalid action'];
-            }
-        } else {
-            $response = ['success' => false, 'message' => 'Invalid request method'];
+            $this->json($response);
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            $this->json(['success' => false, 'message' => 'Internal server error']);
         }
-
-        $this->sendJsonResponse($response);
     }
 
     public function createOrder($user_id) {

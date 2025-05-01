@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ];
 
         // Chuyển hướng đến trang xác nhận thanh toán
-        header("Location: payment_confirmation.php");
+        header("Location: " . BASE_URL . "/giaodich/payment-confirmation");
         exit();
     }
 }
@@ -53,36 +53,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác nhận giao dịch</title>
-    <style>
-        .error {
-            color: red;
-            margin-bottom: 10px;
-        }
-        .success {
-            color: green;
-            margin-bottom: 10px;
-        }
-        .transaction-details {
-            margin: 20px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-    </style>
+    <title>Xác nhận giao dịch - BayGorn1</title>
+    <link rel="stylesheet" href="/asset/css/giaodich.css">
+    <link rel="stylesheet" href="/asset/css/header.css">
+    <link rel="stylesheet" href="/asset/css/footer.css">
 </head>
 <body>
-    <h1>Xác nhận giao dịch</h1>
+    <?php include APP_ROOT . '/app/view/layout/header.php'; ?>
     
-    <?php if (!empty($errors)): ?>
-        <div class="error">
-            <ul>
-                <?php foreach ($errors as $error): ?>
-                    <li><?php echo $error; ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <a href="giaodich.php">Quay lại trang giao dịch</a>
-    <?php endif; ?>
+    <div class="container">
+        <h1>Xác nhận giao dịch</h1>
+        
+        <?php if (!empty($errors)): ?>
+            <div class="error">
+                <ul>
+                    <?php foreach ($errors as $error): ?>
+                        <li><?php echo htmlspecialchars($error); ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+            <a href="<?php echo BASE_URL; ?>/giaodich" class="btn btn-primary">Quay lại trang giao dịch</a>
+        <?php endif; ?>
+    </div>
+
+    <?php include APP_ROOT . '/app/view/layout/footer.php'; ?>
 </body>
 </html> 
