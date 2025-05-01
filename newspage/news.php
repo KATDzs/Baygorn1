@@ -37,7 +37,7 @@
         [
             'title' => 'Palworld bùng nổ! Game sinh tồn bắt quái vật đang làm mưa làm gió toàn cầu',
             'description' => 'Tựa game sinh tồn thế giới mở Palworld, kết hợp giữa bắt quái vật và xây dựng căn cứ, đang gây bão toàn cầu với lối chơi sáng tạo!',
-            'img' => '../img/brainrotevolution.webp',
+            'img' => '../img/game_palworld.jpeg',
             'link' => '../newspage/news4.php'
         ],
         [
