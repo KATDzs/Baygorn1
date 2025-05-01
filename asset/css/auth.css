@@ -1,0 +1,97 @@
+/* Shared styles for login and register containers */
+.login-container,
+.register-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Shared title styles */
+.login-title,
+.register-title {
+    text-align: center;
+    color: #ff4655;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Form group styles */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #2f2f2f;
+    color: #fff;
+    font-size: 16px;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #ff4655;
+}
+
+/* Button styles */
+.login-btn,
+.register-btn {
+    width: 100%;
+    padding: 12px;
+    background: #ff4655;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+    background: #ff2d3f;
+}
+
+/* Link styles */
+.register-link,
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #ccc;
+}
+
+.register-link a,
+.login-link a {
+    color: #ff4655;
+    text-decoration: none;
+}
+
+.register-link a:hover,
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Error message styles */
+.error-message {
+    color: #ff4655;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+/* Password requirements hint */
+.password-requirements {
+    color: #ccc;
+    font-size: 12px;
+    margin-top: 5px;
+} 

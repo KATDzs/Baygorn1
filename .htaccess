@@ -1,9 +1,32 @@
 RewriteEngine On
 RewriteBase /Baygorn1/
 
-# Bỏ qua xử lý các file tĩnh
-RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp|svg|css|js)$ [NC]
+# Prevent directory listing
+Options -Indexes
+
+# Handle Authorization Header
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+# Protect sensitive files
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Allow direct access to asset files
+RewriteCond %{REQUEST_URI} \.(css|js|jpg|jpeg|png|gif|ico|woff|woff2|ttf|svg|eot|pdf|webp|avif)$ [NC]
 RewriteRule ^ - [L]
 
-# Chuyển hướng tất cả các request khác về index.php
-RewriteRule ^(.*)$ index.php?url=$1 [QSA,L] 
+# Protect core directory
+RewriteRule ^core/ - [F,L]
+
+# Nếu không phải file/thư mục thật
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Chuyển hướng tất cả request đến index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
+# Chuyển hướng / đến /home
+RewriteRule ^$ home [L,R=301] 

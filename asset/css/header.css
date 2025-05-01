@@ -101,43 +101,25 @@
   z-index: 1;
 }
 
-.menu a {
+.menu-link {
   text-decoration: none;
   color: var(--text-color);
   font-size: 13px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  padding: 8px 0;
+  padding: 8px 16px;
   position: relative;
   transition: all 0.3s ease;
   opacity: 0.8;
-  text-shadow: none;
 }
 
-.menu a:hover {
+.menu-link:hover {
   opacity: 1;
   color: #FF4655;
 }
 
-.menu a::before {
-  content: '';
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: #FF4655;
-  border-radius: 50%;
-  left: -12px;
-  top: 50%;
-  transform: translateY(-50%) scale(0);
-  transition: transform 0.3s ease;
-}
-
-.menu a:hover::before {
-  transform: translateY(-50%) scale(1);
-}
-
-.menu a::after {
+.menu-link::after {
   content: '';
   position: absolute;
   width: 100%;
@@ -150,57 +132,56 @@
   transition: transform 0.3s ease;
 }
 
-.menu a:hover::after {
+.menu-link:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
 .account {
   display: flex;
+  align-items: center;
   gap: 16px;
-  position: relative;
-  z-index: 1;
+}
+
+.Login, .Register {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 120px;
+  height: 40px;
+  padding: 0 24px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: #FFFFFF;
 }
 
 .Login {
-  background: linear-gradient(45deg, #FF4655, #8C1C24);
-  color: var(--text-color);
-  border: none;
-  padding: 12px 32px;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+  background: #FF4655;
+  border: 1px solid #FF4655;
 }
 
-.Login::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.2),
-    transparent
-  );
-  transition: 0.5s;
-}
-
-.Login:hover::before {
-  left: 100%;
+.Register {
+  background: transparent;
+  border: 1px solid #FF4655;
+  color: #FF4655;
 }
 
 .Login:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 70, 85, 0.4);
+  background: #E64150;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 70, 85, 0.3);
+}
+
+.Register:hover {
+  background: rgba(255, 70, 85, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 70, 85, 0.15);
 }
 
 @media (max-width: 1024px) {
@@ -227,8 +208,10 @@
     height: 24px;
   }
 
-  .Login {
-    padding: 8px 20px;
-    font-size: 12px;
+  .Login, .Register {
+    min-width: 100px;
+    height: 36px;
+    padding: 0 16px;
+    font-size: 13px;
   }
 }

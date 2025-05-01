@@ -5,14 +5,18 @@ return array(
     'baseURL' => 'http://localhost/Baygorn1/',
     'db' => array(
         'host'     => 'localhost',
-        'name'     => 'baygorn_db',
+        'name'     => 'shopgame_db',
         'username' => 'root',
         'password' => ''
     ),
     'paths' => array(
-        'controllers' => 'Controller/',
-        'models' => 'model/',
-        'views' => 'view/',
-        'assets' => 'asset/'
+        'controllers' => 'app/Controller/',
+        'models'     => 'app/model/',
+        'views'      => 'app/view/',
+        'assets'     => 'asset/',
+        'css'        => 'asset/css/',
+        'js'         => 'asset/js/',
+        'img'        => 'asset/img/',
+        'games_img'  => 'asset/img/games/'
     )
-); 
+) ;
