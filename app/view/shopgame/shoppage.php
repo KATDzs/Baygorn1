@@ -36,7 +36,7 @@
         <div class="detail-btns">
             <span class="detail-price" id="detailPrice"></span>
             <div class="detail-btns-row">
-                <a href="#" class="btn btn-order-now">MUA NGAY</a>
+                <a href="#" class="btn btn-order-now" id="buyNowBtn">MUA NGAY</a>
                 <a href="#" class="btn btn-preorder">ĐẶT HÀNG</a>
             </div>
         </div>
@@ -92,6 +92,8 @@
         // Hero section
         heroTitle.textContent = game.title;
         heroDesc.textContent = game.description;
+        // Cập nhật URL cho nút Mua Ngay
+        document.getElementById('buyNowBtn').href = `/Baygorn1/app/view/giaodich/giaodich.php?id=${game.game_id}`;
         // Xóa hiệu ứng fade-in sau khi xong
         setTimeout(() => {
             const card = cardContainer.querySelector('.slider-card');

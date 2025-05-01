@@ -1,53 +1,45 @@
+<?php
+// Define APP_ROOT if not already defined
+if (!defined('APP_ROOT')) {
+    define('APP_ROOT', dirname(dirname(dirname(__FILE__))));
+}
+
+// Include necessary files
+require_once '../../Controller/GiaoDichController.php';
+
+$giaoDichController = new GiaoDichController();
+$game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BayGorn1 - Mua game</title>
-  <link rel="stylesheet" href="/asset/css/giaodich.css">
-  <link rel="stylesheet" href="/asset/css/header.css">
-  <link rel="stylesheet" href="/asset/css/footer.css">
+  <link rel="stylesheet" href="/Baygorn1/asset/css/giaodich.css">
+  <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
+  <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
 </head>
 <body>
-    <?php include APP_ROOT . '/app/view/layout/header.php'; ?>
+    <?php include '../layout/header.php'; ?>
   <div class="container">
     <div class="game-detail">
-      <?php
-        // Kết nối database
-        require_once APP_ROOT . '/core/Database.php';
-        $db = new Database();
-        $conn = $db->getConnection();
-        
-        // Kiểm tra kết nối
-        if (!$conn) {
-          die("Kết nối thất bại: " . mysqli_connect_error());
-        }
-
-        // Lấy game_id từ URL parameter
-        $game_id = isset($_GET['id']) ? $_GET['id'] : 1;
-
-        // Query lấy thông tin game
-        $sql = "SELECT * FROM games WHERE game_id = ?";
-        $stmt = mysqli_prepare($conn, $sql);
-        mysqli_stmt_bind_param($stmt, "i", $game_id);
-        mysqli_stmt_execute($stmt);
-        $result = mysqli_stmt_get_result($stmt);
-        
-        if ($game = mysqli_fetch_assoc($result)) {
-          echo "<img src='{$game['image_url']}' alt='{$game['title']}' class='game-image'>";
-          echo "<div class='game-info'>";
-          echo "<h1>{$game['title']}</h1>";
-          echo "<p class='game-description'>{$game['description']}</p>";
-          echo "<p class='game-price'>Giá: " . number_format($game['price'], 0, ',', '.') . " VNĐ</p>";
-          echo "</div>";
-        } else {
-          echo "<p>Không tìm thấy game</p>";
-        }
-
-        mysqli_close($conn);
-      ?>
+      <?php if ($game): ?>
+        <img src="/Baygorn1/asset/img/<?php echo $game['image_url']; ?>" alt="<?php echo $game['title']; ?>" class="game-image">
+        <div class="game-info">
+          <h1><?php echo $game['title']; ?></h1>
+          <p class="game-description"><?php echo $game['description']; ?></p>
+          <p class="game-price">Giá: <?php echo number_format($game['price'], 0, ',', '.'); ?> VNĐ</p>
+          <div class="buttons">
+            <a href="/Baygorn1/app/view/giaodich/payment_confirmation.php?id=<?php echo $game['game_id']; ?>">MUA NGAY</a>
+            <a href="/Baygorn1/app/view/giaodich/pre_order.php?id=<?php echo $game['game_id']; ?>">ĐẶT HÀNG</a>
+          </div>
+        </div>
+      <?php else: ?>
+        <p>Không tìm thấy game</p>
+      <?php endif; ?>
     </div>
   </div>
-  <?php include APP_ROOT . '/app/view/layout/footer.php'; ?>
+  <?php include '../layout/footer.php'; ?>
 </body>
 </html>
