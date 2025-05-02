@@ -23,110 +23,76 @@ body {
 /* Game detail section */
 .game-detail {
     display: flex;
-    gap: 30px;
-    background-color: var(--riot-dark);
+    gap: 40px;
+    background: #1a1a1a;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(230, 0, 18, 0.2);
-    margin-bottom: 30px;
-    animation: fadeIn 0.5s ease-out;
+    margin-top: 30px;
 }
 
 .game-image {
     width: 400px;
-    height: auto;
-    border-radius: 10px;
+    height: 500px;
     object-fit: cover;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
 }
 
 .game-info {
     flex: 1;
+    color: #fff;
 }
 
 .game-info h1 {
-    color: var(--riot-red);
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #fff;
 }
 
-/* Game description section */
 .game-description {
-    color: var(--riot-light);
+    font-size: 16px;
     line-height: 1.6;
+    color: #ccc;
+    margin-bottom: 30px;
 }
 
-.game-description h3 {
-    color: var(--riot-red);
-    font-size: 1.5rem;
-    margin: 2rem 0 1rem;
-    font-weight: 600;
-}
-
-.game-description p {
-    margin: 0.5rem 0;
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-.game-description ul {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-.game-description ul li {
-    position: relative;
-    padding-left: 25px;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    line-height: 1.7;
-}
-
-.game-description ul li:before {
-    content: "•";
-    color: var(--riot-red);
-    position: absolute;
-    left: 0;
-    font-size: 1.2rem;
-}
-
-/* Price section */
 .game-price {
-    font-size: 1.5rem;
-    color: var(--riot-red);
+    font-size: 24px;
     font-weight: bold;
-    margin: 2rem 0;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(230, 0, 18, 0.2);
-    border-bottom: 1px solid rgba(230, 0, 18, 0.2);
+    color: #e31837;
+    margin-bottom: 30px;
 }
 
-/* Buy button */
-.game-info button {
-    background-color: var(--riot-red);
-    color: var(--riot-light);
-    border: none;
-    padding: 12px 24px;
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.buttons a {
+    padding: 15px 40px;
     border-radius: 5px;
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    text-align: center;
     transition: all 0.3s ease;
-    width: 100%;
-    max-width: 200px;
 }
 
-.game-info button:hover {
-    background-color: #ff1a1a;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(230, 0, 18, 0.3);
+.buttons a:first-child {
+    background-color: #e31837;
+    color: white;
 }
 
-/* Rating stars */
-.game-description p:has(⭐) {
-    color: #ffd700;
-    font-weight: 500;
+.buttons a:first-child:hover {
+    background-color: #c41230;
+}
+
+.buttons a:last-child {
+    background-color: #333;
+    color: white;
+}
+
+.buttons a:last-child:hover {
+    background-color: #444;
 }
 
 /* Transaction form */
@@ -232,4 +198,48 @@ body {
 
 .game-detail {
     animation: fadeIn 0.5s ease-out;
+}
+
+.btn-buy {
+    background: #ff4b5c;
+    color: #fff;
+    padding: 12px 36px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    margin-right: 18px;
+    display: inline-block;
+}
+.btn-buy:hover {
+    background: #e60012;
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(230,0,18,0.18);
+}
+
+.btn-preorder {
+    background: transparent;
+    color: #ff4b5c;
+    padding: 12px 36px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    text-align: center;
+    border: 2px solid #ff4b5c;
+    outline: none;
+    letter-spacing: 1px;
+    transition: background 0.2s, color 0.2s, border 0.2s;
+    display: inline-block;
+}
+.btn-preorder:hover {
+    background: #ff4b5c;
+    color: #fff;
+    border: 2px solid #ff4b5c;
 } 

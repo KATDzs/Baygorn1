@@ -18,7 +18,7 @@
                         </div>
                     <?php endif; ?>
 
-                    <form method="POST" action="/auth/forgot-password">
+                    <form method="POST" action="/Baygorn1/index.php?url=auth/forgot-password">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
                         
                         <div class="form-group mb-3">
@@ -32,7 +32,7 @@
                     </form>
 
                     <div class="mt-3 text-center">
-                        <a href="/auth/login">Quay lại đăng nhập</a>
+                        <a href="/Baygorn1/index.php?url=auth/login">Quay lại đăng nhập</a>
                     </div>
                 </div>
             </div>

@@ -74,11 +74,12 @@ $action = isset($urlArr[1]) && $urlArr[0] !== 'about' ? $urlArr[1] : ($urlArr[0]
 $params = array_slice($urlArr, 2);
 
 // Add Controller suffix if not present
-if (strpos($controllerName, 'Controller') === false) {
-    $controllerClassName = $controllerName . 'Controller';
-} else {
-    $controllerClassName = $controllerName;
-}
+$controllerMap = [
+    'giaodich' => 'GiaoDichController',
+    // thêm các controller khác nếu cần
+];
+$controllerKey = strtolower($urlArr[0]);
+$controllerClassName = $controllerMap[$controllerKey] ?? ($controllerName . 'Controller');
 
 // Create controller instance and call action
 $controllerFile = BASE_PATH . '/' . $config['paths']['controllers'] . $controllerClassName . '.php';

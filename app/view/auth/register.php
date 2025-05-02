@@ -19,7 +19,7 @@
                 <div class="error-message"><?php echo $error; ?></div>
             <?php endif; ?>
 
-            <form action="/Baygorn1/auth/register" method="POST">
+            <form action="/Baygorn1/index.php?url=auth/register" method="POST">
                 <div class="form-group">
                     <label for="username">Tên đăng nhập</label>
                     <input type="text" id="username" name="username" required minlength="3" maxlength="20">
@@ -45,7 +45,7 @@
                 <button type="submit" class="register-btn">Đăng ký</button>
 
                 <div class="login-link">
-                    Đã có tài khoản? <a href="/Baygorn1/auth/login">Đăng nhập ngay</a>
+                    Đã có tài khoản? <a href="/Baygorn1/index.php?url=auth/login">Đăng nhập ngay</a>
                 </div>
             </form>
         </div>

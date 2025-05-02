@@ -1,49 +1,53 @@
 <?php
 session_start();
-
-// Kiểm tra xem có thông tin giao dịch trong session không
-if (!isset($_SESSION['transaction'])) {
-    header("Location: " . BASE_URL . "/giaodich");
-    exit();
+if (!isset($_SESSION['user'])) {
+    $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
+    header("Location: /Baygorn1/app/view/auth/login.php");
+    exit;
 }
-
-$transaction = $_SESSION['transaction'];
+require_once '../../core/db_connection.php';
+require_once '../../model/UserModel.php';
+$userModel = new UserModel($conn);
+$user = $userModel->getUserById($_SESSION['user']['user_id']);
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác nhận thanh toán thành công - BayGorn1</title>
-    <link rel="stylesheet" href="/asset/css/giaodich.css">
-    <link rel="stylesheet" href="/asset/css/header.css">
-    <link rel="stylesheet" href="/asset/css/footer.css">
+    <title>Xác nhận thanh toán - BayGorn1</title>
+    <link rel="stylesheet" href="/Baygorn1/asset/css/giaodich.css">
+    <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
+    <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
 </head>
 <body>
-    <?php include APP_ROOT . '/app/view/layout/header.php'; ?>
-
+    <?php include '../layout/header.php'; ?>
     <div class="container">
         <div class="confirmation-container">
-            <h1>Thanh toán thành công!</h1>
-            
-            <div class="transaction-details">
-                <h2>Thông tin giao dịch</h2>
-                <p><strong>Tên game:</strong> <?php echo htmlspecialchars($transaction['gameName']); ?></p>
-                <p><strong>Giá:</strong> <?php echo htmlspecialchars($transaction['gamePrice']); ?></p>
-                <p><strong>Họ và tên:</strong> <?php echo htmlspecialchars($transaction['fullName']); ?></p>
-                <p><strong>Email:</strong> <?php echo htmlspecialchars($transaction['email']); ?></p>
-                <p><strong>Số điện thoại:</strong> <?php echo htmlspecialchars($transaction['phone']); ?></p>
-                <p><strong>Phương thức thanh toán:</strong> <?php echo htmlspecialchars($transaction['paymentMethod']); ?></p>
-                <p><strong>Thời gian giao dịch:</strong> <?php echo htmlspecialchars($transaction['transactionDate']); ?></p>
-            </div>
-            
-            <p class="thank-you-message">Cảm ơn bạn đã mua hàng! Chúng tôi sẽ gửi thông tin chi tiết về game và hướng dẫn cài đặt qua email của bạn.</p>
-            
-            <a href="<?php echo BASE_URL; ?>" class="btn btn-primary">Quay lại trang chủ</a>
+            <h2>Điền thông tin để thanh toán</h2>
+            <form method="post" action="/Baygorn1/index.php?controller=giaodich&action=processPayment">
+                <div class="form-group">
+                    <label>Họ và tên</label>
+                    <input type="text" name="fullName" required value="<?php echo htmlspecialchars($user['full_name'] ?? ''); ?>">
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" name="email" required value="<?php echo htmlspecialchars($user['email'] ?? ''); ?>">
+                </div>
+                <div class="form-group">
+                    <label>Số điện thoại</label>
+                    <input type="text" name="phone" required value="<?php echo htmlspecialchars($user['phone'] ?? ''); ?>">
+                </div>
+                <div class="form-group">
+                    <label>Phương thức thanh toán</label>
+                    <select name="paymentMethod" required>
+                        <option value="bank">Chuyển khoản ngân hàng</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-buy">XÁC NHẬN THANH TOÁN</button>
+            </form>
         </div>
+        <a href="/Baygorn1/" class="btn-preorder">Quay lại trang chủ</a>
     </div>
-
-    <?php include APP_ROOT . '/app/view/layout/footer.php'; ?>
+    <?php include '../layout/footer.php'; ?>
 </body>
-</html> 
+</html>

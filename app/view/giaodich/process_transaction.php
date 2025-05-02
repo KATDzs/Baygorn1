@@ -1,81 +1,81 @@
 <?php
 session_start();
+require_once '../../Controller/GiaoDichController.php';
+$giaoDichController = new GiaoDichController();
+$game_id = $_GET['id'] ?? 0;
+$game = $giaoDichController->getGameDetail($game_id);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Lấy thông tin từ form
-    $gameName = $_POST['gameName'];
-    $gamePrice = $_POST['gamePrice'];
-    $fullName = $_POST['fullName'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $paymentMethod = $_POST['paymentMethod'];
+$isLoggedIn = isset($_SESSION['user']);
+$userData = [
+    'fullName' => '',
+    'email' => '',
+    'phone' => ''
+];
 
-    // Validate dữ liệu
-    $errors = [];
-    
-    if (empty($fullName)) {
-        $errors[] = "Vui lòng nhập họ và tên";
-    }
-    
-    if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $errors[] = "Vui lòng nhập email hợp lệ";
-    }
-    
-    if (empty($phone) || !preg_match("/^[0-9]{10,11}$/", $phone)) {
-        $errors[] = "Vui lòng nhập số điện thoại hợp lệ";
-    }
-    
-    if (empty($paymentMethod)) {
-        $errors[] = "Vui lòng chọn phương thức thanh toán";
-    }
-
-    if (empty($errors)) {
-        // Lưu thông tin giao dịch vào session
-        $_SESSION['transaction'] = [
-            'gameName' => $gameName,
-            'gamePrice' => $gamePrice,
-            'fullName' => $fullName,
-            'email' => $email,
-            'phone' => $phone,
-            'paymentMethod' => $paymentMethod,
-            'transactionDate' => date('Y-m-d H:i:s')
-        ];
-
-        // Chuyển hướng đến trang xác nhận thanh toán
-        header("Location: " . BASE_URL . "/giaodich/payment-confirmation");
-        exit();
+// Nếu đã đăng nhập, lấy thông tin user từ database
+if ($isLoggedIn) {
+    require_once '../../model/UserModel.php';
+    $userModel = new UserModel();
+    // Giả sử $_SESSION['user'] chứa user_id
+    $user = $userModel->getUserById($_SESSION['user']['user_id']);
+    if ($user) {
+        $userData['fullName'] = $user['full_name'];
+        $userData['email'] = $user['email'];
+        $userData['phone'] = $user['phone'];
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác nhận giao dịch - BayGorn1</title>
-    <link rel="stylesheet" href="/asset/css/giaodich.css">
-    <link rel="stylesheet" href="/asset/css/header.css">
-    <link rel="stylesheet" href="/asset/css/footer.css">
+    <title>Xác nhận thanh toán - BayGorn1</title>
+    <link rel="stylesheet" href="/Baygorn1/asset/css/giaodich.css">
 </head>
 <body>
-    <?php include APP_ROOT . '/app/view/layout/header.php'; ?>
-    
+    <?php include '../layout/header.php'; ?>
     <div class="container">
-        <h1>Xác nhận giao dịch</h1>
-        
-        <?php if (!empty($errors)): ?>
-            <div class="error">
-                <ul>
-                    <?php foreach ($errors as $error): ?>
-                        <li><?php echo htmlspecialchars($error); ?></li>
-                    <?php endforeach; ?>
-                </ul>
+        <?php if ($game): ?>
+            <div class="game-detail">
+                <img src="/Baygorn1/asset/img/<?php echo $game['image_url']; ?>" alt="<?php echo $game['title']; ?>" class="game-image">
+                <div class="game-info">
+                    <h2><?php echo $game['title']; ?></h2>
+                    <p class="game-description"><?php echo $game['description']; ?></p>
+                    <p class="game-price">Giá: <?php echo number_format($game['price'], 0, ',', '.'); ?> VNĐ</p>
+                </div>
             </div>
-            <a href="<?php echo BASE_URL; ?>/giaodich" class="btn btn-primary">Quay lại trang giao dịch</a>
+            <div class="confirmation-container">
+                <h2>Điền thông tin để thanh toán</h2>
+                <form method="post" action="process_payment.php">
+                    <input type="hidden" name="game_id" value="<?php echo $game['game_id']; ?>">
+                    <div class="form-group">
+                        <label>Họ và tên</label>
+                        <input type="text" name="fullName" required value="<?php echo htmlspecialchars($userData['fullName']); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" name="email" required value="<?php echo htmlspecialchars($userData['email']); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input type="text" name="phone" required value="<?php echo htmlspecialchars($userData['phone']); ?>">
+                    </div>
+                    <div class="form-group">
+                        <label>Phương thức thanh toán</label>
+                        <select name="paymentMethod" required>
+                            <option value="bank">Chuyển khoản ngân hàng</option>
+                            <option value="momo">Momo</option>
+                            <option value="cod">Thanh toán khi nhận hàng</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-buy">XÁC NHẬN THANH TOÁN</button>
+                </form>
+            </div>
+        <?php else: ?>
+            <p>Không tìm thấy game để thanh toán.</p>
         <?php endif; ?>
+        <a href="/Baygorn1/" class="btn-preorder">Quay lại trang chủ</a>
     </div>
-
-    <?php include APP_ROOT . '/app/view/layout/footer.php'; ?>
+    <?php include '../layout/footer.php'; ?>
 </body>
-</html> 
+</html>
