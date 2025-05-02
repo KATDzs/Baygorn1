@@ -14,6 +14,8 @@ header("Pragma: no-cache");
         <?php endif; ?>
 
         <form action="<?= $url('auth/login') ?>" method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            
             <div class="form-group">
                 <label for="username">Tên đăng nhập</label>
                 <input type="text" id="username" name="username" required>
@@ -22,6 +24,10 @@ header("Pragma: no-cache");
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group text-end">
+                <a href="<?= $url('auth/forgot-password') ?>" class="forgot-password-link">Quên mật khẩu?</a>
             </div>
 
             <button type="submit" class="login-btn">Đăng nhập</button>
