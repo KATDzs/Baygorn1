@@ -21,6 +21,12 @@ RewriteRule ^ - [L]
 # Protect core directory
 RewriteRule ^core/ - [F,L]
 
+# Cho phép truy cập trực tiếp file PHP trong app/view/giaodich/
+RewriteRule ^app/view/giaodich/.*\.php$ - [L]
+
+# Rewrite /giaodich?id=1 to app/view/giaodich/giaodich.php
+RewriteRule ^giaodich$ app/view/giaodich/giaodich.php [L,QSA]
+
 # Nếu không phải file/thư mục thật
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

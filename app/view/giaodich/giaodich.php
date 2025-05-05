@@ -1,12 +1,12 @@
 <?php
 // Define APP_ROOT if not already defined
 if (!defined('APP_ROOT')) {
-    define('APP_ROOT', dirname(dirname(dirname(__FILE__))));
+    define('APP_ROOT', realpath(__DIR__ . '/../../../'));
 }
 
 // Include necessary files
-require_once '../../Controller/GiaoDichController.php';
-require_once __DIR__ . '/../../../core/db_connection.php';
+require_once APP_ROOT . '/app/Controller/GiaoDichController.php';
+require_once APP_ROOT . '/core/db_connection.php';
 
 $giaoDichController = new GiaoDichController($conn);
 $game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
@@ -22,7 +22,7 @@ $game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
   <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
 </head>
 <body>
-    <?php include '../layout/header.php'; ?>
+    <?php include APP_ROOT . '/app/view/layout/header.php'; ?>
   <div class="container">
     <div class="game-detail">
       <?php if ($game): ?>
@@ -41,6 +41,6 @@ $game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
       <?php endif; ?>
     </div>
   </div>
-  <?php include '../layout/footer.php'; ?>
+  <?php include APP_ROOT . '/app/view/layout/footer.php'; ?>
 </body>
 </html>

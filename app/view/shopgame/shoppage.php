@@ -17,7 +17,7 @@ $config = require_once __DIR__ . '/../../../config.php';
                 <span class="price" id="heroPrice"><?php echo number_format($games[0]['price']); ?> VNĐ</span>
             </div>
             <div class="hero-buttons">
-                <a href="<?php echo $config['base']; ?>app/view/giaodich/giaodich.php?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
+                <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
                 <a href="<?php echo $config['base']; ?>app/view/game/game-detail.php?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
             </div>
         </div>
@@ -87,7 +87,7 @@ $config = require_once __DIR__ . '/../../../config.php';
 
             <div class="game-grid" id="gameGrid">
                 <?php foreach ($games as $game): ?>
-                <a href="/Baygorn1/app/view/giaodich/giaodich.php?id=<?php echo $game['game_id']; ?>" class="game-card">
+                <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="game-card">
                     <div class="game-card-image">
                         <img src="/Baygorn1/asset/img/<?php echo $game['image_url']; ?>" 
                              alt="<?php echo $game['title']; ?>">
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Update slider card
         cardContainer.innerHTML = `
             <div class="slider-card fade-in">
-                <a href="/Baygorn1/app/view/giaodich/giaodich.php?id=${game.game_id}">
+                <a href="/Baygorn1/giaodich?id=${game.game_id}">
                     <img src="${imagePath}" alt="${game.title}">
                     <div class="slider-card-info">
                         <div class="title">${game.title}</div>
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
         heroDesc.textContent = game.description || '';
         heroPlatform.textContent = game.platform;
         heroPrice.textContent = `${Number(game.price).toLocaleString()} VNĐ`;
-        buyNowBtn.href = `<?php echo $config['base']; ?>app/view/giaodich/giaodich.php?id=${game.game_id}`;
+        buyNowBtn.href = `/Baygorn1/giaodich?id=${game.game_id}`;
     }
 
     // Initial render
@@ -241,7 +241,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const defaultImage = '<?php echo $config['assets']; ?>img/default-game.jpg';
             
             return `
-                <a href="/Baygorn1/app/view/giaodich/giaodich.php?id=${game.game_id}" 
+                <a href="/Baygorn1/giaodich?id=${game.game_id}" 
                    class="game-card" 
                    data-categories="${game.categories.map(cat => cat.category_id).join(',')}"
                    data-platform="${game.platform}"
