@@ -1,0 +1,1 @@
+error_log($logMessage, 3, __DIR__ . '/../../logs/error.log');[2025-05-05 15:47:03] Login error

@@ -24,7 +24,7 @@ class AuthController extends BaseController {
         if ($this->isLoggedIn()) {
             $this->redirect('home');
         }
-
+        $csrfToken = $this->generateCsrfToken();
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Validate CSRF token
@@ -91,7 +91,7 @@ class AuthController extends BaseController {
         } catch (Exception $e) {
             $this->logError('Login error', $e);
             $this->error500();
-        }
+        }        
     }
 
     // Hiển thị form đăng ký

@@ -16,6 +16,21 @@ class BaseController {
         }
         return null;
     }
+
+    protected function generateCSRFToken() {
+        if (empty($_SESSION['csrf_token'])) {
+            $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        }
+        return $_SESSION['csrf_token'];
+    }
+
+    protected function validateCSRF($token) {
+        if (!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']) {
+            throw new Exception('Invalid CSRF token');
+        }
+    }
+
+    
     
     protected function view($viewName, $data = []) {
         // Add config to all views
@@ -62,6 +77,16 @@ class BaseController {
         // Load view
         require_once BASE_PATH . '/' . $this->config['paths']['views'] . $viewName . '.php';
     }
+    protected function logError($message) {
+        // Ghi log đơn giản vào file
+        error_log(date('[Y-m-d H:i:s] ') . $message . "\n", 3, __DIR__ . '/../../logs/error.log');
+    }
+    protected function error500() {
+        http_response_code(500);
+        $this->view('error/500'); // loi mat ket noi 
+        exit;
+    }
+    
     
     protected function redirect($url) {
         header('Location: ' . $this->config['baseURL'] . $url);
@@ -93,4 +118,5 @@ class BaseController {
             $this->redirect('error/403');
         }
     }
+    
 } 

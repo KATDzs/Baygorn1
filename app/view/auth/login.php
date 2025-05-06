@@ -14,7 +14,7 @@ header("Pragma: no-cache");
         <?php endif; ?>
 
         <form action="<?= $url('auth/login') ?>" method="POST">
-            <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">
             
             <div class="form-group">
                 <label for="username">Tên đăng nhập</label>
