@@ -77,7 +77,7 @@ $meta = json_decode($game['meta'], true);
                     <i class="fas fa-tag"></i>
                     <span><?php echo number_format($game['price']); ?> VNĐ</span>
                 </div>
-                <a href="<?php echo $config['base']; ?>app/view/giaodich/giaodich.php?id=<?php echo $game['game_id']; ?>" class="buy-button">
+                <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="buy-button">
                     MUA NGAY
                 </a>
             </div>

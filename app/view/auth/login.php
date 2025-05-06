@@ -27,13 +27,13 @@ header("Pragma: no-cache");
             </div>
 
             <div class="form-group text-end">
-                <a href="<?= $url('auth/forgot-password') ?>" class="forgot-password-link">Quên mật khẩu?</a>
+                <a href="/Baygorn1/index.php?url=auth/forgot-password" class="forgot-password-link">Quên mật khẩu?</a>
             </div>
 
             <button type="submit" class="login-btn">Đăng nhập</button>
 
             <div class="register-link">
-                Chưa có tài khoản? <a href="<?= $url('auth/register') ?>">Đăng ký ngay</a>
+                Chưa có tài khoản? <a href="/Baygorn1/index.php?url=auth/register">Đăng ký ngay</a>
             </div>
         </form>
     </div>

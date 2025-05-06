@@ -36,15 +36,15 @@
         </div>
         <div class="account">
             <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="/Baygorn1/cart" class="menu-link">Cart</a>
-                <a href="/Baygorn1/history" class="menu-link">History</a>
+                <a href="/Baygorn1/index.php?url=cart" class="menu-link">Cart</a>
+                <a href="/Baygorn1/index.php?url=history" class="menu-link">History</a>
                 <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
-                    <a href="/Baygorn1/admin" class="menu-link">Admin</a>
+                    <a href="/Baygorn1/index.php?url=admin" class="menu-link">Admin</a>
                 <?php endif; ?>
-                <a href="/Baygorn1/auth/logout" class="menu-link">Logout</a>
+                <a href="/Baygorn1/index.php?url=auth/logout" class="menu-link">Logout</a>
             <?php else: ?>
-                <a href="/Baygorn1/auth/login" class="Login">Login</a>
-                <a href="/Baygorn1/auth/register" class="Register">Register</a>
+                <a href="/Baygorn1/index.php?url=auth/login" class="Login">Login</a>
+                <a href="/Baygorn1/index.php?url=auth/register" class="Register">Register</a>
             <?php endif; ?>
         </div>
     </nav>

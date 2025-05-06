@@ -70,6 +70,14 @@ class AuthController extends BaseController {
                     // Set session data
                     $this->initializeUserSession($user);
 
+                    // Nếu có redirect_after_login thì chuyển về đó
+                    if (isset($_SESSION['redirect_after_login'])) {
+                        $redirectUrl = $_SESSION['redirect_after_login'];
+                        unset($_SESSION['redirect_after_login']);
+                        header("Location: $redirectUrl");
+                        exit;
+                    }
+
                     // Redirect based on role
                     $this->redirect($user['is_admin'] ? 'admin' : 'home');
                         } else {
