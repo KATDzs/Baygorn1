@@ -1,3 +1,9 @@
+<?php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+}
+require_once ROOT_PATH . '/view/layout/header.php';
+?>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -13,7 +19,6 @@
     <link rel="stylesheet" href="../asset/css/newstyle.css">
 </head>
 <body>
-    <?php include '../layout/header.html'; ?>
     <main class="news-content">
         <article class="news-article">
             <h1>Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!</h1>
@@ -63,7 +68,7 @@
         </article>
     </main>
     
-    <?php include '../layout/footer.html'; ?>
+    <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
     <script src="../asset/js/news.js"></script>
 </body>
 </html>
