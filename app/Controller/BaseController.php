@@ -18,16 +18,44 @@ class BaseController {
     }
 
     protected function generateCSRFToken() {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            error_log("Session is not active. Starting session.");
+            session_start();
+        }
         if (empty($_SESSION['csrf_token'])) {
             $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+            error_log("Generated CSRF Token: " . $_SESSION['csrf_token']);
         }
         return $_SESSION['csrf_token'];
     }
 
+    protected function startSession() {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
+
     protected function validateCSRF($token) {
-        if (!isset($_SESSION['csrf_token']) || $token !== $_SESSION['csrf_token']) {
+        $this->startSession();
+
+        if (empty($token)) {
+            error_log("CSRF Token is empty or not provided.");
+            throw new Exception('CSRF token is missing');
+        }
+
+        if (!isset($_SESSION['csrf_token'])) {
+            error_log("Session CSRF Token is not set. Session might not be initialized properly.");
+            throw new Exception('CSRF token is not set in session');
+        }
+
+        if (!hash_equals($_SESSION['csrf_token'], $token)) {
+            error_log("CSRF Token mismatch detected. Session Token: " . $_SESSION['csrf_token'] . ", Provided Token: " . $token);
             throw new Exception('Invalid CSRF token');
         }
+
+        // Regenerate CSRF token after successful validation to prevent reuse
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+        error_log("CSRF Token successfully validated and regenerated: " . $_SESSION['csrf_token']);
     }
 
     
@@ -77,9 +105,16 @@ class BaseController {
         // Load view
         require_once BASE_PATH . '/' . $this->config['paths']['views'] . $viewName . '.php';
     }
-    protected function logError($message) {
-        // Ghi log đơn giản vào file
-        error_log(date('[Y-m-d H:i:s] ') . $message . "\n", 3, __DIR__ . '/../../logs/error.log');
+    protected function logError($message, $exception = null) {
+        // Ghi log chi tiết hơn với thông tin ngoại lệ nếu có
+        $logMessage = date('[Y-m-d H:i:s] ') . $message;
+        if ($exception) {
+            $logMessage .= "\nException: " . $exception->getMessage();
+            $logMessage .= "\nFile: " . $exception->getFile();
+            $logMessage .= "\nLine: " . $exception->getLine();
+            $logMessage .= "\nStack trace:\n" . $exception->getTraceAsString();
+        }
+        error_log($logMessage . "\n", 3, __DIR__ . '/../../logs/error.log');
     }
     protected function error500() {
         http_response_code(500);
@@ -119,4 +154,39 @@ class BaseController {
         }
     }
     
-} 
+    protected function validate($data, $rules) {
+        $errors = [];
+
+        foreach ($rules as $field => $fieldRules) {
+            foreach ($fieldRules as $rule) {
+                if ($rule === 'required' && empty($data[$field])) {
+                    $errors[$field][] = 'This field is required';
+                } elseif (strpos($rule, 'min:') === 0) {
+                    $min = (int) substr($rule, 4);
+                    if (strlen($data[$field] ?? '') < $min) {
+                        $errors[$field][] = "Minimum length is $min characters";
+                    }
+                } elseif (strpos($rule, 'max:') === 0) {
+                    $max = (int) substr($rule, 4);
+                    if (strlen($data[$field] ?? '') > $max) {
+                        $errors[$field][] = "Maximum length is $max characters";
+                    }
+                }
+            }
+        }
+
+        if (!empty($errors)) {
+            $_SESSION['validation_errors'] = $errors;
+            return false;
+        }
+
+        return true;
+    }
+
+    protected function sanitize($input) {
+        if (is_array($input)) {
+            return array_map([$this, 'sanitize'], $input);
+        }
+        return htmlspecialchars(trim($input), ENT_QUOTES, 'UTF-8');
+    }
+}

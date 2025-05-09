@@ -72,6 +72,13 @@ class UserModel {
         );
         
         $success = mysqli_stmt_execute($stmt);
+        
+        // Thêm log chi tiết để kiểm tra dữ liệu và lỗi SQL
+        error_log("Data passed to createUser: " . print_r($data, true));
+        if (!$success) {
+            error_log("SQL Error: " . mysqli_error($this->conn));
+        }
+        
         $userId = $success ? mysqli_insert_id($this->conn) : 0;
         mysqli_stmt_close($stmt);
         return $userId;
@@ -153,6 +160,33 @@ class UserModel {
         $stmt->bind_param("s", $email);
         $stmt->execute();
         return $stmt->get_result()->num_rows > 0;
+    }
+
+    public function getLoginAttempts($username) {
+        $query = "SELECT COUNT(*) as count, MAX(attempt_time) as last_attempt FROM login_attempts WHERE username = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $data = $result->fetch_assoc();
+        $stmt->close();
+        return $data;
+    }
+
+    public function resetLoginAttempts($username) {
+        $query = "DELETE FROM login_attempts WHERE username = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function incrementLoginAttempts($username) {
+        $query = "INSERT INTO login_attempts (username, attempt_time) VALUES (?, NOW())";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("s", $username);
+        $stmt->execute();
+        $stmt->close();
     }
 }
 ?>

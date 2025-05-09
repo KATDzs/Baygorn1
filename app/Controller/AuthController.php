@@ -12,19 +12,35 @@ class AuthController extends BaseController {
         'number' => true,
         'special' => true
     ];
+    private $errors = [];
 
     public function __construct($conn) {
         parent::__construct($conn);
         $this->userModel = $this->loadModel('UserModel');
     }
 
+    public function addError($field, $message) {
+        $this->errors[$field][] = $message;
+    }
+
+    public function hasErrors() {
+        return !empty($this->errors);
+    }
+
+    public function getErrors() {
+        return $this->errors;
+    }
+
     // Hiển thị form đăng nhập
     public function login() {
+        session_start();
+        $csrf_token = $_SESSION['csrf_token'] ?? bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $csrf_token;
+
         // Redirect if already logged in
         if ($this->isLoggedIn()) {
             $this->redirect('home');
         }
-        $csrfToken = $this->generateCsrfToken();
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Validate CSRF token
@@ -39,7 +55,8 @@ class AuthController extends BaseController {
                 if (!$this->validate($_POST, $rules)) {
                     return $this->view('auth/login', [
                         'title' => 'Đăng nhập',
-                        'css_files' => ['auth']
+                        'css_files' => ['auth'],
+                        'csrf_token' => $csrf_token
                     ]);
                 }
 
@@ -51,7 +68,8 @@ class AuthController extends BaseController {
                     $this->addError('general', 'Account is temporarily locked. Please try again later.');
                     return $this->view('auth/login', [
                         'title' => 'Đăng nhập',
-                        'css_files' => ['auth']
+                        'css_files' => ['auth'],
+                        'csrf_token' => $csrf_token
                     ]);
                 }
 
@@ -87,13 +105,15 @@ class AuthController extends BaseController {
                     $this->addError('general', 'Invalid username or password');
                     $this->view('auth/login', [
                         'title' => 'Đăng nhập',
-                        'css_files' => ['auth']
+                        'css_files' => ['auth'],
+                        'csrf_token' => $csrf_token
                     ]);
                 }
             } else {
             $this->view('auth/login', [
                 'title' => 'Đăng nhập',
-                'css_files' => ['auth']
+                'css_files' => ['auth'],
+                'csrf_token' => $csrf_token
             ]);
             }
         } catch (Exception $e) {
@@ -104,106 +124,62 @@ class AuthController extends BaseController {
 
     // Hiển thị form đăng ký
     public function register() {
-        // Redirect if already logged in
-        if ($this->isLoggedIn()) {
-            $this->redirect('home');
-        }
+        $this->startSession();
+        $csrf_token = $_SESSION['csrf_token'] ?? bin2hex(random_bytes(32));
+        $_SESSION['csrf_token'] = $csrf_token;
 
-        try {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Check for registration rate limiting
-                $ip = $_SERVER['REMOTE_ADDR'];
-                if ($this->isRegistrationLocked($ip)) {
-                    $this->addError('general', 'Too many registration attempts. Please try again later.');
-                    return $this->view('auth/register', [
-                        'title' => 'Đăng ký',
-                        'css_files' => ['auth']
-                    ]);
-                }
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            error_log("Session CSRF Token: " . ($_SESSION['csrf_token'] ?? 'null'));
+            error_log("Form CSRF Token: " . ($_POST['csrf_token'] ?? 'null'));
 
+            try {
                 // Validate CSRF token
                 $this->validateCSRF($_POST['csrf_token'] ?? '');
-                
-                // Increment registration attempts
-                $this->incrementRegistrationAttempts($ip);
-                
+
                 // Validate input
                 $rules = [
-                    'username' => ['required', 'min:3', 'max:50', 'alpha_num'],
-                    'password' => ['required', 'min:' . $this->passwordMinLength],
-                    'password_confirm' => ['required', 'same:password'],
+                    'username' => ['required', 'min:3', 'max:20'],
                     'email' => ['required', 'email'],
+                    'password' => ['required', 'min:6'],
+                    'confirm_password' => ['required', 'same:password'],
                     'full_name' => ['required', 'min:2', 'max:100']
                 ];
 
                 if (!$this->validate($_POST, $rules)) {
-                    return $this->view('auth/register', [
-                        'title' => 'Đăng ký',
-                        'css_files' => ['auth']
-                    ]);
-                }
-                
-                // Additional password validation
-                if (!$this->validatePasswordStrength($_POST['password'])) {
-                    return $this->view('auth/register', [
-                        'title' => 'Đăng ký',
-                        'css_files' => ['auth']
-                    ]);
-                }
-                
-                // Check existing username and email
-                if ($this->userModel->getUserByUsername($_POST['username'])) {
-                    $this->addError('username', 'Username already exists');
-                }
-                if ($this->userModel->getUserByEmail($_POST['email'])) {
-                    $this->addError('email', 'Email already exists');
-                }
-                
-                if ($this->hasErrors()) {
-                    return $this->view('auth/register', [
-                        'title' => 'Đăng ký',
-                        'css_files' => ['auth']
-                    ]);
+                    error_log("Validation errors: " . print_r($_SESSION['validation_errors'], true));
+                    return $this->view('auth/register', ['csrf_token' => $csrf_token]);
                 }
 
-                // Prepare user data
-                $userData = [
-                    'username' => $this->sanitize($_POST['username']),
-                    'password_hash' => password_hash($_POST['password'], PASSWORD_DEFAULT),
-                    'email' => $this->sanitize($_POST['email']),
-                    'full_name' => $this->sanitize($_POST['full_name']),
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'status' => 'active'
-                ];
+                // Sanitize input
+                $username = $this->sanitize($_POST['username']);
+                $email = $this->sanitize($_POST['email']);
+                $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $full_name = $this->sanitize($_POST['full_name']);
 
-                // Begin transaction
-                $this->conn->begin_transaction();
+                // Save to database
+                $userModel = $this->loadModel('UserModel');
+                $result = $userModel->createUser([
+                    'username' => $username,
+                    'email' => $email,
+                    'password' => $password,
+                    'full_name' => $full_name
+                ]);
 
-                try {
-                    // Create user
-                    $userId = $this->userModel->createUser($userData);
-                    
-                    // Send welcome email
-                    $this->sendWelcomeEmail($userData['email'], $userData['full_name']);
-                    
-                    // Commit transaction
-                    $this->conn->commit();
-                    
-                    $this->redirect('auth/login', ['success' => 'Registration successful! Please login.']);
-                } catch (Exception $e) {
-                    $this->conn->rollback();
-                    throw $e;
+                if ($result) {
+                    error_log("User successfully registered: " . $username);
+                    $this->redirect('auth/login');
+                } else {
+                    error_log("Failed to save user to database. Query might have failed.");
+                    return $this->view('auth/register', ['csrf_token' => $csrf_token, 'error' => 'Failed to register user.']);
                 }
+            } catch (Exception $e) {
+                error_log("Registration error: " . $e->getMessage());
+                error_log("Stack trace: " . $e->getTraceAsString());
+                return $this->view('auth/register', ['csrf_token' => $csrf_token, 'error' => 'An error occurred during registration.']);
             }
-            
-            $this->view('auth/register', [
-                'title' => 'Đăng ký',
-                'css_files' => ['auth']
-            ]);
-        } catch (Exception $e) {
-            $this->logError('Registration error', $e);
-            $this->error500();
         }
+
+        $this->view('auth/register', ['csrf_token' => $csrf_token]);
     }
 
     // Đăng xuất

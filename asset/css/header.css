@@ -27,6 +27,7 @@
   right: 0;
   z-index: 1000;
   transition: all 0.3s ease;
+  margin-bottom: 0; /* Loại bỏ khoảng cách dưới menu */
 }
 
 .navbar::before {
@@ -184,6 +185,78 @@
   box-shadow: 0 4px 12px rgba(255, 70, 85, 0.15);
 }
 
+.header-avatar-menu {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.avatar-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.avatar {
+  cursor: pointer;
+  position: relative;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Đặt menu ngay dưới avatar */
+  right: 0;
+  background-color: var(--bg-color);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+  text-align: left;
+  padding: 0;
+}
+
+.dropdown-menu .dropdown-item {
+  padding: 12px 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  transition: all 0.3s ease;
+  opacity: 0.9;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  opacity: 1;
+  color: #FF4655;
+  background-color: rgba(255, 70, 85, 0.1);
+}
+
+.dropdown-menu .dropdown-item:first-child {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--text-color);
+  cursor: pointer;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 @media (max-width: 1024px) {
   .navbar {
     padding: 0 24px;
@@ -216,17 +289,14 @@
   }
 }
 
-main {
-  margin-top: 80px; /* Chiều cao của navbar */
-  min-height: calc(100vh - 80px);
-  width: 100%;
-  position: relative;
-  z-index: 1;
-}
-
 @media (max-width: 768px) {
   main {
     margin-top: 64px; /* Chiều cao của navbar trên mobile */
     min-height: calc(100vh - 64px);
   }
+}
+
+/* Nếu banner có khoảng cách trên, loại bỏ nó */
+.banner {
+  margin-top: 0; /* Loại bỏ khoảng cách trên banner */
 }

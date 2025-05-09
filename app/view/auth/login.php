@@ -5,6 +5,11 @@ header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
 ?>
 
+<link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
+<link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
+<link rel="stylesheet" href="/Baygorn1/asset/css/auth.css">
+<?php include __DIR__ . '/../layout/header.php'; ?>
+
 <div class="main-content">
     <div class="login-container">
         <h2 class="login-title">Đăng nhập</h2>
@@ -37,4 +42,6 @@ header("Pragma: no-cache");
             </div>
         </form>
     </div>
-</div> 
+</div>
+
+<?php include __DIR__ . '/../layout/footer.php'; ?>

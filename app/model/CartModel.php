@@ -7,9 +7,10 @@ class CartModel {
     }
 
     public function getCartItems($userId) {
-        $query = "SELECT c.*, g.title, g.price, g.image_url, (g.price * c.quantity) as subtotal 
-                 FROM cart_items c
-                 JOIN games g ON c.game_id = g.game_id
+        $query = "SELECT ci.*, g.title, g.price, g.image_url, (g.price * ci.quantity) as subtotal 
+                 FROM cart_items ci
+                 JOIN carts c ON ci.cart_id = c.cart_id
+                 JOIN games g ON ci.game_id = g.game_id
                  WHERE c.user_id = ?";
                  
         $stmt = mysqli_prepare($this->conn, $query);
@@ -111,4 +112,4 @@ class CartModel {
         return $success;
     }
 }
-?> 
+?>

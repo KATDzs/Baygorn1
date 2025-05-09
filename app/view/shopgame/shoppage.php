@@ -7,7 +7,7 @@ $config = require_once __DIR__ . '/../../../config.php';
 <div class="main-container">
     <!-- Hero Section -->
     <section class="hero-zombie">
-        <div class="hero-bg-img" style="background-image: url('<?php echo $config['assets']; ?>img/games/<?php echo $games[0]['image_url']; ?>')"></div>
+        <div class="hero-bg-img" style="background-image: url('/Baygorn1/asset/img/games/<?php echo $games[0]['image_url']; ?>')"></div>
         <div class="hero-zombie-content">
             <span class="hero-label" id="heroLabel">WHAT'S HOT</span>
             <h1 id="heroTitle"><?php echo htmlspecialchars($games[0]['title']); ?></h1>
@@ -19,13 +19,14 @@ $config = require_once __DIR__ . '/../../../config.php';
             <div class="hero-buttons">
                 <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
                 <a href="<?php echo $config['base']; ?>app/view/game/game-detail.php?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
+                <a href="/Baygorn1/index.php?url=cart/add&game_id=<?php echo $games[0]['game_id']; ?>" class="btn btn-secondary" data-game-id="<?php echo $games[0]['game_id']; ?>">THÊM VÀO GIỎ HÀNG</a>
             </div>
         </div>
     </section>
 
     <!-- Featured Games Slider -->
     <section class="slider-section">
-        <div class="slider-blur-bg" id="sliderBlurBg" style="background-image: url('<?php echo $config['assets']; ?>img/games/<?php echo $games[0]['image_url']; ?>')"></div>
+        <div class="slider-blur-bg" id="sliderBlurBg" style="background-image: url('/Baygorn1/asset/img/games/<?php echo $games[0]['image_url']; ?>')"></div>
         <div class="container">
             <div class="slider-header">
                 <div class="slider-title">
@@ -89,8 +90,8 @@ $config = require_once __DIR__ . '/../../../config.php';
                 <?php foreach ($games as $game): ?>
                 <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="game-card">
                     <div class="game-card-image">
-                        <img src="/Baygorn1/asset/img/<?php echo $game['image_url']; ?>" 
-                             alt="<?php echo $game['title']; ?>">
+                        <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($game['image_url']); ?>" 
+                             alt="<?php echo htmlspecialchars($game['title']); ?>">
                     </div>
                     <div class="game-card-info">
                         <h3><?php echo $game['title']; ?></h3>
@@ -122,8 +123,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderCard(idx, direction = 1) {
         if (!games.length) return;
         const game = games[idx];
-        const imagePath = `<?php echo $config['assets']; ?>img/games/${game.image_url}`;
-        const defaultImage = '<?php echo $config['assets']; ?>img/default-game.jpg';
+        const imagePath = `/Baygorn1/asset/img/games/${game.image_url}`;
+        const defaultImage = '/Baygorn1/asset/img/default-game.jpg';
 
         // Update slider card
         cardContainer.innerHTML = `
@@ -237,8 +238,8 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderGames() {
         gameGrid.className = `game-${currentView}`;
         gameGrid.innerHTML = filteredGames.map(game => {
-            const imagePath = `<?php echo $config['assets']; ?>img/games/${game.image_url}`;
-            const defaultImage = '<?php echo $config['assets']; ?>img/default-game.jpg';
+            const imagePath = `/Baygorn1/asset/img/games/${game.image_url}`;
+            const defaultImage = '/Baygorn1/asset/img/default-game.jpg';
             
             return `
                 <a href="/Baygorn1/giaodich?id=${game.game_id}" 
@@ -293,5 +294,38 @@ document.addEventListener('DOMContentLoaded', function() {
             renderGames();
         });
     });
+
+    // Add to cart functionality
+    const addToCartButtons = document.querySelectorAll('.btn-add-cart');
+
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const gameId = this.dataset.gameId;
+
+            fetch('/Baygorn1/index.php?url=cart/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `game_id=${gameId}&quantity=1`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert(data.message);
+                    // Optionally, refresh the cart view dynamically
+                    window.location.href = '/Baygorn1/index.php?url=cart';
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred while adding to cart');
+            });
+        });
+    });
 });
-</script> 
+</script>

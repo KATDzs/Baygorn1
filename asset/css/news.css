@@ -5,11 +5,18 @@ body {
     color: #fff;
 }
 
+
+
 .tin-tuc {
     padding: 40px 20px;
     max-width: 1200px;
     margin: auto;
     position: relative;
+}
+
+.tin-tuc h2 {
+    margin-top: 0; /* Loại bỏ khoảng cách trên của tiêu đề */
+    padding-top: 0; /* Đảm bảo không có padding trên */
 }
 
 h2 {

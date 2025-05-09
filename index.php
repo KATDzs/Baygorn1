@@ -1,7 +1,14 @@
 <?php
-// Start session at the very beginning
+// Ensure session is started at the very beginning
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
+}
+
+// Debug session initialization
+if (!isset($_SESSION['user_id'])) {
+    error_log("Session user_id is not set. Redirecting to login.");
+} else {
+    error_log("Session user_id: " . $_SESSION['user_id']);
 }
 
 // Define base path
@@ -40,10 +47,6 @@ function autoload($className) {
         require_once $file;
     }
 }
-    ini_set('display_errors', 1);
-    ini_set('display_startup_errors', 1);
-    error_reporting(E_ALL);
-
 
 // Register autoload function
 spl_autoload_register('autoload');
@@ -80,18 +83,29 @@ $params = array_slice($urlArr, 2);
 // Add Controller suffix if not present
 $controllerMap = [
     'giaodich' => 'GiaoDichController',
+    'cart' => 'CartController', // Ensure CartController is mapped correctly
+    'auth' => 'AuthController', // Map auth routes to AuthController
     // thêm các controller khác nếu cần
 ];
 $controllerKey = strtolower($urlArr[0]);
 $controllerClassName = $controllerMap[$controllerKey] ?? ($controllerName . 'Controller');
 
 // Create controller instance and call action
-$controllerFile = BASE_PATH . '/' . $config['paths']['controllers'] . $controllerClassName . '.php';
+$controllerFile = BASE_PATH . '/app/Controller/' . $controllerClassName . '.php';
+
+error_log("Controller file path: " . $controllerFile);
+if (!file_exists($controllerFile)) {
+    error_log("Controller file does not exist: " . $controllerFile);
+} else {
+    error_log("Controller file exists: " . $controllerFile);
+}
 
 try {
     if (file_exists($controllerFile)) {
         require_once $controllerFile;
         $controller = new $controllerClassName($conn);
+        
+        error_log("Controller: $controllerClassName, Action: $action");
         
         if (method_exists($controller, $action)) {
             call_user_func_array([$controller, $action], $params);
@@ -107,4 +121,4 @@ try {
     
     // Show error page
     require_once BASE_PATH . '/' . $config['paths']['views'] . 'error/404.php';
-} 
+}

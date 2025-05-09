@@ -49,13 +49,13 @@ body {
 /* Hero Section */
 .hero {
   height: 100vh;
-  background: url('../asset/img/riot_style_white_image.jpg') center/cover no-repeat;
+  background: url('/Baygorn1/asset/img/riot_style_white_image.jpg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   position: relative;
-  margin-top: 80px;
+  margin-top: 0;
   overflow: hidden;
 }
 

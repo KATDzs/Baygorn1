@@ -75,3 +75,8 @@ body {
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
+
+main {
+    margin-top: 80px; /* Đảm bảo khoảng cách giữa menu và nội dung */
+    padding-top: 0; /* Loại bỏ padding không cần thiết */
+}

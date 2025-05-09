@@ -17,6 +17,12 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/Baygorn1/asset/img/logo.png">
+    
+    <style>
+        body {
+            padding-top: 80px; /* Đảm bảo khoảng cách giữa menu và nội dung */
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -34,21 +40,45 @@
                 <li><a href="/Baygorn1/about" class="menu-link">About</a></li>
             </ul>
         </div>
-        <div class="account">
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="/Baygorn1/index.php?url=cart" class="menu-link">Cart</a>
-                <a href="/Baygorn1/index.php?url=history" class="menu-link">History</a>
-                <?php if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin'): ?>
-                    <a href="/Baygorn1/index.php?url=admin" class="menu-link">Admin</a>
+
+        <?php if (isset($_SESSION['user_id'])): ?>
+        <div class="header-avatar-menu">
+            <div class="avatar" onclick="toggleDropdown()">
+                <img src="/Baygorn1/asset/img/avatar.jpg" alt="User Avatar" class="avatar-img">
+            </div>
+            <div id="dropdown-menu" class="dropdown-menu">
+                <a href="/Baygorn1/index.php?url=user/profile" class="dropdown-item">Profile</a>
+                <a href="/Baygorn1/index.php?url=user/history" class="dropdown-item">History</a>
+                <a href="/Baygorn1/index.php?url=cart" class="dropdown-item">Cart</a>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <a href="/Baygorn1/index.php?url=admin" class="dropdown-item">Admin</a>
                 <?php endif; ?>
-                <a href="/Baygorn1/index.php?url=auth/logout" class="menu-link">Logout</a>
-            <?php else: ?>
-                <a href="/Baygorn1/index.php?url=auth/login" class="Login">Login</a>
-                <a href="/Baygorn1/index.php?url=auth/register" class="Register">Register</a>
-            <?php endif; ?>
+                <a href="/Baygorn1/index.php?url=auth/logout" class="dropdown-item">Logout</a>
+            </div>
         </div>
+        <?php else: ?>
+        <div class="header-avatar-menu">
+            <a href="/Baygorn1/index.php?url=auth/login" class="menu-link Login">Login</a>
+            <a href="/Baygorn1/index.php?url=auth/register" class="menu-link Register">Register</a>
+        </div>
+        <?php endif; ?>
     </nav>
-    <main>
-    <!-- Content will be injected here -->
+   
+    
+
+    <script>
+    function toggleDropdown() {
+        const dropdown = document.getElementById('dropdown-menu');
+        dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('dropdown-menu');
+        const avatar = document.querySelector('.avatar');
+        if (!avatar.contains(event.target)) {
+            dropdown.style.display = 'none';
+        }
+    });
+    </script>
 </body>
 </html>

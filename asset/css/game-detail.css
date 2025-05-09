@@ -122,6 +122,10 @@
     color: #333;
 }
 
+main {
+    margin-top: 80px; /* Đảm bảo khoảng cách giữa menu và nội dung */
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
     .game-detail-container {
@@ -148,4 +152,4 @@
     .details-grid {
         grid-template-columns: 1fr;
     }
-} 
+}

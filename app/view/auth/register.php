@@ -19,7 +19,15 @@
                 <div class="error-message"><?php echo $error; ?></div>
             <?php endif; ?>
 
+            <?php error_log("CSRF Token in Form: " . ($csrf_token ?? 'null')); ?>
+
             <form action="/Baygorn1/index.php?url=auth/register" method="POST">
+                <input type="hidden" name="csrf_token" value="<?= $csrf_token ?>">
+                <div class="form-group">
+                    <label for="full_name">Họ và tên</label>
+                    <input type="text" id="full_name" name="full_name" required minlength="2" maxlength="100">
+                    <div class="password-requirements">Họ và tên phải từ 2-100 ký tự</div>
+                </div>
                 <div class="form-group">
                     <label for="username">Tên đăng nhập</label>
                     <input type="text" id="username" name="username" required minlength="3" maxlength="20">
@@ -67,4 +75,4 @@
         });
     </script>
 </body>
-</html> 
+</html>

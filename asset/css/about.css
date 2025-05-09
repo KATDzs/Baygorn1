@@ -207,4 +207,9 @@
     .contact-info {
         grid-template-columns: 1fr;
     }
-} 
+}
+
+/* Main Element */
+main {
+    margin-top: 80px; /* Đảm bảo khoảng cách giữa menu và nội dung */
+}
