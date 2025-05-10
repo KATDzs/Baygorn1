@@ -1,9 +1,5 @@
 <?php
 // No need to require files or initialize models here since it's handled by the controller
-// Prevent caching
-header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-header("Cache-Control: post-check=0, pre-check=0", false);
-header("Pragma: no-cache");
 
 // Define ROOT_PATH if not already defined
 if (!defined('ROOT_PATH')) {
@@ -29,7 +25,7 @@ if (!isset($latestNews)) $latestNews = [];
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <?php require_once ROOT_PATH . '/view/layout/header.php'; ?>
+  <?php require_once ROOT_PATH . '/app/view/layout/header.php'; ?>
   
   <main>
     <!-- Hero Section -->
@@ -167,4 +163,3 @@ if (!isset($latestNews)) $latestNews = [];
   </script>
 </body>
 </html>
-    

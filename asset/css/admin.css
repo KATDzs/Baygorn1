@@ -1,0 +1,92 @@
+<?php
+// CSS cho trang admin
+.admin-dashboard, .admin-users, .admin-games, .admin-game-form {
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 10px;
+    padding: 32px 40px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+}
+.admin-dashboard h1, .admin-users h1, .admin-games h1, .admin-game-form h1 {
+    margin-bottom: 24px;
+    font-size: 2.2rem;
+    color: #2d3a4b;
+}
+.admin-stats {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 32px;
+}
+.admin-stats .stat {
+    flex: 1;
+    background: #f5f7fa;
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+}
+.admin-stats .stat h2 {
+    font-size: 1.1rem;
+    color: #888;
+    margin-bottom: 8px;
+}
+.admin-stats .stat p {
+    font-size: 1.7rem;
+    color: #2d3a4b;
+    margin: 0;
+}
+.admin-dashboard table, .admin-users table, .admin-games table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 32px;
+}
+.admin-dashboard th, .admin-dashboard td, .admin-users th, .admin-users td, .admin-games th, .admin-games td {
+    border: 1px solid #e0e0e0;
+    padding: 10px 12px;
+    text-align: left;
+}
+.admin-dashboard th, .admin-users th, .admin-games th {
+    background: #f0f2f5;
+    color: #2d3a4b;
+}
+.admin-dashboard tr:nth-child(even), .admin-users tr:nth-child(even), .admin-games tr:nth-child(even) {
+    background: #fafbfc;
+}
+.admin-dashboard section, .admin-dashboard ul {
+    margin-bottom: 32px;
+}
+.admin-dashboard ul {
+    list-style: disc inside;
+    padding-left: 20px;
+}
+.admin-game-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+.admin-game-form label {
+    font-weight: 500;
+    color: #2d3a4b;
+}
+.admin-game-form input, .admin-game-form textarea {
+    padding: 8px 10px;
+    border: 1px solid #d0d7de;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+.admin-game-form button {
+    width: 120px;
+    padding: 10px;
+    background: #2d3a4b;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 12px;
+}
+.admin-game-form img {
+    margin-top: 8px;
+    max-height: 100px;
+    border-radius: 5px;
+}

@@ -188,7 +188,9 @@ class OrderModel {
     // Lấy tổng doanh thu
     public function getTotalRevenue() {
         $sql = "SELECT SUM(total_amount) FROM orders WHERE status = 'completed'";
-        return mysqli_query($this->conn, $sql)->fetch_column() ?? 0;
+        $result = mysqli_query($this->conn, $sql);
+        $row = mysqli_fetch_row($result);
+        return $row[0] ?? 0;
     }
 
     // Lấy đơn hàng gần đây
@@ -262,4 +264,4 @@ class OrderModel {
         }
     }
 }
-?> 
+?>

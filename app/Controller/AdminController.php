@@ -1,4 +1,8 @@
 <?php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(dirname(__DIR__)));
+}
+
 class AdminController extends BaseController {
     private $userModel;
     private $gameModel;
@@ -17,7 +21,7 @@ class AdminController extends BaseController {
 
     // Kiểm tra quyền admin
     private function checkAdminAuth() {
-        if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || !$_SESSION['is_admin']) {
+        if (!isset($_SESSION['user_id']) || !isset($_SESSION['is_admin']) || $_SESSION['is_admin'] != 1) {
             if ($_SERVER['REQUEST_METHOD'] === 'GET') {
                 header('Location: /Baygorn1/auth/login');
                 exit;
@@ -30,8 +34,8 @@ class AdminController extends BaseController {
     // Trang dashboard
     public function index() {
         try {
-            $this->requireAdmin();
-        $stats = $this->getDashboardStats();
+            $this->checkAdminAuth();
+            $stats = $this->getDashboardStats();
             
             $this->view('admin/dashboard', [
                 'title' => 'Dashboard',
@@ -47,7 +51,7 @@ class AdminController extends BaseController {
     // Quản lý người dùng
     public function users() {
         try {
-            $this->requireAdmin();
+            $this->checkAdminAuth();
             
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 10;
@@ -84,7 +88,7 @@ class AdminController extends BaseController {
     // Quản lý game
     public function games() {
         try {
-            $this->requireAdmin();
+            $this->checkAdminAuth();
             
         $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
         $limit = 10;
@@ -121,7 +125,7 @@ class AdminController extends BaseController {
     // Thêm game mới
     public function addGame() {
         if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-            require_once 'view/admin/game-form.php';
+            require_once ROOT_PATH . '/app/view/admin/game-form.php';
             return;
         }
 
@@ -207,7 +211,7 @@ class AdminController extends BaseController {
                 require_once 'view/error/404.php';
                 return;
             }
-            require_once 'view/admin/game-form.php';
+            require_once ROOT_PATH . '/app/view/admin/game-form.php';
         }
     }
 

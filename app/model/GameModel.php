@@ -88,9 +88,9 @@ class GameModel {
 
     // Lấy game bán chạy nhất
     public function getTopSellingGames($limit = 5) {
-        $query = "SELECT g.*, COUNT(o.order_id) as total_sales 
+        $query = "SELECT g.*, COUNT(od.order_detail_id) as total_sales 
                  FROM games g
-                 LEFT JOIN order_items o ON g.game_id = o.game_id
+                 LEFT JOIN order_details od ON g.game_id = od.game_id
                  GROUP BY g.game_id
                  ORDER BY total_sales DESC
                  LIMIT ?";
@@ -251,4 +251,4 @@ class GameModel {
         return $success;
     }
 }
-?> 
+?>

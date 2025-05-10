@@ -27,12 +27,10 @@ RewriteRule ^app/view/giaodich/.*\.php$ - [L]
 # Rewrite /giaodich?id=1 to app/view/giaodich/giaodich.php
 RewriteRule ^giaodich$ app/view/giaodich/giaodich.php [L,QSA]
 
-# Nếu không phải file/thư mục thật
+# Đảm bảo rewrite mọi route đẹp về index.php
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-
-# Chuyển hướng tất cả request đến index.php
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # Chuyển hướng / đến /home
-RewriteRule ^$ home [L,R=301] 
+RewriteRule ^$ home [L,R=301]

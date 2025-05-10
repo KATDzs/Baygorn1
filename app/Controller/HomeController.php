@@ -11,6 +11,10 @@ class HomeController extends BaseController {
 
     // Trang chủ
     public function index() {
+        // Set cache-control headers before any output
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
         try {
             // Lấy game mới nhất
             $latestGames = $this->gameModel->getLatestGames(4);
@@ -36,6 +40,10 @@ class HomeController extends BaseController {
 
     // Trang About
     public function about() {
+        // Set cache-control headers before any output
+        header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+        header("Cache-Control: post-check=0, pre-check=0", false);
+        header("Pragma: no-cache");
         try {
             $this->view('about/about', [
                 'title' => 'Về chúng tôi',
@@ -100,4 +108,4 @@ class HomeController extends BaseController {
             $this->view('error/404');
         }
     }
-} 
+}

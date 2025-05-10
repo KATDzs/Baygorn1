@@ -18,11 +18,7 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/Baygorn1/asset/img/logo.png">
     
-    <style>
-        body {
-            padding-top: 80px; /* Đảm bảo khoảng cách giữa menu và nội dung */
-        }
-    </style>
+
 </head>
 <body>
     <!-- Navigation -->
@@ -38,6 +34,40 @@
                 <li><a href="/Baygorn1/game" class="menu-link">Game</a></li>
                 <li><a href="/Baygorn1/news" class="menu-link">News</a></li>
                 <li><a href="/Baygorn1/about" class="menu-link">About</a></li>
+                <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+                    <li class="admin-dropdown-parent" style="position:relative;">
+                        <a href="/Baygorn1/index.php?url=admin" class="menu-link" style="color:purple;font-weight:bold;">Admin</a>
+                        <ul class="admin-navbar-dropdown" style="display:none; position:absolute; background:#232a36; border-radius:10px; min-width:200px; top:100%; left:0; box-shadow:0 2px 12px rgba(0,0,0,0.12); z-index:1000;">
+                            <li><a href="/Baygorn1/index.php?url=admin" class="dropdown-link">Dashboard</a></li>
+                            <li><a href="/Baygorn1/index.php?url=admin/users" class="dropdown-link">Quản lý người dùng</a></li>
+                            <li><a href="/Baygorn1/index.php?url=admin/games" class="dropdown-link">Quản lý game</a></li>
+                            <li><a href="/Baygorn1/index.php?url=admin/addGame" class="dropdown-link">Thêm game mới</a></li>
+                        </ul>
+                    </li>
+                    <style>
+                    .admin-navbar-dropdown li { list-style:none; }
+                    .admin-navbar-dropdown .dropdown-link {
+                        display:block; padding:12px 18px; color:#7ed6df; text-decoration:none; font-weight:500;
+                        border-bottom:1px solid #232a36; transition:background 0.2s, color 0.2s;
+                    }
+                    .admin-navbar-dropdown .dropdown-link:hover {
+                        background:#202634; color:#fff;
+                    }
+                    .admin-navbar-dropdown li:last-child .dropdown-link { border-bottom:none; }
+                    </style>
+                    <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        var parent = document.querySelector('.admin-dropdown-parent');
+                        var dropdown = parent.querySelector('.admin-navbar-dropdown');
+                        parent.addEventListener('mouseenter', function() {
+                            dropdown.style.display = 'block';
+                        });
+                        parent.addEventListener('mouseleave', function() {
+                            dropdown.style.display = 'none';
+                        });
+                    });
+                    </script>
+                <?php endif; ?>
             </ul>
         </div>
 
@@ -51,7 +81,7 @@
                 <a href="/Baygorn1/index.php?url=user/history" class="dropdown-item">History</a>
                 <a href="/Baygorn1/index.php?url=cart" class="dropdown-item">Cart</a>
                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
-                    <a href="/Baygorn1/index.php?url=admin" class="dropdown-item">Admin</a>
+                    <a href="/Baygorn1/index.php?url=admin" class="dropdown-item" id="admin-link">Admin</a>
                 <?php endif; ?>
                 <a href="/Baygorn1/index.php?url=auth/logout" class="dropdown-item">Logout</a>
             </div>

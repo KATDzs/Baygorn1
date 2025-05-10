@@ -83,8 +83,9 @@ $params = array_slice($urlArr, 2);
 // Add Controller suffix if not present
 $controllerMap = [
     'giaodich' => 'GiaoDichController',
-    'cart' => 'CartController', // Ensure CartController is mapped correctly
-    'auth' => 'AuthController', // Map auth routes to AuthController
+    'cart' => 'CartController',
+    'auth' => 'AuthController',
+    'admin' => 'AdminController', // Thêm dòng này để ánh xạ đúng controller admin
     // thêm các controller khác nếu cần
 ];
 $controllerKey = strtolower($urlArr[0]);

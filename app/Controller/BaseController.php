@@ -138,7 +138,8 @@ class BaseController {
     }
 
     protected function isAdmin() {
-        return isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin';
+        // Sử dụng đúng session lưu quyền admin
+        return (isset($_SESSION['is_admin']) && $_SESSION['is_admin']);
     }
 
     protected function requireLogin() {
