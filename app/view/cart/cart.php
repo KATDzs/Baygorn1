@@ -17,20 +17,30 @@
             <tbody>
                 <?php foreach ($cartItems as $item): ?>
                     <tr>
-                        <td><img src="<?php echo htmlspecialchars($item['game']['image_url']); ?>" alt="<?php echo htmlspecialchars($item['game']['title']); ?>" class="cart-item-image"></td>
-                        <td><?php echo htmlspecialchars($item['game']['title']); ?></td>
-                        <td><?php echo number_format($item['game']['price'], 2); ?> $</td>
+                        <td>
+                            <?php
+                            $imgPath = $_SERVER['DOCUMENT_ROOT'] . '/Baygorn1/asset/img/games/' . $item['image_url'];
+                            $imgUrl = '/Baygorn1/asset/img/games/' . htmlspecialchars($item['image_url']);
+                            $defaultImg = '/Baygorn1/asset/img/default-game.jpg';
+                            if (!file_exists($imgPath) || empty($item['image_url'])) {
+                                $imgUrl = $defaultImg;
+                            }
+                            ?>
+                            <img src="<?php echo $imgUrl; ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" class="cart-item-image">
+                        </td>
+                        <td><?php echo htmlspecialchars($item['title']); ?></td>
+                        <td><?php echo number_format($item['price'], 2); ?> $</td>
                         <td>
                             <form method="POST" action="/Baygorn1/index.php?url=cart/update">
-                                <input type="hidden" name="cart_item_id" value="<?php echo $item['id']; ?>">
+                                <input type="hidden" name="cart_item_id" value="<?php echo $item['cart_item_id']; ?>">
                                 <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" class="quantity-input">
                                 <button type="submit" class="update-btn">Update</button>
                             </form>
                         </td>
-                        <td><?php echo number_format($item['game']['price'] * $item['quantity'], 2); ?> $</td>
+                        <td><?php echo number_format($item['price'] * $item['quantity'], 2); ?> $</td>
                         <td>
                             <form method="POST" action="/Baygorn1/index.php?url=cart/remove">
-                                <input type="hidden" name="cart_item_id" value="<?php echo $item['id']; ?>">
+                                <input type="hidden" name="cart_item_id" value="<?php echo $item['cart_item_id']; ?>">
                                 <button type="submit" class="remove-btn">Remove</button>
                             </form>
                         </td>

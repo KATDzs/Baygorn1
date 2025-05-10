@@ -61,28 +61,27 @@ class BaseController {
     
     
     protected function view($viewName, $data = []) {
-        // Add config to all views
         $data['config'] = $this->config;
-        
-        // Add helper functions
         $data['asset'] = function($path) {
             return $this->config['baseURL'] . 'asset/' . $path;
         };
-        
         $data['url'] = function($path) {
             return $this->config['baseURL'] . $path;
         };
-        
-        // Extract data to make it available in view
         extract($data);
-        
-        // Load header
         require_once BASE_PATH . '/' . $this->config['paths']['views'] . 'layout/header.php';
-        
-        // Load main view
-        require_once BASE_PATH . '/' . $this->config['paths']['views'] . $viewName . '.php';
-        
-        // Load footer
+        // Normalize view name: remove leading/trailing slashes and duplicate slashes
+        $viewName = trim(str_replace('..', '', $viewName), '/');
+        $viewFile = BASE_PATH . '/' . $this->config['paths']['views'] . $viewName;
+        if (!str_ends_with($viewFile, '.php')) {
+            $viewFile .= '.php';
+        }
+        if (file_exists($viewFile)) {
+            require_once $viewFile;
+        } else {
+            error_log('View file not found: ' . $viewFile);
+            require_once BASE_PATH . '/' . $this->config['paths']['views'] . 'error/404.php';
+        }
         require_once BASE_PATH . '/' . $this->config['paths']['views'] . 'layout/footer.php';
     }
 
@@ -146,6 +145,7 @@ class BaseController {
         if (!$this->isLoggedIn()) {
             $this->redirect('auth/login');
         }
+        return $_SESSION['user_id'];
     }
 
     protected function requireAdmin() {

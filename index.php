@@ -101,14 +101,18 @@ if (!file_exists($controllerFile)) {
 }
 
 try {
+    error_log("DEBUG: index.php about to instantiate controller: $controllerClassName from $controllerFile");
     if (file_exists($controllerFile)) {
         require_once $controllerFile;
         $controller = new $controllerClassName($conn);
+        error_log("DEBUG: index.php instantiated controller: $controllerClassName");
         
         error_log("Controller: $controllerClassName, Action: $action");
         
         if (method_exists($controller, $action)) {
+            error_log("DEBUG: index.php about to call action: $action");
             call_user_func_array([$controller, $action], $params);
+            error_log("DEBUG: index.php finished calling action: $action");
         } else {
             throw new Exception("Action not found: {$action}");
         }

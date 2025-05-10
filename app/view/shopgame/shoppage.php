@@ -19,7 +19,7 @@ $config = require_once __DIR__ . '/../../../config.php';
             <div class="hero-buttons">
                 <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
                 <a href="<?php echo $config['base']; ?>app/view/game/game-detail.php?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
-                <a href="/Baygorn1/index.php?url=cart/add&game_id=<?php echo $games[0]['game_id']; ?>" class="btn btn-secondary" data-game-id="<?php echo $games[0]['game_id']; ?>">THÊM VÀO GIỎ HÀNG</a>
+                <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $games[0]['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
             </div>
         </div>
     </section>
@@ -99,6 +99,7 @@ $config = require_once __DIR__ . '/../../../config.php';
                             <span class="game-platform"><?php echo $game['platform']; ?></span>
                             <span class="game-price"><?php echo number_format($game['price']); ?> VNĐ</span>
                         </div>
+                        <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $game['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
                     </div>
                 </a>
                 <?php endforeach; ?>
@@ -106,6 +107,34 @@ $config = require_once __DIR__ . '/../../../config.php';
         </div>
     </section>
 </div>
+
+<!-- Toast Notification -->
+<div id="toast" class="toast-notification"></div>
+
+<style>
+.toast-notification {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #323232;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 16px 32px;
+    position: fixed;
+    z-index: 9999;
+    right: 40px;
+    bottom: 40px;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+.toast-notification.show {
+    visibility: visible;
+    opacity: 1;
+}
+</style>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
@@ -273,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="game-price">${Number(game.price).toLocaleString()} VNĐ</div>
                         </div>
+                        <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="${game.game_id}">THÊM VÀO GIỎ HÀNG</button>
                     </div>
                 </a>
             `;
@@ -295,6 +325,16 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // Toast notification function (bottom right)
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.className = 'toast-notification show';
+        setTimeout(() => {
+            toast.className = 'toast-notification';
+        }, 2500);
+    }
+
     // Add to cart functionality
     const addToCartButtons = document.querySelectorAll('.btn-add-cart');
 
@@ -313,17 +353,11 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.json())
             .then(data => {
-                if (data.success) {
-                    alert(data.message);
-                    // Optionally, refresh the cart view dynamically
-                    window.location.href = '/Baygorn1/index.php?url=cart';
-                } else {
-                    alert(data.message);
-                }
+                showToast(data.message);
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('An error occurred while adding to cart');
+                showToast('Đã xảy ra lỗi khi thêm vào giỏ hàng');
             });
         });
     });

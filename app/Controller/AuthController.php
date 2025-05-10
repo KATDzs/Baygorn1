@@ -33,7 +33,9 @@ class AuthController extends BaseController {
 
     // Hiển thị form đăng nhập
     public function login() {
-        session_start();
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
         $csrf_token = $_SESSION['csrf_token'] ?? bin2hex(random_bytes(32));
         $_SESSION['csrf_token'] = $csrf_token;
 

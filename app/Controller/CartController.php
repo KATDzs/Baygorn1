@@ -10,6 +10,7 @@ class CartController extends BaseController {
     }
 
     public function index() {
+        error_log("DEBUG: Entered CartController::index()");
         try {
             error_log("CartController index method invoked.");
             error_log("Accessing CartController index method");
@@ -54,26 +55,38 @@ class CartController extends BaseController {
         try {
             $userId = $this->requireLogin();
 
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $gameId = $_POST['game_id'] ?? 0;
-                $quantity = $_POST['quantity'] ?? 1;
+            // Accept both POST and GET for add-to-cart for compatibility
+            $gameId = $_POST['game_id'] ?? $_GET['game_id'] ?? 0;
+            $quantity = $_POST['quantity'] ?? 1;
 
-                if ($this->cartModel->addToCart($userId, $gameId, $quantity)) {
-                    header('Content-Type: application/json');
-                    echo json_encode(['success' => true, 'message' => 'Item added to cart successfully']);
-                    exit;
-                } else {
-                    header('Content-Type: application/json');
-                    echo json_encode(['success' => false, 'message' => 'Failed to add item to cart']);
-                    exit;
-                }
+            if (!$gameId) {
+                // Return error if no game_id
+                $this->returnAddToCartResponse(false, 'No game selected');
+            }
+
+            if ($this->cartModel->addToCart($userId, $gameId, $quantity)) {
+                $this->returnAddToCartResponse(true, 'Đã thêm vào giỏ hàng!');
+            } else {
+                $this->returnAddToCartResponse(false, 'Thêm vào giỏ hàng thất bại!');
             }
         } catch (Exception $e) {
-            header('Content-Type: application/json');
-            echo json_encode(['success' => false, 'message' => 'An error occurred']);
-            error_log($e->getMessage());
-            exit;
+            $this->returnAddToCartResponse(false, 'Đã xảy ra lỗi!');
         }
+    }
+
+    private function returnAddToCartResponse($success, $message) {
+        // Always return JSON for add-to-cart (AJAX-friendly)
+        header('Content-Type: application/json; charset=utf-8');
+        echo json_encode(['success' => $success, 'message' => $message], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    private function isAjaxRequest() {
+        return (
+            !empty($_SERVER['HTTP_X_REQUESTED_WITH']) &&
+            strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest'
+        ) ||
+        (isset($_SERVER['CONTENT_TYPE']) && strpos($_SERVER['CONTENT_TYPE'], 'application/json') !== false);
     }
 
     public function update() {
