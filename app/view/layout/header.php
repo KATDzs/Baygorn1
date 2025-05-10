@@ -14,6 +14,9 @@
             <link rel="stylesheet" href="/Baygorn1/asset/css/<?= $css ?>.css">
         <?php endforeach; ?>
     <?php endif; ?>
+    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+        <link rel="stylesheet" href="/Baygorn1/asset/css/header-admin.css">
+    <?php endif; ?>
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/Baygorn1/asset/img/logo.png">
@@ -44,29 +47,6 @@
                             <li><a href="/Baygorn1/index.php?url=admin/addGame" class="dropdown-link">Thêm game mới</a></li>
                         </ul>
                     </li>
-                    <style>
-                    .admin-navbar-dropdown li { list-style:none; }
-                    .admin-navbar-dropdown .dropdown-link {
-                        display:block; padding:12px 18px; color:#7ed6df; text-decoration:none; font-weight:500;
-                        border-bottom:1px solid #232a36; transition:background 0.2s, color 0.2s;
-                    }
-                    .admin-navbar-dropdown .dropdown-link:hover {
-                        background:#202634; color:#fff;
-                    }
-                    .admin-navbar-dropdown li:last-child .dropdown-link { border-bottom:none; }
-                    </style>
-                    <script>
-                    document.addEventListener('DOMContentLoaded', function() {
-                        var parent = document.querySelector('.admin-dropdown-parent');
-                        var dropdown = parent.querySelector('.admin-navbar-dropdown');
-                        parent.addEventListener('mouseenter', function() {
-                            dropdown.style.display = 'block';
-                        });
-                        parent.addEventListener('mouseleave', function() {
-                            dropdown.style.display = 'none';
-                        });
-                    });
-                    </script>
                 <?php endif; ?>
             </ul>
         </div>
@@ -110,5 +90,8 @@
         }
     });
     </script>
+    <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
+        <script src="/Baygorn1/asset/js/header-admin.js"></script>
+    <?php endif; ?>
 </body>
 </html>

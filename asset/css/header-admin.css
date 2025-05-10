@@ -1,0 +1,9 @@
+.admin-navbar-dropdown li { list-style:none; }
+.admin-navbar-dropdown .dropdown-link {
+    display:block; padding:12px 18px; color:#7ed6df; text-decoration:none; font-weight:500;
+    border-bottom:1px solid #232a36; transition:background 0.2s, color 0.2s;
+}
+.admin-navbar-dropdown .dropdown-link:hover {
+    background:#202634; color:#fff;
+}
+.admin-navbar-dropdown li:last-child .dropdown-link { border-bottom:none; }

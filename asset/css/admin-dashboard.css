@@ -1,0 +1,99 @@
+.admin-dashboard {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: #181c24;
+    border-radius: 18px;
+    padding: 32px 40px 40px 40px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+    color: #fff;
+}
+.admin-stats {
+    display: flex;
+    gap: 32px;
+    margin-bottom: 40px;
+    justify-content: space-between;
+}
+.admin-stats .stat {
+    flex: 1;
+    background: linear-gradient(135deg, #2d3a4b 60%, #3e4a5e 100%);
+    border-radius: 16px;
+    padding: 32px 0 24px 0;
+    text-align: center;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+    transition: transform 0.2s;
+    position: relative;
+}
+.admin-stats .stat:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+}
+.admin-stats .stat h2 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+    color: #7ed6df;
+    letter-spacing: 1px;
+}
+.admin-stats .stat p {
+    font-size: 2.8rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 0;
+}
+.recent-orders {
+    margin-bottom: 36px;
+}
+.recent-orders h2, .top-games h2 {
+    font-size: 1.5rem;
+    margin-bottom: 18px;
+    color: #7ed6df;
+    letter-spacing: 1px;
+}
+.recent-orders table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #232a36;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+.recent-orders th, .recent-orders td {
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 1.08rem;
+}
+.recent-orders th {
+    background: #202634;
+    color: #7ed6df;
+    font-weight: 600;
+}
+.recent-orders tr:nth-child(even) {
+    background: #232a36;
+}
+.recent-orders tr:nth-child(odd) {
+    background: #1b202a;
+}
+.recent-orders td {
+    color: #fff;
+}
+.top-games ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.top-games li {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+}
+.top-games li:before {
+    content: '\1F3AE'; /* gamepad emoji */
+    font-size: 1.2em;
+    margin-right: 8px;
+    color: #7ed6df;
+}
+@media (max-width: 900px) {
+    .admin-stats { flex-direction: column; gap: 18px; }
+    .admin-dashboard { padding: 18px 4vw; }
+}

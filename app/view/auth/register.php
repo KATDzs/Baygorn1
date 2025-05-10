@@ -61,18 +61,6 @@
 
     <?php include __DIR__ . '/../layout/footer.php'; ?>
 
-    <script>
-        // Kiểm tra mật khẩu khớp nhau
-        const password = document.getElementById('password');
-        const confirmPassword = document.getElementById('confirm_password');
-        const form = document.querySelector('form');
-
-        form.addEventListener('submit', function(e) {
-            if (password.value !== confirmPassword.value) {
-                e.preventDefault();
-                alert('Mật khẩu xác nhận không khớp!');
-            }
-        });
-    </script>
+    <script src="/Baygorn1/asset/js/auth-register.js"></script>
 </body>
 </html>

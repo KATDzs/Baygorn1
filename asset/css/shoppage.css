@@ -673,4 +673,27 @@ main {
         align-items: flex-start;
         gap: 0.5rem;
     }
-} 
+}
+
+.toast-notification {
+    visibility: hidden;
+    min-width: 250px;
+    background-color: #323232;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 16px 32px;
+    position: fixed;
+    z-index: 9999;
+    right: 40px;
+    bottom: 40px;
+    font-size: 16px;
+    opacity: 0;
+    transition: opacity 0.4s, visibility 0.4s;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+    pointer-events: none;
+}
+.toast-notification.show {
+    visibility: visible;
+    opacity: 1;
+}

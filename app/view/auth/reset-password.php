@@ -50,14 +50,6 @@
     </div>
 </div>
 
-<script>
-document.getElementById('password_confirm').addEventListener('input', function() {
-    if (this.value !== document.getElementById('password').value) {
-        this.setCustomValidity('Mật khẩu xác nhận không khớp');
-    } else {
-        this.setCustomValidity('');
-    }
-});
-</script>
+<script src="/Baygorn1/asset/js/auth-reset-password.js"></script>
 
-<?php require_once 'app/view/layouts/footer.php'; ?> 
+<?php require_once 'app/view/layouts/footer.php'; ?>

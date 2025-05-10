@@ -1,0 +1,45 @@
+.admin-users {
+    max-width: 1100px;
+    margin: 40px auto;
+    background: #181c24;
+    border-radius: 18px;
+    padding: 32px 40px 40px 40px;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.18);
+    color: #fff;
+}
+.admin-users h1 {
+    font-size: 2rem;
+    margin-bottom: 32px;
+    color: #7ed6df;
+    text-align: center;
+    letter-spacing: 1px;
+}
+.admin-users table {
+    width: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #232a36;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+}
+.admin-users th, .admin-users td {
+    padding: 14px 10px;
+    text-align: center;
+    font-size: 1.08rem;
+}
+.admin-users th {
+    background: #202634;
+    color: #7ed6df;
+    font-weight: 600;
+}
+.admin-users tr:nth-child(even) {
+    background: #232a36;
+}
+.admin-users tr:nth-child(odd) {
+    background: #1b202a;
+}
+.admin-users td {
+    color: #fff;
+}
+@media (max-width: 900px) {
+    .admin-users { padding: 18px 4vw; }
+}
