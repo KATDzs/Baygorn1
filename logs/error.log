@@ -1,1 +1,9 @@
 error_log($logMessage, 3, __DIR__ . '/../../logs/error.log');[2025-05-05 15:47:03] Login error
+[2025-05-10 13:41:27] Login error
+Exception: Invalid CSRF token
+File: C:\xampp\htdocs\Baygorn1\app\Controller\BaseController.php
+Line: 53
+Stack trace:
+#0 C:\xampp\htdocs\Baygorn1\app\Controller\AuthController.php(49): BaseController->validateCSRF('8c9d7928755dcd7...')
+#1 C:\xampp\htdocs\Baygorn1\index.php(114): AuthController->login()
+#2 {main}

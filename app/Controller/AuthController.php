@@ -41,8 +41,10 @@ class AuthController extends BaseController {
 
         // Redirect if already logged in
         if ($this->isLoggedIn()) {
-            $this->redirect('home');
+            header('Location: ' . $this->config['base']);
+            exit;
         }
+
         try {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 // Validate CSRF token
