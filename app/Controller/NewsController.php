@@ -117,4 +117,40 @@ class NewsController extends BaseController {
             ]);
         }
     }
+
+    // Individual news pages
+    public function news1() {
+        $this->view('news/news1', [
+            'title' => 'Minecraft Spring Update',
+            'css_files' => ['news']
+        ]);
+    }
+
+    public function news2() {
+        $this->view('news/news2', [
+            'title' => 'Roblox Brainrot Evolution Update',
+            'css_files' => ['news']
+        ]);
+    }
+
+    public function news3() {
+        $this->view('news/news3', [
+            'title' => 'ĐTCL 14.2: Cân Bằng Meta',
+            'css_files' => ['news']
+        ]);
+    }
+
+    public function news4() {
+        $this->view('news/news4', [
+            'title' => 'Palworld bùng nổ!',
+            'css_files' => ['news']
+        ]);
+    }
+
+    public function news5() {
+        $this->view('news/news5', [
+            'title' => 'LEGION - Biểu tượng của kỷ nguyên đen tối',
+            'css_files' => ['news']
+        ]);
+    }
 } 
