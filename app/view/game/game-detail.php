@@ -1,4 +1,7 @@
 <?php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+}
 // Get configuration
 $config = require_once __DIR__ . '/../../../config.php';
 
@@ -33,6 +36,9 @@ $categories = explode(',', $game['categories']);
 
 // Decode meta information
 $meta = json_decode($game['meta'], true);
+
+// Thêm header
+require_once ROOT_PATH . '/view/layout/header.php';
 ?>
 
 <!DOCTYPE html>
@@ -45,6 +51,8 @@ $meta = json_decode($game['meta'], true);
     <link rel="stylesheet" href="<?php echo $config['assets']; ?>css/game-detail.css">
 </head>
 <body>
+    <!-- Header -->
+    <?php require_once ROOT_PATH . '/view/layout/header.php'; ?>
     <div class="game-detail-container">
         <div class="game-hero" style="background-image: url('<?php echo $config['assets']; ?>img/games/<?php echo htmlspecialchars($game['image_url']); ?>')">
         </div>
@@ -113,7 +121,8 @@ $meta = json_decode($game['meta'], true);
             </div>
         </div>
     </div>
-
+    <!-- Footer -->
+    <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
 </body>
 </html> 
