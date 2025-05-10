@@ -25,8 +25,6 @@ if (!isset($latestNews)) $latestNews = [];
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <?php require_once ROOT_PATH . '/app/view/layout/header.php'; ?>
-  
   <main>
     <!-- Hero Section -->
     <section class="hero">

@@ -27,14 +27,11 @@ RewriteRule ^app/view/giaodich/.*\.php$ - [L]
 # Rewrite /giaodich?id=1 to app/view/giaodich/giaodich.php
 RewriteRule ^giaodich$ app/view/giaodich/giaodich.php [L,QSA]
 
-<<<<<<< HEAD
 # Đảm bảo rewrite mọi route đẹp về index.php
-=======
 # Rewrite /game/game-detail to app/view/game/game-detail.php
 RewriteRule ^game/game-detail$ app/view/game/game-detail.php [L,QSA]
 
 # Nếu không phải file/thư mục thật
->>>>>>> 6865b6c57f01d3bd3ee04cd75561ef68c5093143
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
