@@ -27,6 +27,9 @@ RewriteRule ^app/view/giaodich/.*\.php$ - [L]
 # Rewrite /giaodich?id=1 to app/view/giaodich/giaodich.php
 RewriteRule ^giaodich$ app/view/giaodich/giaodich.php [L,QSA]
 
+# Rewrite /game/game-detail to app/view/game/game-detail.php
+RewriteRule ^game/game-detail$ app/view/game/game-detail.php [L,QSA]
+
 # Nếu không phải file/thư mục thật
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

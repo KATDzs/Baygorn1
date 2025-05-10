@@ -54,41 +54,71 @@ if (!isset($latestNews)) $latestNews = [];
       </div>
 
       <div class="news-grid">
-        <?php if (!empty($latestNews)): ?>
-          <!-- Main Left Block -->
-          <div class="featured-news">
-            <a href="/Baygorn1/news/detail/<?php echo htmlspecialchars($latestNews[0]['news_id']); ?>" class="news-link">
-              <div class="news-image">
-                <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($latestNews[0]['image_url']); ?>" alt="<?php echo htmlspecialchars($latestNews[0]['title']); ?>">
+        <?php
+        $news = [
+            [
+                'title' => 'Minecraft Spring Update',
+                'description' => '​Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!​',
+                'img' => '/Baygorn1/asset/img/games/minecraftupdate.jpg',
+                'link' => '/Baygorn1/news/news1'
+            ],
+            [
+                'title' => 'Roblox Brainrot Evolution Update',
+                'description' => 'Cập nhật và tối ưu các tính năng cùng nhiều phần quà hấp dẫn đang đợi bạn tới chơi!',
+                'img' => '/Baygorn1/asset/img/games/brainrotevolution.webp',
+                'link' => '/Baygorn1/news/news2'
+            ],
+            [
+                'title' => 'ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll',
+                'description' => 'Bản cập nhật 14.2 mang tính cân bằng cao, cùng sự tối ưu hệ thống mới cho game thủ.',
+                'img' => '/Baygorn1/asset/img/games/tftupdate.avif',
+                'link' => '/Baygorn1/news/news3'
+            ],
+            [
+                'title' => 'Palworld bùng nổ! Game sinh tồn bắt quái vật đang làm mưa làm gió toàn cầu',
+                'description' => 'Tựa game sinh tồn thế giới mở Palworld, kết hợp giữa bắt quái vật và xây dựng căn cứ, đang gây bão toàn cầu với lối chơi sáng tạo!',
+                'img' => '/Baygorn1/asset/img/games/game_palworld.jpeg',
+                'link' => '/Baygorn1/news/news4'
+            ],
+            [
+                'title' => 'LEGION - Biểu tượng của kỷ nguyên đen tối',
+                'description' => 'LEGION tồn tại trong một thế giới nơi các thành phố đã bị nuốt chửng bởi mạng lưới siêu máy tính. Các tập đoàn khổng lồ kiểm soát từng nhịp thở của nhân loại.',
+                'img' => '/Baygorn1/asset/img/games/game_i_am_legion.jpg',
+                'link' => '/Baygorn1/news/news5'
+            ],
+        ];
+        ?>
+        <!-- Main Left Block -->
+        <div class="featured-news">
+          <a href="<?php echo $news[0]['link']; ?>" class="news-link">
+            <div class="news-image">
+              <img src="<?php echo $news[0]['img']; ?>" alt="<?php echo htmlspecialchars($news[0]['title']); ?>">
+            </div>
+            <div class="news-overlay">
+              <div class="news-content">
+                <h1><?php echo htmlspecialchars($news[0]['title']); ?></h1>
+                <p class="news-intro"><?php echo htmlspecialchars($news[0]['description']); ?></p>
+                <span class="news-tag">TIN TỨC</span>
               </div>
-              <div class="news-overlay">
-                <div class="news-content">
-                  <h1><?php echo htmlspecialchars($latestNews[0]['title']); ?></h1>
-                  <p class="news-date"><?php echo date('d/m/Y', strtotime($latestNews[0]['published_at'])); ?></p>
-                  <p class="news-intro"><?php echo htmlspecialchars($latestNews[0]['content']); ?></p>
-                  <span class="news-tag">TIN TỨC</span>
-                </div>
+            </div>
+          </a>
+        </div>
+
+        <!-- Right Column -->
+        <div class="news-list">
+          <?php for($i = 1; $i < count($news); $i++): ?>
+            <a href="<?php echo $news[$i]['link']; ?>" class="news-item">
+              <div class="news-item-image">
+                <img src="<?php echo $news[$i]['img']; ?>" alt="<?php echo htmlspecialchars($news[$i]['title']); ?>">
+              </div>
+              <div class="news-item-content">
+                <h3><?php echo htmlspecialchars($news[$i]['title']); ?></h3>
+                <p class="news-description"><?php echo htmlspecialchars($news[$i]['description']); ?></p>
+                <span class="news-item-tag">TIN TỨC</span>
               </div>
             </a>
-          </div>
-
-          <!-- Right Column -->
-          <div class="news-list">
-            <?php for($i = 1; $i < count($latestNews); $i++): ?>
-              <a href="/Baygorn1/news/detail/<?php echo htmlspecialchars($latestNews[$i]['news_id']); ?>" class="news-item">
-                <div class="news-item-image">
-                  <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($latestNews[$i]['image_url']); ?>" alt="<?php echo htmlspecialchars($latestNews[$i]['title']); ?>">
-                </div>
-                <div class="news-item-content">
-                  <h3><?php echo htmlspecialchars($latestNews[$i]['title']); ?></h3>
-                  <span class="news-item-tag">TIN TỨC</span>
-                </div>
-              </a>
-            <?php endfor; ?>
-          </div>
-        <?php else: ?>
-          <p class="no-news">Chưa có tin tức mới.</p>
-        <?php endif; ?>
+          <?php endfor; ?>
+        </div>
       </div>
     </section>
 
@@ -108,7 +138,7 @@ if (!isset($latestNews)) $latestNews = [];
         <div class="games-grid">
           <?php if (!empty($latestGames)): ?>
             <?php foreach($latestGames as $game): ?>
-              <a href="/Baygorn1/game/detail/<?php echo htmlspecialchars($game['game_id']); ?>" class="game-card">
+              <a href="/Baygorn1/app/view/game/game-detail.php?id=<?php echo htmlspecialchars($game['game_id']); ?>" class="game-card">
                 <div class="game-image">
                   <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($game['image_url']); ?>" alt="<?php echo htmlspecialchars($game['title']); ?>">
                 </div>

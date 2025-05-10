@@ -18,7 +18,7 @@ $config = require_once __DIR__ . '/../../../config.php';
             </div>
             <div class="hero-buttons">
                 <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
-                <a href="<?php echo $config['base']; ?>app/view/game/game-detail.php?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
+                <a href="/Baygorn1/game/game-detail?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
                 <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $games[0]['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
             </div>
         </div>
@@ -88,7 +88,7 @@ $config = require_once __DIR__ . '/../../../config.php';
 
             <div class="game-grid" id="gameGrid">
                 <?php foreach ($games as $game): ?>
-                <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="game-card">
+                <div class="game-card">
                     <div class="game-card-image">
                         <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($game['image_url']); ?>" 
                              alt="<?php echo htmlspecialchars($game['title']); ?>">
@@ -99,9 +99,10 @@ $config = require_once __DIR__ . '/../../../config.php';
                             <span class="game-platform"><?php echo $game['platform']; ?></span>
                             <span class="game-price"><?php echo number_format($game['price']); ?> VNĐ</span>
                         </div>
+                        <a href="/Baygorn1/game/game-detail?id=<?php echo $game['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
                         <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $game['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
                     </div>
-                </a>
+                </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -271,23 +272,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const defaultImage = '/Baygorn1/asset/img/default-game.jpg';
             
             return `
-                <a href="/Baygorn1/giaodich?id=${game.game_id}" 
-                   class="game-card" 
-                   data-categories="${game.categories.map(cat => cat.category_id).join(',')}"
-                   data-platform="${game.platform}"
-                   data-price="${game.price}"
-                   data-date="${game.created_at}"
-                   data-name="${game.title}">
+                <div class="game-card">
                     <div class="game-card-image">
                         <img src="${imagePath}" 
                              alt="${game.title}"
                              loading="lazy"
                              onerror="this.src='${defaultImage}'">
-                        <div class="game-card-overlay">
-                            <div class="overlay-content">
-                                <span class="view-details">XEM CHI TIẾT</span>
-                            </div>
-                        </div>
                     </div>
                     <div class="game-card-info">
                         <div class="game-card-header">
@@ -302,9 +292,10 @@ document.addEventListener('DOMContentLoaded', function() {
                             </div>
                             <div class="game-price">${Number(game.price).toLocaleString()} VNĐ</div>
                         </div>
+                        <a href="/Baygorn1/game/game-detail?id=${game.game_id}" class="btn btn-outline">CHI TIẾT</a>
                         <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="${game.game_id}">THÊM VÀO GIỎ HÀNG</button>
                     </div>
-                </a>
+                </div>
             `;
         }).join('');
     }
