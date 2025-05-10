@@ -9,8 +9,6 @@
                     <th>Image</th>
                     <th>Product</th>
                     <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Subtotal</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -30,14 +28,6 @@
                         </td>
                         <td><?php echo htmlspecialchars($item['title']); ?></td>
                         <td><?php echo number_format($item['price'], 2); ?> $</td>
-                        <td>
-                            <form method="POST" action="/Baygorn1/index.php?url=cart/update">
-                                <input type="hidden" name="cart_item_id" value="<?php echo $item['cart_item_id']; ?>">
-                                <input type="number" name="quantity" value="<?php echo $item['quantity']; ?>" min="1" class="quantity-input">
-                                <button type="submit" class="update-btn">Update</button>
-                            </form>
-                        </td>
-                        <td><?php echo number_format($item['price'] * $item['quantity'], 2); ?> $</td>
                         <td>
                             <form method="POST" action="/Baygorn1/index.php?url=cart/remove">
                                 <input type="hidden" name="cart_item_id" value="<?php echo $item['cart_item_id']; ?>">

@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 }
@@ -85,9 +86,14 @@ require_once ROOT_PATH . '/view/layout/header.php';
                     <i class="fas fa-tag"></i>
                     <span><?php echo number_format($game['price']); ?> VNĐ</span>
                 </div>
-                <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="buy-button">
-                    MUA NGAY
-                </a>
+                <div class="action-buttons">
+                    <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="buy-button">
+                        MUA NGAY
+                    </a>
+                    <button onclick="addToCart(<?php echo $game['game_id']; ?>)" class="cart-button">
+                        <i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -124,5 +130,53 @@ require_once ROOT_PATH . '/view/layout/header.php';
     <!-- Footer -->
     <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    function addToCart(gameId) {
+        Swal.fire({
+            title: 'Đang xử lý...',
+            text: 'Vui lòng đợi trong giây lát',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        fetch('/Baygorn1/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'game_id=' + gameId
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Thành công!',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: data.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Lỗi!',
+                text: 'Có lỗi xảy ra khi thêm vào giỏ hàng',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    }
+    </script>
 </body>
 </html> 

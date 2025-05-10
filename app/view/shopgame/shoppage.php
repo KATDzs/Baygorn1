@@ -113,7 +113,57 @@ $config = require_once __DIR__ . '/../../../config.php';
 <div id="toast" class="toast-notification"></div>
 
 <link rel="stylesheet" href="/Baygorn1/asset/css/shoppage.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 window.SHOPGAMES_DATA = <?php echo json_encode(array_values($games), JSON_UNESCAPED_UNICODE); ?>;
+
+document.querySelectorAll('.btn-add-cart').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+        var gameId = this.getAttribute('data-game-id');
+        Swal.fire({
+            title: 'Đang xử lý...',
+            text: 'Vui lòng đợi trong giây lát',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        fetch('/Baygorn1/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'game_id=' + gameId
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Thành công!',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: data.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Lỗi!',
+                text: 'Có lỗi xảy ra khi thêm vào giỏ hàng',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    });
+});
 </script>
 <script src="/Baygorn1/asset/js/shoppage.js"></script>
