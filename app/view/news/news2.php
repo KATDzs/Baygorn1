@@ -19,13 +19,13 @@ require_once ROOT_PATH . '/view/layout/header.php';
     <link rel="stylesheet" href="../asset/css/newstyle.css">
 </head>
 <body>
-    <main class="news-content">
-        <article class="news-article">
-            <h1>Brainrot Evolution - Khi Roblox không còn là chính nó</h1>
-            <p class="news-date">Ngày 26 tháng 4 năm 2025</p>
+    <main class="news-content container my-5">
+        <article class="news-article card p-4 shadow-lg">
+            <h1 class="mb-3">Brainrot Evolution - Khi Roblox không còn là chính nó</h1>
+            <p class="news-date text-muted">Ngày 26 tháng 4 năm 2025</p>
             <p class="news-intro">Brainrot Evolution đang gây bão trong cộng đồng Roblox, thổi bùng làn sóng meme hóa, sáng tạo nội dung điên rồ và cả... những cuộc tranh cãi nảy lửa. Cùng khám phá hiện tượng thú vị (và hơi hỗn loạn) này!</p>
 
-            <section class="news-section">
+            <section class="news-section mt-4">
                 <h2>🧠 Brainrot Evolution là gì?</h2>
                 <p>Brainrot Evolution là tên gọi không chính thức cho phong trào sáng tạo nội dung Roblox "dị", "bất chấp logic", và đôi khi cực kỳ vô nghĩa. Các trò chơi, meme, video TikTok theo phong cách Brainrot thường có đặc trưng như:</p>
                 <ul>
@@ -37,7 +37,7 @@ require_once ROOT_PATH . '/view/layout/header.php';
                 <p><strong>✅ Vì sao hot?</strong> Brainrot tạo cảm giác mới lạ, giải trí nhẹ nhàng và dễ dàng viral trên mạng xã hội.</p>
             </section>
 
-            <section class="news-section">
+            <section class="news-section mt-4">
                 <h2>🔥 Những trò chơi Brainrot nổi bật</h2>
                 <h3>🐸 Skibidi Toilet Evolution</h3>
                 <p>Trò chơi lấy cảm hứng từ meme Skibidi Toilet, nơi người chơi... chiến đấu cùng toilet có đầu người trong bối cảnh kỳ quái.</p>
@@ -49,7 +49,7 @@ require_once ROOT_PATH . '/view/layout/header.php';
                 <p>Game PvP mà vũ khí chính là... tiếng hét, tiếng meme Internet, và những đoạn âm thanh hỗn loạn.</p>
             </section>
 
-            <section class="news-section">
+            <section class="news-section mt-4">
                 <h2>📈 Tác động đến cộng đồng Roblox</h2>
                 <ul>
                     <li>Giới trẻ đổ xô tạo game "nhảm nhưng vui".</li>
@@ -60,7 +60,7 @@ require_once ROOT_PATH . '/view/layout/header.php';
                 <p><strong>✅ Kết quả:</strong> Brainrot vừa thổi luồng gió mới cho Roblox, vừa làm dấy lên câu hỏi về hướng đi lâu dài của nền tảng này.</p>
             </section>
 
-            <section class="news-section">
+            <section class="news-section mt-4">
                 <h2>🔮 Tương lai nào cho Brainrot Evolution?</h2>
                 <p>Một số dự đoán cho xu hướng này:</p>
                 <ul>

@@ -25,29 +25,32 @@ if (!isset($latestNews)) $latestNews = [];
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main>
+  <main class="container-fluid px-0">
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero row gx-0">
       <div class="overlay"></div>
-      <div class="hero-content">
-        <h1 class="hero-title">Hãy ngước nhìn lên những Tinh Tú Thăng Hoa</h1>
-        <p class="hero-subtitle">Kiếm tìm và chiến đấu cho huyền thoại đích thực của bạn từ ngày 17/04!</p>
+      <div class="hero-content col-12 col-md-10 mx-auto">
+        <h1 class="hero-title">Chào mừng đến với Baygorn – Thế giới game trong tầm tay bạn!</h1>
+        <p class="hero-subtitle">Khám phá, cập nhật và sở hữu những tựa game hot nhất ngay hôm nay!</p>
       </div>
     </section>
 
     <!-- News Section -->
-    <section class="news-section">
-      <div class="section-header">
-        <h1 class="section-title">Chuyện gì đang xảy ra vậy?</h1>
-        <a href="/Baygorn1/news" class="view-all-btn">
-          Xem tất cả
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-            <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
-          </svg>
-        </a>
+    <section class="news-section container my-5">
+      <div class="section-header row align-items-center mb-4">
+        <div class="col">
+          <h1 class="section-title">Chuyện gì đang xảy ra vậy?</h1>
+        </div>
+        <div class="col-auto">
+          <a href="/Baygorn1/news" class="btn btn-danger view-all-btn d-flex align-items-center gap-2">
+            Xem tất cả
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+              <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
       </div>
-
-      <div class="news-grid">
+      <div class="news-grid row g-4">
         <?php
         $news = [
             [
@@ -83,10 +86,10 @@ if (!isset($latestNews)) $latestNews = [];
         ];
         ?>
         <!-- Main Left Block -->
-        <div class="featured-news">
+        <div class="featured-news col-12 col-lg-8">
           <a href="<?php echo $news[0]['link']; ?>" class="news-link">
             <div class="news-image">
-              <img src="<?php echo $news[0]['img']; ?>" alt="<?php echo htmlspecialchars($news[0]['title']); ?>">
+              <img src="<?php echo $news[0]['img']; ?>" alt="<?php echo htmlspecialchars($news[0]['title']); ?>" class="img-fluid rounded">
             </div>
             <div class="news-overlay">
               <div class="news-content">
@@ -99,16 +102,19 @@ if (!isset($latestNews)) $latestNews = [];
         </div>
 
         <!-- Right Column -->
-        <div class="news-list">
+        <div class="news-list col-12 col-lg-4 d-flex flex-column gap-4">
           <?php for($i = 1; $i < count($news); $i++): ?>
-            <a href="<?php echo $news[$i]['link']; ?>" class="news-item">
-              <div class="news-item-image">
-                <img src="<?php echo $news[$i]['img']; ?>" alt="<?php echo htmlspecialchars($news[$i]['title']); ?>">
+            <a href="<?php echo $news[$i]['link']; ?>" class="news-item d-flex flex-row align-items-center bg-dark rounded-4 p-3 gap-3 shadow-sm h-100" style="min-height:110px;">
+              <div class="news-item-image flex-shrink-0 rounded-3 overflow-hidden" style="width:110px; height:70px; background:#222; display:flex; align-items:center; justify-content:center;">
+                <img src="<?php echo $news[$i]['img']; ?>" alt="<?php echo htmlspecialchars($news[$i]['title']); ?>" class="img-fluid w-100 h-100 object-fit-cover">
               </div>
-              <div class="news-item-content">
-                <h3><?php echo htmlspecialchars($news[$i]['title']); ?></h3>
-                <p class="news-description"><?php echo htmlspecialchars($news[$i]['description']); ?></p>
-                <span class="news-item-tag">TIN TỨC</span>
+              <div class="news-item-content flex-grow-1 d-flex flex-column justify-content-center">
+                <div class="fw-bold text-white mb-1 text-truncate" style="font-size:1.1rem; max-width:220px;">
+                  <?php echo htmlspecialchars($news[$i]['title']); ?>
+                </div>
+                <div class="d-flex align-items-center gap-2 mt-1">
+                  <span class="news-item-tag text-secondary small fw-semibold">TIN TỨC</span>
+                </div>
               </div>
             </a>
           <?php endfor; ?>
@@ -117,24 +123,28 @@ if (!isset($latestNews)) $latestNews = [];
     </section>
 
     <!-- Games Section -->
-    <section class="games-section">
+    <section class="games-section container my-5">
       <div class="content-wrapper">
-        <div class="section-header">
-          <h2 class="section-title">Trò chơi của chúng tôi</h2>
-          <a href="/Baygorn1/game" class="view-all-btn">
-            Xem tất cả
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
-            </svg>
-          </a>
+        <div class="section-header row align-items-center mb-4">
+          <div class="col">
+            <h2 class="section-title">Trò chơi của chúng tôi</h2>
+          </div>
+          <div class="col-auto">
+            <a href="/Baygorn1/game" class="btn btn-outline-danger view-all-btn d-flex align-items-center gap-2">
+              Xem tất cả
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="20" height="20">
+                <path fill-rule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </div>
         </div>
 
-        <div class="games-grid">
+        <div class="games-grid row g-4">
           <?php if (!empty($latestGames)): ?>
             <?php foreach($latestGames as $game): ?>
-              <a href="/Baygorn1/app/view/game/game-detail.php?id=<?php echo htmlspecialchars($game['game_id']); ?>" class="game-card">
+              <a href="/Baygorn1/app/view/game/game-detail.php?id=<?php echo htmlspecialchars($game['game_id']); ?>" class="game-card col-12 col-md-6 col-lg-4">
                 <div class="game-image">
-                  <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($game['image_url']); ?>" alt="<?php echo htmlspecialchars($game['title']); ?>">
+                  <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($game['image_url']); ?>" alt="<?php echo htmlspecialchars($game['title']); ?>" class="img-fluid rounded">
                 </div>
                 <div class="game-overlay">
                   <div class="game-content">

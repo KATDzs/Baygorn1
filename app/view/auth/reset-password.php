@@ -1,10 +1,9 @@
 <?php require_once 'app/view/layouts/header.php'; ?>
-
-<div class="container mt-5">
+<div class="container py-5">
     <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header">
+        <div class="col-12 col-md-6">
+            <div class="card shadow">
+                <div class="card-header bg-danger text-white">
                     <h4 class="mb-0">Đặt lại mật khẩu</h4>
                 </div>
                 <div class="card-body">
@@ -17,10 +16,8 @@
                             </ul>
                         </div>
                     <?php endif; ?>
-
                     <form method="POST" action="/auth/reset-password?token=<?php echo htmlspecialchars($token); ?>">
                         <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
-                        
                         <div class="form-group mb-3">
                             <label for="password">Mật khẩu mới</label>
                             <input type="password" class="form-control" id="password" name="password" required 
@@ -30,17 +27,14 @@
                                 Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt
                             </small>
                         </div>
-
                         <div class="form-group mb-3">
                             <label for="password_confirm">Xác nhận mật khẩu mới</label>
                             <input type="password" class="form-control" id="password_confirm" name="password_confirm" required>
                         </div>
-
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-primary">Đặt lại mật khẩu</button>
+                            <button type="submit" class="btn btn-danger">Đặt lại mật khẩu</button>
                         </div>
                     </form>
-
                     <div class="mt-3 text-center">
                         <a href="/auth/login">Quay lại đăng nhập</a>
                     </div>
@@ -49,7 +43,4 @@
         </div>
     </div>
 </div>
-
-<script src="/Baygorn1/asset/js/auth-reset-password.js"></script>
-
 <?php require_once 'app/view/layouts/footer.php'; ?>

@@ -18,6 +18,9 @@
         <link rel="stylesheet" href="/Baygorn1/asset/css/header-admin.css">
     <?php endif; ?>
     
+    <!-- Bootstrap CSS (fix integrity error by removing integrity & crossorigin) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/Baygorn1/asset/img/logo.png">
     
@@ -93,5 +96,8 @@
     <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
         <script src="/Baygorn1/asset/js/header-admin.js"></script>
     <?php endif; ?>
+    
+    <!-- Bootstrap Bundle JS (fix integrity error by removing integrity & crossorigin) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

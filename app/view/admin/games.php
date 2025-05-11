@@ -6,10 +6,11 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
 ?>
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin.css">
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin-games.css">
-<main class="admin-games">
-    <h1>Quản lý game</h1>
-    <table>
-        <thead>
+<main class="admin-games container my-5">
+    <h1 class="mb-4">Quản lý game</h1>
+    <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
             <tr>
                 <th>ID</th>
                 <th>Tên game</th>
@@ -27,8 +28,8 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
                         <td><?= number_format($game['price']) ?> VNĐ</td>
                         <td><?= $game['stock'] ?></td>
                         <td>
-                            <a href="/Baygorn1/index.php?url=admin/editGame/<?= $game['game_id'] ?? $game['id'] ?>" class="action-btn">Sửa</a>
-                            <a href="/Baygorn1/index.php?url=admin/deleteGame/<?= $game['game_id'] ?? $game['id'] ?>" class="action-btn" onclick="return confirm('Bạn có chắc muốn xóa game này?')">Xóa</a>
+                            <a href="/Baygorn1/index.php?url=admin/editGame/<?= $game['game_id'] ?? $game['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>
+                            <a href="/Baygorn1/index.php?url=admin/deleteGame/<?= $game['game_id'] ?? $game['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Bạn có chắc muốn xóa game này?')">Xóa</a>
                         </td>
                     </tr>
                 <?php endforeach; ?>
@@ -37,5 +38,6 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
 </main>
 <?php require_once ROOT_PATH . '/app/view/layout/footer.php'; ?>

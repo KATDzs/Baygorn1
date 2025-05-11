@@ -19,13 +19,13 @@ require_once ROOT_PATH . '/view/layout/header.php';
     <link rel="stylesheet" href="../asset/css/newstyle.css">
 </head>
 <body>
-    <main class="news-content">
-        <article class="news-article">
-            <h1>ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll</h1>
-            <p class="news-date">16/04/2025</p>
+    <main class="news-content container my-5">
+        <article class="news-article card p-4 shadow-lg">
+            <h1 class="mb-3">ĐTCL 14.2: Cân Bằng Meta, Hack bị điều chỉnh và buff tướng reroll</h1>
+            <p class="news-date text-muted">16/04/2025</p>
             <p class="news-intro">Bản cập nhật 14.2 mang tính cân bằng cao, với trọng tâm là giảm sức mạnh Hack, buff chiến thuật reroll và tăng tính ổn định cho meta Thành Phố Công Nghệ. Ngoài ra, còn có nhiều thay đổi lớn liên quan đến các tướng, trang bị, và các cơ chế trong trò chơi giúp thay đổi phong cách chơi và tăng tính chiến thuật trong các trận đấu.</p>
 
-            <section class="news-section">
+            <section class="news-section mt-4">
                 <h2>🔧 Cơ chế Hack và Kho Vũ Khí</h2>
                 <p>Bản cập nhật 14.2 tập trung vào việc điều chỉnh cơ chế Hack, giảm đi sự bá đạo của nó và tăng cường tính công bằng cho mọi người chơi. Bên cạnh đó, Kho Vũ Khí cũng được làm mới để mang đến sự thay đổi thú vị trong các lựa chọn của người chơi.</p>
                 <ul>

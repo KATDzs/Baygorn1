@@ -19,13 +19,13 @@ require_once ROOT_PATH . '/view/layout/header.php';
     <link rel="stylesheet" href="../asset/css/newstyle.css">
 </head>
 <body>
-    <main class="news-content">
-        <article class="news-article">
-            <h1>Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!</h1>
-            <p class="news-date">Ngày 25 tháng 3 năm 2025</p>
+    <main class="news-content container my-5">
+        <article class="news-article card p-4 shadow-lg">
+            <h1 class="mb-3">Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!</h1>
+            <p class="news-date text-muted">Ngày 25 tháng 3 năm 2025</p>
             <p class="news-intro">Mojang đã phát hành bản cập nhật Minecraft Java Edition 1.21.5 với tên gọi "Spring to Life" - bản cập nhật mùa xuân đầu tiên của năm, mang đến nhiều thay đổi hấp dẫn về sinh vật, thực vật và âm thanh môi trường, giúp thế giới Minecraft trở nên sống động và chân thực hơn bao giờ hết.</p>
             
-            <section class="news-section">
+            <section class="news-section mt-4">
                 <h2>🌿 Những điểm nổi bật trong bản cập nhật</h2>
                 
                 <h3>🐄 Biến thể động vật theo vùng khí hậu</h3>

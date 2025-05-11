@@ -7,10 +7,12 @@
     <link rel="stylesheet" href="/Baygorn1/asset/css/404.css">
 </head>
 <body>
-    <div class="error-container">
-        <h1>500</h1>
-        <h2>loi may chu</h2>
-        <a href="/Baygorn1/home" class="back-btn">Trở về trang chủ</a>
+    <div class="container d-flex flex-column justify-content-center align-items-center vh-100">
+        <div class="error-container text-center">
+            <h1 class="display-1">500</h1>
+            <h2 class="mb-3">Lỗi máy chủ</h2>
+            <a href="/Baygorn1/home" class="back-btn btn btn-danger">Trở về trang chủ</a>
+        </div>
     </div>
 </body>
 </html>

@@ -57,28 +57,36 @@
     ];
     ?>
 
-    <main class="tin-tuc">
-        <h2>Tin tức</h2>
+    <main class="tin-tuc container my-5">
+        <h2 class="mb-4">Tin tức</h2>
 
-        <div class="slider-wrapper">
-            <button class="nav-button prev-button" onclick="scrollSlider(-1)" aria-label="Previous slide">❮</button>
-            <div class="slider-container" id="slider">
-                <?php foreach ($news as $item): ?>
-                    <a href="<?= htmlspecialchars($item['link']) ?>" class="news-card">
-                        <img src="<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['title']) ?>" loading="lazy">
-                        <div class="news-content">
-                            <h3><?= htmlspecialchars($item['title']) ?></h3>
-                            <p><?= htmlspecialchars($item['description']) ?></p>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
+        <div class="slider-wrapper row align-items-center mb-4">
+            <div class="col-auto">
+                <button class="nav-button prev-button btn btn-light" onclick="scrollSlider(-1)" aria-label="Previous slide">&#x276e;</button>
             </div>
-            <button class="nav-button next-button" onclick="scrollSlider(1)" aria-label="Next slide">❯</button>
+            <div class="slider-container col px-0" id="slider">
+                <div class="row row-cols-1 row-cols-md-3 g-3">
+                    <?php foreach ($news as $item): ?>
+                        <div class="col">
+                            <a href="<?= htmlspecialchars($item['link']) ?>" class="news-card card h-100">
+                                <img src="<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['title']) ?>" loading="lazy" class="card-img-top">
+                                <div class="news-content card-body">
+                                    <h3 class="card-title h5"><?= htmlspecialchars($item['title']) ?></h3>
+                                    <p class="card-text"><?= htmlspecialchars($item['description']) ?></p>
+                                </div>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+            </div>
+            <div class="col-auto">
+                <button class="nav-button next-button btn btn-light" onclick="scrollSlider(1)" aria-label="Next slide">&#x276f;</button>
+            </div>
         </div>
         
-        <div class="dots" id="dots" role="tablist">
+        <div class="dots d-flex justify-content-center gap-2 mb-4" id="dots" role="tablist">
             <?php foreach ($news as $index => $item): ?>
-                <button class="dot <?= $index === 0 ? 'active' : '' ?>" onclick="goToSlide(<?= $index ?>)" role="tab" aria-label="Go to slide <?= $index + 1 ?>"></button>
+                <button class="dot btn btn-sm <?= $index === 0 ? 'active btn-danger' : 'btn-outline-secondary' ?>" onclick="goToSlide(<?= $index ?>)" role="tab" aria-label="Go to slide <?= $index + 1 ?>"></button>
             <?php endforeach; ?>
         </div>
     </main>

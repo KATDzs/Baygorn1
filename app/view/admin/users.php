@@ -6,10 +6,11 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
 ?>
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin.css">
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin-users.css">
-<main class="admin-users">
-    <h1>Quản lý người dùng</h1>
-    <table>
-        <thead>
+<main class="admin-users container my-5">
+    <h1 class="mb-4">Quản lý người dùng</h1>
+    <div class="table-responsive">
+    <table class="table table-bordered align-middle">
+        <thead class="table-light">
             <tr>
                 <th>ID</th>
                 <th>Tên đăng nhập</th>
@@ -26,7 +27,7 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
                         <td><?= $user['username'] ?></td>
                         <td><?= $user['email'] ?></td>
                         <td><?= $user['full_name'] ?></td>
-                        <td><?= $user['is_admin'] ? '<span style="color:#f6e58d;font-weight:bold">Admin</span>' : 'User' ?></td>
+                        <td><?= $user['is_admin'] ? '<span class="badge bg-warning text-dark">Admin</span>' : 'User' ?></td>
                     </tr>
                 <?php endforeach; ?>
             <?php else: ?>
@@ -34,5 +35,6 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
             <?php endif; ?>
         </tbody>
     </table>
+    </div>
 </main>
 <?php require_once ROOT_PATH . '/app/view/layout/footer.php'; ?>
