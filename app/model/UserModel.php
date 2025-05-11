@@ -86,17 +86,19 @@ class UserModel {
 
     public function updateUser($id, $data) {
         $query = "UPDATE users SET 
-                 username = ?,
                  email = ?,
-                 role = ?,
+                 fullname = ?,
+                 phone = ?,
+                 address = ?,
                  modified_at = NOW()
                  WHERE user_id = ?";
                  
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "sssi",
-            $data['username'],
+        mysqli_stmt_bind_param($stmt, "ssssi",
             $data['email'],
-            $data['role'],
+            $data['fullname'],
+            $data['phone'],
+            $data['address'],
             $id
         );
         
@@ -105,14 +107,14 @@ class UserModel {
         return $success;
     }
 
-    public function updatePassword($id, $password) {
+    public function updatePassword($id, $password_hash) {
         $query = "UPDATE users SET 
-                 password = ?,
+                 password_hash = ?,
                  modified_at = NOW()
                  WHERE user_id = ?";
                  
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "si", $password, $id);
+        mysqli_stmt_bind_param($stmt, "si", $password_hash, $id);
         $success = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         return $success;

@@ -210,76 +210,126 @@ class AuthController extends BaseController {
         $this->requireLogin();
 
         try {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                // Validate CSRF token
-                $this->validateCSRF($_POST['csrf_token'] ?? '');
-
-                // Validate input
-                $rules = [
-                    'email' => ['required', 'email'],
-                    'full_name' => ['required', 'min:2', 'max:100']
-                ];
-                
-                if (!empty($_POST['new_password'])) {
-                    $rules['current_password'] = ['required'];
-                    $rules['new_password'] = ['required', 'min:' . $this->passwordMinLength];
-                    $rules['password_confirm'] = ['required', 'same:new_password'];
-                }
-
-                if (!$this->validate($_POST, $rules)) {
-                    return $this->view('auth/profile', [
-                        'title' => 'Thông tin cá nhân',
-                        'css_files' => ['auth']
-                    ]);
-                }
-
-                // Begin transaction
-                $this->conn->begin_transaction();
-
-                try {
-                    $userData = [
-                        'email' => $this->sanitize($_POST['email']),
-                        'full_name' => $this->sanitize($_POST['full_name'])
-                    ];
-
-                    // Handle password change
-                    if (!empty($_POST['new_password'])) {
-                        if (!password_verify($_POST['current_password'], $this->user['password_hash'])) {
-                            $this->addError('current_password', 'Current password is incorrect');
-                            throw new Exception('Invalid current password');
-                }
-                
-                        if (!$this->validatePasswordStrength($_POST['new_password'])) {
-                            throw new Exception('Password does not meet requirements');
-                        }
-
-                        $userData['password_hash'] = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
-                    }
-
-                    // Update user
-                    $this->userModel->updateUser($this->user['id'], $userData);
-                    
-                    // Commit transaction
-                    $this->conn->commit();
-                    
-                    // Refresh user data
-                    $this->loadUser();
-                    
-                    $this->redirect('auth/profile', ['success' => 'Profile updated successfully']);
-                } catch (Exception $e) {
-                    $this->conn->rollback();
-                    throw $e;
-                }
-            }
+            // Get user data
+            $user = $this->userModel->getUserById($_SESSION['user_id']);
             
+            if (!$user) {
+                throw new Exception('User not found');
+            }
+
             $this->view('auth/profile', [
                 'title' => 'Thông tin cá nhân',
-                'css_files' => ['auth']
+                'css_files' => ['auth'],
+                'user' => $user
             ]);
         } catch (Exception $e) {
-            $this->logError('Profile update error', $e);
-            $this->error500();
+            $this->logError('Profile error', $e);
+            $_SESSION['message'] = 'Có lỗi xảy ra khi tải thông tin cá nhân';
+            $_SESSION['message_type'] = 'danger';
+            $this->redirect('home');
         }
+    }
+
+    public function update_profile() {
+        $this->requireLogin();
+
+        try {
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                throw new Exception('Invalid request method');
+            }
+
+            // Validate input
+            $rules = [
+                'email' => ['required', 'email'],
+                'fullname' => ['required', 'min:2', 'max:100'],
+                'phone' => ['optional', 'max:20'],
+                'address' => ['optional', 'max:255']
+            ];
+
+            if (!$this->validate($_POST, $rules)) {
+                throw new Exception('Invalid input data');
+            }
+
+            // Update user data
+            $userData = [
+                'email' => $this->sanitize($_POST['email']),
+                'fullname' => $this->sanitize($_POST['fullname']),
+                'phone' => $this->sanitize($_POST['phone'] ?? ''),
+                'address' => $this->sanitize($_POST['address'] ?? '')
+            ];
+
+            $result = $this->userModel->updateUser($_SESSION['user_id'], $userData);
+
+            if ($result) {
+                $_SESSION['message'] = 'Cập nhật thông tin thành công';
+                $_SESSION['message_type'] = 'success';
+            } else {
+                throw new Exception('Failed to update profile');
+            }
+
+        } catch (Exception $e) {
+            $this->logError('Update profile error', $e);
+            $_SESSION['message'] = 'Có lỗi xảy ra khi cập nhật thông tin';
+            $_SESSION['message_type'] = 'danger';
+        }
+
+        $this->redirect('auth/profile');
+    }
+
+    public function change_password() {
+        $this->requireLogin();
+
+        try {
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                throw new Exception('Invalid request method');
+            }
+
+            // Validate input
+            $rules = [
+                'current_password' => ['required'],
+                'new_password' => ['required', 'min:' . $this->passwordMinLength],
+                'confirm_password' => ['required', 'same:new_password']
+            ];
+
+            if (!$this->validate($_POST, $rules)) {
+                throw new Exception('Invalid input data');
+            }
+
+            // Get current user data
+            $user = $this->userModel->getUserById($_SESSION['user_id']);
+            
+            if (!$user) {
+                throw new Exception('User not found');
+            }
+
+            // Verify current password
+            if (!password_verify($_POST['current_password'], $user['password_hash'])) {
+                throw new Exception('Mật khẩu hiện tại không đúng');
+            }
+
+            // Validate new password strength
+            if (!$this->validatePasswordStrength($_POST['new_password'])) {
+                throw new Exception('Mật khẩu mới không đủ mạnh');
+            }
+
+            // Update password
+            $newPasswordHash = password_hash($_POST['new_password'], PASSWORD_DEFAULT);
+            $result = $this->userModel->updatePassword($_SESSION['user_id'], $newPasswordHash);
+
+            if ($result) {
+                $_SESSION['message'] = 'Đổi mật khẩu thành công';
+                $_SESSION['message_type'] = 'success';
+            } else {
+                throw new Exception('Failed to update password');
+            }
+
+        } catch (Exception $e) {
+            $this->logError('Change password error', $e);
+            $_SESSION['message'] = $e->getMessage();
+            $_SESSION['message_type'] = 'danger';
+        }
+
+        $this->redirect('auth/profile');
     }
 
     public function forgotPassword() {
