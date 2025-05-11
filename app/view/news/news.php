@@ -57,28 +57,28 @@
     ];
     ?>
 
-    <main class="tin-tuc">
-        <h2>Tin tức</h2>
+    <main class="tin-tuc container">
+        <h2 class="text-center mb-4">Tin tức</h2>
 
-        <div class="slider-wrapper">
-            <button class="nav-button prev-button" onclick="scrollSlider(-1)" aria-label="Previous slide">❮</button>
-            <div class="slider-container" id="slider">
+        <div class="slider-wrapper row flex-nowrap flex-md-wrap overflow-auto overflow-md-visible px-0 px-md-3">
+            <button class="nav-button prev-button col-auto align-self-center" onclick="scrollSlider(-1)" aria-label="Previous slide">❮</button>
+            <div class="slider-container d-flex flex-row flex-md-row gap-3 gap-md-4 col p-0" id="slider">
                 <?php foreach ($news as $item): ?>
-                    <a href="<?= htmlspecialchars($item['link']) ?>" class="news-card">
-                        <img src="<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['title']) ?>" loading="lazy">
-                        <div class="news-content">
-                            <h3><?= htmlspecialchars($item['title']) ?></h3>
-                            <p><?= htmlspecialchars($item['description']) ?></p>
+                    <a href="<?= htmlspecialchars($item['link']) ?>" class="news-card card border-0 shadow-sm mb-3 mb-md-0" style="min-width: 260px; max-width: 320px; flex: 0 0 80vw; flex-basis: 80vw; flex-grow: 0; flex-shrink: 0;">
+                        <img src="<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['title']) ?>" loading="lazy" class="card-img-top img-fluid rounded-top">
+                        <div class="news-content card-body p-3">
+                            <h3 class="card-title h6 mb-2 text-truncate"><?= htmlspecialchars($item['title']) ?></h3>
+                            <p class="card-text small text-secondary mb-0 text-truncate" style="max-height: 2.8em; overflow: hidden;"><?= htmlspecialchars($item['description']) ?></p>
                         </div>
                     </a>
                 <?php endforeach; ?>
             </div>
-            <button class="nav-button next-button" onclick="scrollSlider(1)" aria-label="Next slide">❯</button>
+            <button class="nav-button next-button col-auto align-self-center" onclick="scrollSlider(1)" aria-label="Next slide">❯</button>
         </div>
         
-        <div class="dots" id="dots" role="tablist">
+        <div class="dots d-flex justify-content-center mt-3" id="dots" role="tablist">
             <?php foreach ($news as $index => $item): ?>
-                <button class="dot <?= $index === 0 ? 'active' : '' ?>" onclick="goToSlide(<?= $index ?>)" role="tab" aria-label="Go to slide <?= $index + 1 ?>"></button>
+                <button class="dot <?= $index === 0 ? 'active' : '' ?> mx-1" onclick="goToSlide(<?= $index ?>)" role="tab" aria-label="Go to slide <?= $index + 1 ?>"></button>
             <?php endforeach; ?>
         </div>
     </main>
