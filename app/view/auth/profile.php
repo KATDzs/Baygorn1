@@ -1,3 +1,17 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BayGorn1 - Tin Tức</title>
+    <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
+    <link rel="stylesheet" href="/Baygorn1/asset/css/auth.css">
+    <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
 <?php
 // Ensure session is started
 if (session_status() === PHP_SESSION_NONE) {
@@ -10,84 +24,28 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Get user data from database
-$user_id = $_SESSION['user_id'];
-$query = "SELECT * FROM users WHERE id = ?";
-$stmt = $conn->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$user = $result->fetch_assoc();
-
 // Include header
-include_once BASE_PATH . '/app/view/layouts/header.php';
+include_once BASE_PATH . '/app/view/layout/header.php';
 ?>
+<link rel="stylesheet" href="<?php echo $config['baseURL']; ?>asset/css/auth.css">
 
-<div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="text-center">Thông tin cá nhân</h3>
-                </div>
-                <div class="card-body">
-                    <?php if (isset($_SESSION['message'])): ?>
-                        <div class="alert alert-<?php echo $_SESSION['message_type']; ?>">
-                            <?php 
-                                echo $_SESSION['message']; 
-                                unset($_SESSION['message']);
-                                unset($_SESSION['message_type']);
-                            ?>
-                        </div>
-                    <?php endif; ?>
-
-                    <form action="<?php echo $config['baseURL']; ?>auth/update_profile" method="POST">
-                        <div class="mb-3">
-                            <label for="username" class="form-label">Tên đăng nhập</label>
-                            <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($user['username']); ?>" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="fullname" class="form-label">Họ và tên</label>
-                            <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo htmlspecialchars($user['fullname']); ?>" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="phone" class="form-label">Số điện thoại</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo htmlspecialchars($user['phone']); ?>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="address" class="form-label">Địa chỉ</label>
-                            <textarea class="form-control" id="address" name="address" rows="3"><?php echo htmlspecialchars($user['address']); ?></textarea>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">Cập nhật thông tin</button>
-                        </div>
-                    </form>
-
-                    <hr>
-
-                    <h4 class="mt-4">Đổi mật khẩu</h4>
-                    <form action="<?php echo $config['baseURL']; ?>auth/change_password" method="POST">
-                        <div class="mb-3">
-                            <label for="current_password" class="form-label">Mật khẩu hiện tại</label>
-                            <input type="password" class="form-control" id="current_password" name="current_password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="new_password" class="form-label">Mật khẩu mới</label>
-                            <input type="password" class="form-control" id="new_password" name="new_password" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="confirm_password" class="form-label">Xác nhận mật khẩu mới</label>
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
-                        </div>
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-warning">Đổi mật khẩu</button>
-                        </div>
-                    </form>
-                </div>
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-card-header">
+            <h3 class="text-center" style="color:#ff4d4f;">Thông tin cá nhân</h3>
+        </div>
+        <div class="auth-card-body">
+            <div class="form-group mb-4">
+                <label class="form-label">Tên đăng nhập</label>
+                <div class="form-control" readonly><?php echo htmlspecialchars($user['username']); ?></div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="form-label">Email</label>
+                <div class="form-control" readonly><?php echo htmlspecialchars($user['email']); ?></div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="form-label">Họ và tên</label>
+                <div class="form-control" readonly><?php echo htmlspecialchars($user['full_name']); ?></div>
             </div>
         </div>
     </div>
@@ -95,5 +53,7 @@ include_once BASE_PATH . '/app/view/layouts/header.php';
 
 <?php
 // Include footer
-include_once BASE_PATH . '/app/view/layouts/footer.php';
+include_once BASE_PATH . '/app/view/layout/footer.php';
 ?> 
+</body>
+</html>

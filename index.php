@@ -66,7 +66,10 @@ $url = isset($_GET['url']) ? rtrim($_GET['url'], '/') : 'home';
 $urlArr = explode('/', $url);
 
 // Map special routes
-if ($urlArr[0] === 'shopgame') {
+if ($urlArr[0] === 'user' && isset($urlArr[1]) && $urlArr[1] === 'profile') {
+    $controllerName = 'Auth';
+    $action = 'profile';
+} else if ($urlArr[0] === 'shopgame') {
     $controllerName = 'Game';
 } else if ($urlArr[0] === 'about') {
     $controllerName = 'Home';
@@ -75,7 +78,7 @@ if ($urlArr[0] === 'shopgame') {
     $controllerName = ucfirst($urlArr[0]);
 }
 
-$action = isset($urlArr[1]) && $urlArr[0] !== 'about' ? $urlArr[1] : ($urlArr[0] === 'about' ? 'about' : 'index');
+$action = isset($action) ? $action : (isset($urlArr[1]) && $urlArr[0] !== 'about' ? $urlArr[1] : ($urlArr[0] === 'about' ? 'about' : 'index'));
 
 // Clean parameters
 $params = array_slice($urlArr, 2);

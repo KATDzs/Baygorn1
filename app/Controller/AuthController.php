@@ -210,13 +210,14 @@ class AuthController extends BaseController {
         $this->requireLogin();
 
         try {
-            // Get user data
+            // Get user data from model
             $user = $this->userModel->getUserById($_SESSION['user_id']);
             
             if (!$user) {
                 throw new Exception('User not found');
             }
 
+            // Pass user data to view
             $this->view('auth/profile', [
                 'title' => 'Thông tin cá nhân',
                 'css_files' => ['auth'],

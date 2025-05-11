@@ -38,3 +38,6 @@ RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
 
 # Chuyển hướng / đến /home
 RewriteRule ^$ home [L,R=301]
+
+# Rewrite đẹp cho trang profile user
+RewriteRule ^user/profile$ index.php?url=user/profile [QSA,L]

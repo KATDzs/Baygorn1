@@ -119,4 +119,71 @@
     color: #ccc;
     font-size: 12px;
     margin-top: 5px;
+}
+
+/* Profile card chỉnh nhỏ lại và căn giữa */
+.auth-container {
+    margin-top: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 60vh;
+}
+.auth-card {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 auto;
+    background: #1f1f1f;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.3);
+    padding: 30px 24px;
+}
+.auth-card-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+.auth-card-header h3 {
+    color: #ff4d4f;
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+.auth-card-body {
+    padding: 0;
+}
+.form-group {
+    margin-bottom: 18px;
+}
+.form-label {
+    color: #fff;
+    margin-bottom: 6px;
+    font-size: 15px;
+    display: block;
+}
+.form-control[readonly], .form-control {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #333;
+    border-radius: 5px;
+    background: #2f2f2f;
+    color: #fff;
+    font-size: 15px;
+    margin: 0 auto;
+    min-height: 36px;
+    box-sizing: border-box;
+}
+@media screen and (max-width: 768px) {
+    .auth-container {
+        margin-top: 90px;
+    }
+    .auth-card {
+        padding: 18px 6px;
+    }
+    .auth-card-header h3 {
+        font-size: 20px;
+    }
+    .form-control[readonly], .form-control {
+        font-size: 14px;
+        min-height: 32px;
+    }
 } 
