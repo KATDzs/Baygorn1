@@ -57,17 +57,16 @@ class CartController extends BaseController {
 
             // Accept both POST and GET for add-to-cart for compatibility
             $gameId = $_POST['game_id'] ?? $_GET['game_id'] ?? 0;
-            $quantity = $_POST['quantity'] ?? 1;
 
             if (!$gameId) {
                 // Return error if no game_id
                 $this->returnAddToCartResponse(false, 'No game selected');
             }
 
-            if ($this->cartModel->addToCart($userId, $gameId, $quantity)) {
+            if ($this->cartModel->addToCart($userId, $gameId)) {
                 $this->returnAddToCartResponse(true, 'Đã thêm vào giỏ hàng!');
             } else {
-                $this->returnAddToCartResponse(false, 'Thêm vào giỏ hàng thất bại!');
+                $this->returnAddToCartResponse(false, 'Bạn đã có game này trong giỏ hàng!');
             }
         } catch (Exception $e) {
             $this->returnAddToCartResponse(false, 'Đã xảy ra lỗi!');

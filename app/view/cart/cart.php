@@ -3,6 +3,7 @@
     <?php if (empty($cartItems)): ?>
         <p>Your cart is empty. <a href="/Baygorn1/game">Continue shopping</a>.</p>
     <?php else: ?>
+<<<<<<< HEAD
         <div class="table-responsive">
             <table class="cart-table table table-bordered align-middle">
                 <thead class="table-light">
@@ -13,6 +14,39 @@
                         <th>Quantity</th>
                         <th>Subtotal</th>
                         <th>Action</th>
+=======
+        <table class="cart-table">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($cartItems as $item): ?>
+                    <tr>
+                        <td>
+                            <?php
+                            $imgPath = $_SERVER['DOCUMENT_ROOT'] . '/Baygorn1/asset/img/games/' . $item['image_url'];
+                            $imgUrl = '/Baygorn1/asset/img/games/' . htmlspecialchars($item['image_url']);
+                            $defaultImg = '/Baygorn1/asset/img/default-game.jpg';
+                            if (!file_exists($imgPath) || empty($item['image_url'])) {
+                                $imgUrl = $defaultImg;
+                            }
+                            ?>
+                            <img src="<?php echo $imgUrl; ?>" alt="<?php echo htmlspecialchars($item['title']); ?>" class="cart-item-image">
+                        </td>
+                        <td><?php echo htmlspecialchars($item['title']); ?></td>
+                        <td><?php echo number_format($item['price'], 2); ?> $</td>
+                        <td>
+                            <form method="POST" action="/Baygorn1/index.php?url=cart/remove">
+                                <input type="hidden" name="cart_item_id" value="<?php echo $item['cart_item_id']; ?>">
+                                <button type="submit" class="remove-btn">Remove</button>
+                            </form>
+                        </td>
+>>>>>>> a505e27919b22f361f9048ae3f98a853e394c6e8
                     </tr>
                 </thead>
                 <tbody>

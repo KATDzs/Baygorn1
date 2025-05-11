@@ -1,4 +1,5 @@
 <?php
+session_start();
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 }
@@ -80,6 +81,7 @@ require_once ROOT_PATH . '/view/layout/header.php';
                     </a>
                 </div>
             </div>
+<<<<<<< HEAD
             <div class="col-12 col-lg-4">
                 <div class="game-details card p-3">
                     <h2 class="h5 mb-3">Thông tin chi tiết</h2>
@@ -109,6 +111,59 @@ require_once ROOT_PATH . '/view/layout/header.php';
                             <div class="detail-value"><?php echo htmlspecialchars($game['stock']); ?></div>
                         </div>
                     </div>
+=======
+
+            <div class="game-categories">
+                <?php foreach ($categories as $category): ?>
+                    <span class="category-tag"><?php echo htmlspecialchars(trim($category)); ?></span>
+                <?php endforeach; ?>
+            </div>
+
+            <p class="game-description"><?php echo nl2br(htmlspecialchars($game['detail_desc'])); ?></p>
+
+            <div class="game-actions">
+                <div class="price-tag">
+                    <i class="fas fa-tag"></i>
+                    <span><?php echo number_format($game['price']); ?> VNĐ</span>
+                </div>
+                <div class="action-buttons">
+                    <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="buy-button">
+                        MUA NGAY
+                    </a>
+                    <button onclick="addToCart(<?php echo $game['game_id']; ?>)" class="cart-button">
+                        <i class="fas fa-shopping-cart"></i> THÊM VÀO GIỎ HÀNG
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="game-details">
+            <h2>Thông tin chi tiết</h2>
+            <div class="details-grid">
+                <div class="detail-item">
+                    <div class="detail-label">Thể loại</div>
+                    <div class="detail-value"><?php echo htmlspecialchars(implode(', ', $categories)); ?></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Nền tảng</div>
+                    <div class="detail-value"><?php echo htmlspecialchars($game['platform']); ?></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Nhà phát hành</div>
+                    <div class="detail-value"><?php echo htmlspecialchars($meta['publisher'] ?? 'N/A'); ?></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Ngày phát hành</div>
+                    <div class="detail-value"><?php echo htmlspecialchars($meta['release_date'] ?? 'N/A'); ?></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Tình trạng</div>
+                    <div class="detail-value"><?php echo htmlspecialchars($game['status']); ?></div>
+                </div>
+                <div class="detail-item">
+                    <div class="detail-label">Số lượng còn lại</div>
+                    <div class="detail-value"><?php echo htmlspecialchars($game['stock']); ?></div>
+>>>>>>> a505e27919b22f361f9048ae3f98a853e394c6e8
                 </div>
             </div>
         </div>
@@ -116,5 +171,53 @@ require_once ROOT_PATH . '/view/layout/header.php';
     <!-- Footer -->
     <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
     <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    function addToCart(gameId) {
+        Swal.fire({
+            title: 'Đang xử lý...',
+            text: 'Vui lòng đợi trong giây lát',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
+
+        fetch('/Baygorn1/cart/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: 'game_id=' + gameId
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                Swal.fire({
+                    title: 'Thành công!',
+                    text: data.message,
+                    icon: 'success',
+                    confirmButtonText: 'OK'
+                });
+            } else {
+                Swal.fire({
+                    title: 'Lỗi!',
+                    text: data.message,
+                    icon: 'error',
+                    confirmButtonText: 'OK'
+                });
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            Swal.fire({
+                title: 'Lỗi!',
+                text: 'Có lỗi xảy ra khi thêm vào giỏ hàng',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        });
+    }
+    </script>
 </body>
 </html>
