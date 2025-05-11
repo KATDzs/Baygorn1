@@ -9,6 +9,22 @@ document.addEventListener('DOMContentLoaded', function() {
             dropdown.style.display = 'none';
         });
     }
+
+    // Đóng menu mobile khi bấm vào link
+    function closeMobileMenu() {
+        var mobileMenu = document.querySelector('.menu.menu-mobile');
+        if (mobileMenu) {
+            mobileMenu.style.display = 'none';
+            // Nếu bạn dùng toggle class để mở/đóng menu, hãy thay bằng:
+            // mobileMenu.classList.remove('menu-mobile-active');
+        }
+    }
+
+    // Gắn sự kiện cho tất cả link trong menu mobile
+    var mobileLinks = document.querySelectorAll('.menu.menu-mobile .menu-link');
+    mobileLinks.forEach(function(link) {
+        link.addEventListener('click', closeMobileMenu);
+    });
 });
 
 function toggleDropdown() {

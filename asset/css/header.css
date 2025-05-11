@@ -246,6 +246,25 @@
   cursor: pointer;
 }
 
+/*
+.admin-dropdown-mobile {
+  display: none;
+  position: absolute;
+  background: #232a36;
+  border-radius: 10px;
+  min-width: 200px;
+  top: 100%;
+  left: 0;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+  z-index: 1000;
+  padding-left: 0;
+  list-style: none;
+}
+.admin-dropdown-mobile.show {
+  display: block;
+}
+*/
+
 @keyframes fadeIn {
   from {
     opacity: 0;

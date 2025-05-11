@@ -1,11 +1,13 @@
 // Add smooth scrolling
-// ...existing code from <script> in home.php...
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    document.querySelector(this.getAttribute('href')).scrollIntoView({
-      behavior: 'smooth'
-    });
+    const href = this.getAttribute('href');
+    if (href && href.length > 1 && document.querySelector(href)) {
+      e.preventDefault();
+      document.querySelector(href).scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
   });
 });
 
