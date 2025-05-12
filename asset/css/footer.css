@@ -159,3 +159,30 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (min-width: 1025px) {
+  .container, .row, .col, [class^="col-"] {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
+  }
+  .navbar, .navbar-nav, .navbar-brand {
+    all: unset;
+  }
+  .btn {
+    all: unset;
+    display: inline-block;
+    padding: 10px 24px;
+    background: #e60012;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+  .btn:hover {
+    background: #b8000d;
+  }
+}

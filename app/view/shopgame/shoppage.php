@@ -1,4 +1,10 @@
 <?php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+}
+$css_files = ['shoppage', 'header', 'footer'];
+require_once ROOT_PATH . '/view/layout/header.php';
+
 // Get configuration
 $config = require_once __DIR__ . '/../../../config.php';
 ?>

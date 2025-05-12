@@ -2,14 +2,10 @@
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 }
-
-$title = 'BayGorn1 - Chi tiết tin tức';
-$css_files = ['news-detail'];
-
 require_once ROOT_PATH . '/view/layout/header.php';
 ?>
-
-<main class="news-content">
+<body>
+    <main class="news-content">
         <article class="news-article">
             <h1>I AM LEGION - Đế chế bóng tối trong thế giới số</h1>
             <p class="news-date">Ngày 28 tháng 4 năm 2025</p>
@@ -44,5 +40,6 @@ require_once ROOT_PATH . '/view/layout/header.php';
             </section>
         </article>
     </main>
-
-<?php require_once ROOT_PATH . '/view/layout/footer.php'; ?> 
+<?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
+</body>
+</html>

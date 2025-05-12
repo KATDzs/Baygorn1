@@ -675,6 +675,15 @@ main {
     }
 }
 
+@media (min-width: 1025px) {
+  .container, .row, .col, [class^="col-"] {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+    padding: 0 2rem !important;
+    box-sizing: border-box !important;
+  }
+}
+
 .toast-notification {
     visibility: hidden;
     min-width: 250px;

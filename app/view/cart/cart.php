@@ -1,3 +1,11 @@
+<?php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+}
+$css_files = ['cart', 'header', 'footer'];
+require_once ROOT_PATH . '/view/layout/header.php';
+?>
+
 <div class="cart-container">
     <h1>Your Cart</h1>
     <?php if (empty($cartItems)): ?>
