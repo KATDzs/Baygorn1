@@ -9,9 +9,8 @@
     background: #0f0f0f;
 }
 
-/* Shared styles for login and register containers */
-.login-container,
-.register-container {
+/* Login container styles */
+.login-container {
     max-width: 400px;
     width: 100%;
     margin: 40px auto;
@@ -26,52 +25,22 @@
     .main-content {
         padding-top: 64px; /* Adjusted for mobile navbar height */
     }
-    
-    .login-container,
-    .register-container {
+    .login-container {
         margin: 20px;
         padding: 20px;
     }
 }
 
-/* Shared title styles */
-.login-title,
-.register-title {
+/* Login title styles */
+.login-title {
     text-align: center;
     color: #ff4655;
     font-size: 24px;
     margin-bottom: 20px;
 }
 
-/* Form group styles */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
-    display: block;
-    color: #fff;
-    margin-bottom: 5px;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    background: #2f2f2f;
-    color: #fff;
-    font-size: 16px;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: #ff4655;
-}
-
 /* Button styles */
-.login-btn,
-.register-btn {
+.login-btn {
     width: 100%;
     padding: 12px;
     background: #ff4655;
@@ -83,107 +52,114 @@
     transition: background 0.3s;
 }
 
-.login-btn:hover,
-.register-btn:hover {
+.login-btn:hover {
     background: #ff2d3f;
 }
 
 /* Link styles */
-.register-link,
-.login-link {
+.register-link {
     text-align: center;
     margin-top: 20px;
     color: #ccc;
 }
 
-.register-link a,
-.login-link a {
+.register-link a {
     color: #ff4655;
     text-decoration: none;
 }
 
-.register-link a:hover,
-.login-link a:hover {
+.register-link a:hover {
     text-decoration: underline;
 }
 
-/* Error message styles */
-.error-message {
-    color: #ff4655;
-    text-align: center;
-    margin-bottom: 15px;
-}
-
-/* Password requirements hint */
-.password-requirements {
-    color: #ccc;
-    font-size: 12px;
-    margin-top: 5px;
-}
-
-/* Profile card chỉnh nhỏ lại và căn giữa */
-.auth-container {
-    margin-top: 130px;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    min-height: 60vh;
-}
-.auth-card {
-    max-width: 400px;
+/* Form control styles */
+.login-container .form-control,
+.main-content .form-control,
+.form-control {
     width: 100%;
-    margin: 0 auto;
-    background: #1f1f1f;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    padding: 30px 24px;
-}
-.auth-card-header {
-    text-align: center;
-    margin-bottom: 24px;
-}
-.auth-card-header h3 {
-    color: #ff4d4f;
-    font-size: 24px;
-    margin: 0;
-    text-align: center;
-}
-.auth-card-body {
-    padding: 0;
-}
-.form-group {
-    margin-bottom: 18px;
-}
-.form-label {
-    color: #fff;
-    margin-bottom: 6px;
-    font-size: 15px;
-    display: block;
-}
-.form-control[readonly], .form-control {
-    width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #333;
-    border-radius: 5px;
-    background: #2f2f2f;
-    color: #fff;
-    font-size: 15px;
+    padding: 10px 12px;
+    border: 1px solid #333 !important;
+    border-radius: 5px !important;
+    background: #2f2f2f !important;
+    color: #fff !important;
+    font-size: 16px;
     margin: 0 auto;
     min-height: 36px;
     box-sizing: border-box;
+    transition: border 0.2s;
 }
-@media screen and (max-width: 768px) {
-    .auth-container {
-        margin-top: 90px;
-    }
-    .auth-card {
-        padding: 18px 6px;
-    }
-    .auth-card-header h3 {
-        font-size: 20px;
-    }
-    .form-control[readonly], .form-control {
-        font-size: 14px;
-        min-height: 32px;
-    }
-} 
+
+.login-container .form-control:focus,
+.main-content .form-control:focus,
+.form-control:focus {
+    outline: none;
+    border-color: #ff4655 !important;
+}
+
+form input.form-control, form select.form-control, form textarea.form-control {
+    background: #23232b !important;
+    color: #fff !important;
+    border: 1.5px solid #ff4655 !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    transition: border 0.2s, box-shadow 0.2s;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+form input.form-control:focus, form select.form-control:focus, form textarea.form-control:focus {
+    outline: none !important;
+    border-color: #ff4655 !important;
+    box-shadow: 0 0 0 2px #ff465566 !important;
+    background: #23232b !important;
+    color: #fff !important;
+}
+
+@media (min-width: 1025px) {
+  form input.form-control, form select.form-control, form textarea.form-control {
+    background: #23232b !important;
+    color: #fff !important;
+    border: 1.5px solid #ff4655 !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+  }
+}
+
+input.form-control, select.form-control, textarea.form-control {
+    background: #23232b !important;
+    color: #fff !important;
+    border: 1.5px solid #ff4655 !important;
+    border-radius: 8px !important;
+    font-size: 16px !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+input.form-control:focus, select.form-control:focus, textarea.form-control:focus {
+    outline: none !important;
+    border-color: #ff4655 !important;
+    box-shadow: 0 0 0 2px #ff465566 !important;
+    background: #23232b !important;
+    color: #fff !important;
+}
+
+label, .form-label {
+    color: #fff !important;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+/* Làm mờ lưu ý dưới input */
+.form-group .form-text, .form-group .invalid-feedback, .form-group .text-muted, .form-text, .invalid-feedback, .text-muted, .password-requirements   {
+    color: #444 !important;
+    font-size: 0.97em;
+    font-weight: 400;
+    opacity: 0.6;
+    transition: color 0.2s;
+}

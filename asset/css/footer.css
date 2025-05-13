@@ -167,8 +167,7 @@
     padding: 0 24px !important;
     box-sizing: border-box !important;
   }
-  .navbar, .navbar-nav, .navbar-brand {
-    all: unset;
+
   }
   .btn {
     all: unset;

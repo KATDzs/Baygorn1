@@ -159,13 +159,15 @@ body {
   font-weight: 500;
 }
 
-.form-group input,
-.form-group select {
+.form-group input:not(.form-control),
+.form-group select:not(.form-control) {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  background: white;
+  color: #333;
 }
 
 .form-group input:focus,

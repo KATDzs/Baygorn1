@@ -8,15 +8,45 @@ body {
 
 
 .tin-tuc {
-    padding: 80px 20px 40px 20px;
-    max-width: 1200px;
-    margin: auto;
+    /* Đảm bảo padding-top luôn >= header (80px desktop/laptop, 64px tablet, 48px mobile) */
+    padding-top: 80px !important;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 0 !important;
     position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 1200px) {
+  .tin-tuc {
+    padding-top: 80px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tin-tuc {
+    padding-top: 64px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .tin-tuc {
+    padding-top: 64px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .tin-tuc {
+    padding-top: 48px !important;
+  }
 }
 
 .tin-tuc h2 {
-    margin-top: 0; /* Loại bỏ khoảng cách trên của tiêu đề */
-    padding-top: 0; /* Đảm bảo không có padding trên */
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    z-index: 2;
+    position: relative;
 }
 
 h2 {
@@ -130,6 +160,12 @@ h2 {
     background-color: #ff4655;
 }
 
+/* Xóa mọi margin-top, padding-top ở main, .container, .news-page để tránh cộng dồn */
+.news-page, main, .container, .container:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 @media (max-width: 600px) {
   .slider-container {
     gap: 0 !important;
@@ -152,4 +188,9 @@ h2 {
     padding: 0 20px !important;
     box-sizing: border-box !important;
   }
+}
+
+/* Đảm bảo header luôn nằm trên main */
+.navbar {
+  z-index: 1002 !important;
 }

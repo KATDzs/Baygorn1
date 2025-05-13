@@ -67,5 +67,17 @@ require_once ROOT_PATH . '/view/layout/header.php';
     </main>
 <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
 <script src="/Baygorn1/asset/js/news.js"></script>
+<script>
+function adjustNewsPadding() {
+  var header = document.querySelector('.navbar');
+  var newsMain = document.querySelector('.tin-tuc');
+  if (header && newsMain) {
+    var headerHeight = header.offsetHeight;
+    newsMain.style.paddingTop = headerHeight + 'px';
+  }
+}
+window.addEventListener('DOMContentLoaded', adjustNewsPadding);
+window.addEventListener('resize', adjustNewsPadding);
+</script>
 </body>
 </html>
