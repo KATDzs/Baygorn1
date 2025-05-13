@@ -76,3 +76,12 @@
     text-align: right;
     margin-top: 20px;
 }
+
+@media (min-width: 1025px) {
+  .container, .row, .col, [class^="col-"] {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+}

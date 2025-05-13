@@ -1,29 +1,10 @@
 <?php
-// No need to require files or initialize models here since it's handled by the controller
-
-// Define ROOT_PATH if not already defined
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 }
-
-// Check if variables are set
-if (!isset($latestGames)) $latestGames = [];
-if (!isset($latestNews)) $latestNews = [];
+$css_files = ['home', 'header', 'footer'];
+require_once ROOT_PATH . '/view/layout/header.php';
 ?>
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-  <meta charset="UTF-8">
-  <title>Trang chủ Riot Games Việt Nam</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Trang chủ chính thức của Riot Games Việt Nam">
-  <link rel="stylesheet" href="<?= $asset('css/home.css') ?>">
-  <link rel="stylesheet" href="<?= $asset('css/header.css') ?>">
-  <link rel="stylesheet" href="<?= $asset('css/footer.css') ?>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
 <body>
   <main>
     <!-- Hero Section -->
@@ -152,9 +133,6 @@ if (!isset($latestNews)) $latestNews = [];
       </div>
     </section>
   </main>
-
-  <?php include ROOT_PATH . '/view/layout/footer.php'; ?>
-
-  <script src="/Baygorn1/asset/js/home.js"></script>
+<?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
 </body>
 </html>

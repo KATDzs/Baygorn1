@@ -6,15 +6,50 @@ body {
 }
 
 .tin-tuc {
-    padding: 80px 20px 40px 20px;
-    max-width: 1200px;
-    margin: auto;
+    /* Đảm bảo padding-top luôn >= header (80px desktop/laptop, 64px tablet, 48px mobile) */
+    padding-top: 80px !important;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 0 !important;
     position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 1200px) {
+  .tin-tuc {
+    padding-top: 80px !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  .tin-tuc {
+    padding-top: 64px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .tin-tuc {
+    padding-top: 64px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .tin-tuc {
+    padding-top: 48px !important;
+  }
 }
 
 .tin-tuc h2 {
+<<<<<<< HEAD
     margin-top: 0;
     padding-top: 0;
+=======
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    z-index: 2;
+    position: relative;
+>>>>>>> 7fc5198345ee83885641959ea0d96ff15dd1de4b
 }
 
 h2 {
@@ -128,6 +163,12 @@ h2 {
     background-color: #ff4655;
 }
 
+/* Xóa mọi margin-top, padding-top ở main, .container, .news-page để tránh cộng dồn */
+.news-page, main, .container, .container:first-child {
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+}
+
 @media (max-width: 600px) {
     .slider-container {
         gap: 0 !important;
@@ -141,4 +182,18 @@ h2 {
         display: block !important;
         margin-top: 12px;
     }
+}
+
+@media (min-width: 1025px) {
+  .container, .row, .col, [class^="col-"] {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* Đảm bảo header luôn nằm trên main */
+.navbar {
+  z-index: 1002 !important;
 }

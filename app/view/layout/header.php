@@ -1,17 +1,19 @@
+<?php // Prevent headers already sent error
+// (No whitespace allowed before this tag)
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($title) ? $title : 'Shop Game' ?></title>
-    
-    <!-- Bootstrap CSS áp dụng cho mọi kích thước màn hình -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <!-- CSS ghi đè Bootstrap, đảm bảo load sau Bootstrap để ưu tiên -->
+    <!-- Bootstrap CSS chỉ áp dụng cho mobile/tablet: LUÔN load TRƯỚC custom CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" media="(max-width: 1024px)">
+    <!-- Custom CSS: luôn load SAU Bootstrap để ghi đè -->
     <link rel="stylesheet" href="/Baygorn1/asset/css/styles.css">
-    <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
     <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
     <link rel="stylesheet" href="/Baygorn1/asset/css/bootstrap-overwrite.css">
+    <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
     <?php if (isset($css_files) && is_array($css_files)): ?>
         <?php foreach ($css_files as $css): ?>
             <link rel="stylesheet" href="/Baygorn1/asset/css/<?= $css ?>.css">
@@ -20,11 +22,10 @@
     <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
         <link rel="stylesheet" href="/Baygorn1/asset/css/header-admin.css">
     <?php endif; ?>
-    
+    <!-- auth.css LUÔN cuối cùng để ghi đè mạnh nhất -->
+    <link rel="stylesheet" href="/Baygorn1/asset/css/auth.css">
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/Baygorn1/asset/img/logo.png">
-    
-
 </head>
 <body>
     <!-- Navigation -->

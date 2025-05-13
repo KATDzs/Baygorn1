@@ -37,92 +37,81 @@ $categories = explode(',', $game['categories']);
 // Decode meta information
 $meta = json_decode($game['meta'], true);
 
-// Thêm header
+// Set CSS files
+$css_files = ['game-detail', 'header', 'footer'];
+
+// Include header
 require_once ROOT_PATH . '/view/layout/header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($game['title']); ?> - Baygorn Game Shop</title>
-    <link rel="stylesheet" href="<?php echo $config['assets']; ?>css/style.css">
-    <link rel="stylesheet" href="<?php echo $config['assets']; ?>css/game-detail.css">
-</head>
-<body>
-    <!-- Header -->
-    <?php require_once ROOT_PATH . '/view/layout/header.php'; ?>
-    <div class="game-detail-container">
-        <div class="game-hero" style="background-image: url('<?php echo $config['assets']; ?>img/games/<?php echo htmlspecialchars($game['image_url']); ?>')">
-        </div>
+<div class="game-detail-container">
+    <div class="game-hero" style="background-image: url('<?php echo $config['assets']; ?>img/games/<?php echo htmlspecialchars($game['image_url']); ?>')">
+    </div>
 
-        <div class="game-info">
-            <h1 class="game-title"><?php echo htmlspecialchars($game['title']); ?></h1>
-            
-            <div class="game-meta">
-                <div class="meta-item">
-                    <i class="fas fa-desktop"></i> <?php echo htmlspecialchars($game['platform']); ?>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-calendar"></i> <?php echo htmlspecialchars($meta['release_date'] ?? 'N/A'); ?>
-                </div>
-                <div class="meta-item">
-                    <i class="fas fa-building"></i> <?php echo htmlspecialchars($meta['publisher'] ?? 'N/A'); ?>
-                </div>
+    <div class="game-info">
+        <h1 class="game-title"><?php echo htmlspecialchars($game['title']); ?></h1>
+        
+        <div class="game-meta">
+            <div class="meta-item">
+                <i class="fas fa-desktop"></i> <?php echo htmlspecialchars($game['platform']); ?>
             </div>
-
-            <div class="game-categories">
-                <?php foreach ($categories as $category): ?>
-                    <span class="category-tag"><?php echo htmlspecialchars(trim($category)); ?></span>
-                <?php endforeach; ?>
+            <div class="meta-item">
+                <i class="fas fa-calendar"></i> <?php echo htmlspecialchars($meta['release_date'] ?? 'N/A'); ?>
             </div>
-
-            <p class="game-description"><?php echo nl2br(htmlspecialchars($game['detail_desc'])); ?></p>
-
-            <div class="game-actions">
-                <div class="price-tag">
-                    <i class="fas fa-tag"></i>
-                    <span><?php echo number_format($game['price']); ?> VNĐ</span>
-                </div>
-                <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="buy-button">
-                    MUA NGAY
-                </a>
+            <div class="meta-item">
+                <i class="fas fa-building"></i> <?php echo htmlspecialchars($meta['publisher'] ?? 'N/A'); ?>
             </div>
         </div>
 
-        <div class="game-details">
-            <h2>Thông tin chi tiết</h2>
-            <div class="details-grid">
-                <div class="detail-item">
-                    <div class="detail-label">Thể loại</div>
-                    <div class="detail-value"><?php echo htmlspecialchars(implode(', ', $categories)); ?></div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Nền tảng</div>
-                    <div class="detail-value"><?php echo htmlspecialchars($game['platform']); ?></div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Nhà phát hành</div>
-                    <div class="detail-value"><?php echo htmlspecialchars($meta['publisher'] ?? 'N/A'); ?></div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Ngày phát hành</div>
-                    <div class="detail-value"><?php echo htmlspecialchars($meta['release_date'] ?? 'N/A'); ?></div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Tình trạng</div>
-                    <div class="detail-value"><?php echo htmlspecialchars($game['status']); ?></div>
-                </div>
-                <div class="detail-item">
-                    <div class="detail-label">Số lượng còn lại</div>
-                    <div class="detail-value"><?php echo htmlspecialchars($game['stock']); ?></div>
-                </div>
+        <div class="game-categories">
+            <?php foreach ($categories as $category): ?>
+                <span class="category-tag"><?php echo htmlspecialchars(trim($category)); ?></span>
+            <?php endforeach; ?>
+        </div>
+
+        <p class="game-description"><?php echo nl2br(htmlspecialchars($game['detail_desc'])); ?></p>
+
+        <div class="game-actions">
+            <div class="price-tag">
+                <i class="fas fa-tag"></i>
+                <span><?php echo number_format($game['price']); ?> VNĐ</span>
+            </div>
+            <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="buy-button">
+                MUA NGAY
+            </a>
+        </div>
+    </div>
+
+    <div class="game-details">
+        <h2>Thông tin chi tiết</h2>
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">Thể loại</div>
+                <div class="detail-value"><?php echo htmlspecialchars(implode(', ', $categories)); ?></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Nền tảng</div>
+                <div class="detail-value"><?php echo htmlspecialchars($game['platform']); ?></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Nhà phát hành</div>
+                <div class="detail-value"><?php echo htmlspecialchars($meta['publisher'] ?? 'N/A'); ?></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Ngày phát hành</div>
+                <div class="detail-value"><?php echo htmlspecialchars($meta['release_date'] ?? 'N/A'); ?></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Tình trạng</div>
+                <div class="detail-value"><?php echo htmlspecialchars($game['status']); ?></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">Số lượng còn lại</div>
+                <div class="detail-value"><?php echo htmlspecialchars($game['stock']); ?></div>
             </div>
         </div>
     </div>
-    <!-- Footer -->
-    <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
-    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>
-</body>
-</html> 
+</div>
+<!-- Footer -->
+<?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
+<script src="https://kit.fontawesome.com/your-font-awesome-kit.js"></script>

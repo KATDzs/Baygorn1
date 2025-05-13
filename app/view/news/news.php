@@ -1,29 +1,13 @@
-<!DOCTYPE html>
-<html lang="vi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BayGorn1 - Tin Tức</title>
-    <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
-    <link rel="stylesheet" href="/Baygorn1/asset/css/news.css">
-    <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-</head>
+<?php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+}
+$css_files = ['news', 'footer', 'header'];
+require_once ROOT_PATH . '/view/layout/header.php';
+?>
 <body>
     <?php
-    if (!defined('ROOT_PATH')) {
-        define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
-    }
-
-    // Set page title and CSS files
-    $title = 'BayGorn1 - Tin Tức';
-    $css_files = ['news', 'footer'];
-
-    require_once ROOT_PATH . '/view/layout/header.php';
-
-    $news = [
+     $news = [
         [
             'title' => 'Minecraft Spring Update',
             'description' => '​Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!​',
@@ -56,7 +40,6 @@
         ],
     ];
     ?>
-
     <main class="tin-tuc container">
         <h2 class="text-center mb-4">Tin tức</h2>
 
@@ -82,8 +65,19 @@
             <?php endforeach; ?>
         </div>
     </main>
-
-    <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
-    <script src="/Baygorn1/asset/js/news.js"></script>
+<?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
+<script src="/Baygorn1/asset/js/news.js"></script>
+<script>
+function adjustNewsPadding() {
+  var header = document.querySelector('.navbar');
+  var newsMain = document.querySelector('.tin-tuc');
+  if (header && newsMain) {
+    var headerHeight = header.offsetHeight;
+    newsMain.style.paddingTop = headerHeight + 'px';
+  }
+}
+window.addEventListener('DOMContentLoaded', adjustNewsPadding);
+window.addEventListener('resize', adjustNewsPadding);
+</script>
 </body>
 </html>

@@ -1,4 +1,9 @@
 <?php
+if (!defined('ROOT_PATH')) {
+    define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+}
+$css_files = ['about', 'header', 'footer'];
+require_once ROOT_PATH . '/view/layout/header.php';
 ?>
 
 <main class="about-page">
@@ -85,4 +90,4 @@
         </div>
     </section>
 </main>
-<script src="/Baygorn1/asset/js/about.js"></script>
+<?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>

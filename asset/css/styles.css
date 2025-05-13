@@ -159,13 +159,15 @@ body {
   font-weight: 500;
 }
 
-.form-group input,
-.form-group select {
+.form-group input:not(.form-control),
+.form-group select:not(.form-control) {
   width: 100%;
   padding: 12px;
   border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  background: white;
+  color: #333;
 }
 
 .form-group input:focus,
@@ -228,4 +230,29 @@ body {
 
 .game-detail {
     animation: fadeIn 0.5s ease-out;
+}
+
+/* Adjust priority for desktop/laptop */
+@media (min-width: 1025px) {
+  .container, .row, .col, [class^="col-"] {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 20px !important;
+    box-sizing: border-box !important;
+  }
+  .btn {
+    all: unset;
+    display: inline-block;
+    padding: 10px 24px;
+    background: #e60012;
+    color: #fff;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s;
+  }
+  .btn:hover {
+    background: #b8000d;
+  }
 }

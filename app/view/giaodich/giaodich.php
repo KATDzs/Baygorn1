@@ -1,29 +1,17 @@
 <?php
-// Define APP_ROOT if not already defined
 if (!defined('APP_ROOT')) {
     define('APP_ROOT', realpath(__DIR__ . '/../../../'));
 }
+$css_files = ['giaodich', 'header', 'footer'];
+require_once APP_ROOT . '/app/view/layout/header.php';
 
-// Include necessary files
 require_once APP_ROOT . '/app/Controller/GiaoDichController.php';
 require_once APP_ROOT . '/core/db_connection.php';
 
 $giaoDichController = new GiaoDichController($conn);
 $game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BayGorn1 - Mua game</title>
-  <link rel="stylesheet" href="/Baygorn1/asset/css/giaodich.css">
-  <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
-  <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
-</head>
-<body>
-    <?php include APP_ROOT . '/app/view/layout/header.php'; ?>
-  <div class="container">
+<div class="container">
     <div class="game-detail">
       <?php if ($game): ?>
         <img src="/Baygorn1/asset/img/<?php echo $game['image_url']; ?>" alt="<?php echo $game['title']; ?>" class="game-image">
@@ -40,7 +28,5 @@ $game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
         <p>Không tìm thấy game</p>
       <?php endif; ?>
     </div>
-  </div>
-  <?php include APP_ROOT . '/app/view/layout/footer.php'; ?>
-</body>
-</html>
+</div>
+<?php include APP_ROOT . '/app/view/layout/footer.php'; ?>

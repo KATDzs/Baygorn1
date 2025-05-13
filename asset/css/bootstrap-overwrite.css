@@ -12,14 +12,33 @@
     margin-right: unset !important;
     box-sizing: border-box !important;
   }
-  /* Ghi đè các class Bootstrap khác nếu cần, ví dụ: */
-  .navbar, .navbar-nav, .navbar-brand {
-    all: unset;
-    /* hoặc thêm lại style cũ nếu bị Bootstrap ảnh hưởng */
-  }
   /* Thêm các ghi đè khác nếu layout cũ bị ảnh hưởng */
   .navbar-toggler {
     display: none !important;
+  }
+
+  /* ĐẢM BẢO MENU HIỂN THỊ FLEX ĐÚNG TRÊN DESKTOP/LAPTOP */
+  .menu {
+    display: flex !important;
+    align-items: center;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+  }
+  .menu.menu-mobile {
+    display: none !important;
+  }
+}
+
+/* Ưu tiên CSS custom trên desktop/laptop, ghi đè hoàn toàn Bootstrap */
+@media (min-width: 1025px) {
+  /* Ghi đè hoàn toàn Bootstrap trên desktop/laptop */
+  .container, .row, .col, [class^="col-"] {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+    padding: 0 24px !important;
+    box-sizing: border-box !important;
   }
 }
 
@@ -67,7 +86,7 @@
     transition: box-shadow 0.2s;
   }
   .menu {
-    display: none;
+    display: none !important;
   }
   /* Hamburger menu */
   .navbar-toggler {
@@ -128,7 +147,7 @@
     margin-top: 0;
   }
   .menu.menu-mobile {
-    display: flex;
+    display: flex !important;
     flex-direction: column;
     gap: 0;
     background: #232a36;
