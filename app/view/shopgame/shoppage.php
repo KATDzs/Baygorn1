@@ -22,7 +22,7 @@ $config = require_once __DIR__ . '/../../../config.php';
                 <span class="platform" id="heroPlatform"><?php echo htmlspecialchars($games[0]['platform']); ?></span>
                 <span class="price" id="heroPrice"><?php echo number_format($games[0]['price']); ?> VNĐ</span>
             </div>
-            <div class="hero-buttons">
+            <div class="hero-buttons d-flex flex-column flex-md-row align-items-center gap-2 gap-md-3">
                 <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
                 <a href="/Baygorn1/game/game-detail?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
                 <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $games[0]['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
@@ -58,8 +58,10 @@ $config = require_once __DIR__ . '/../../../config.php';
         <div class="container">
             <div class="section-header">
                 <h2>DANH SÁCH GAME</h2>
-                <div class="search-box">
+                <div class="search-box mb-2">
                     <input type="text" id="gameSearch" placeholder="Nhập tên game bạn muốn tìm...">
+                    <button id="gameSearchBtn" class="btn btn-primary" type="button">Tìm kiếm</button>
+                    <button id="gameSearchClearBtn" class="btn btn-outline-secondary" type="button" style="display:none">&times;</button>
                 </div>
                 <div class="filter-groups">
                     <select id="categoryFilter">
@@ -97,7 +99,9 @@ $config = require_once __DIR__ . '/../../../config.php';
                 <div class="game-card">
                     <div class="game-card-image">
                         <img src="/Baygorn1/asset/img/games/<?php echo htmlspecialchars($game['image_url']); ?>" 
-                             alt="<?php echo htmlspecialchars($game['title']); ?>">
+                             alt="<?php echo htmlspecialchars($game['title']); ?>"
+                             loading="lazy"
+                             onerror="this.src='/Baygorn1/asset/img/default-game.jpg'">
                     </div>
                     <div class="game-card-info">
                         <h3><?php echo $game['title']; ?></h3>

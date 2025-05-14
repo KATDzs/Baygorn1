@@ -706,3 +706,554 @@ main {
     visibility: visible;
     opacity: 1;
 }
+
+/* --- Responsive for shoppage: mobile & tablet, no affect to desktop --- */
+@media (max-width: 1024px) {
+  .hero-zombie {
+    flex-direction: column;
+    height: auto;
+    min-height: 400px;
+    padding: 2rem 0 0 0;
+    margin-top: 0;
+  }
+  .hero-zombie-content {
+    margin: 0;
+    max-width: 100%;
+    padding: 1.2rem;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+  }
+  .hero-zombie-content h1 {
+    font-size: 2.2rem;
+  }
+  .hero-zombie-content p {
+    font-size: 1rem;
+  }
+  .hero-meta {
+    flex-direction: column;
+    gap: 0.7rem;
+    font-size: 1rem;
+  }
+  .hero-buttons {
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+  .slider-section {
+    padding: 2rem 0;
+  }
+  .slider-header {
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  .slider-title h2 {
+    font-size: 1.5rem;
+  }
+  .slider-frame {
+    max-width: 100vw;
+    aspect-ratio: 16/9;
+  }
+  .game-grid-section {
+    padding: 2rem 0;
+  }
+  .game-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 1rem;
+    padding: 0 0.5rem;
+  }
+  .game-card-info h3 {
+    font-size: 1rem;
+  }
+}
+
+/* --- FIX: Slider card chiếm full chiều cao, không bị trống nửa dưới --- */
+@media (max-width: 1024px) {
+  .slider-frame {
+    display: flex !important;
+    align-items: stretch !important;
+    justify-content: center !important;
+    height: 100% !important;
+    min-height: 180px !important;
+  }
+  .slider-card {
+    position: relative !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: flex-end !important;
+    align-items: stretch !important;
+    background: none !important;
+  }
+  .slider-card a {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 180px !important;
+    align-items: stretch !important;
+    justify-content: flex-end !important;
+  }
+  .slider-card img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    flex: 1 1 auto !important;
+    display: block !important;
+  }
+  .slider-card-info {
+    position: absolute !important;
+    left: 0; right: 0; bottom: 0;
+    width: 100% !important;
+    padding: 0.7rem 0.7rem 0.5rem 0.7rem !important;
+    background: linear-gradient(transparent, rgba(0,0,0,0.9));
+    z-index: 2;
+    box-sizing: border-box;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  .hero-zombie-content {
+    padding: 0.7rem;
+  }
+  .hero-zombie-content h1 {
+    font-size: 1.2rem;
+  }
+  .slider-frame {
+    aspect-ratio: 1/1;
+  }
+  .game-grid {
+    grid-template-columns: 1fr;
+    gap: 0.7rem;
+    padding: 0;
+  }
+  .game-card-info {
+    padding: 0.5rem;
+  }
+  .section-header h2 {
+    font-size: 1.1rem;
+  }
+  .filter-groups {
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0;
+  }
+  .search-box {
+    margin: 0 0 1rem 0;
+    padding: 0;
+  }
+}
+
+/* --- Bootstrap-based mobile/tablet tweaks for shoppage --- */
+@media (max-width: 768px) {
+  .slider-section {
+    padding: 1rem 0 !important;
+  }
+  .slider-header {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+  }
+  .slider-title h2 {
+    font-size: 1.1rem !important;
+    word-break: break-word;
+    text-align: center !important;
+  }
+  .select-all {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.8rem !important;
+    border-width: 1px !important;
+    margin: 0 auto !important;
+    display: block !important;
+  }
+  .slider-wrapper {
+    padding: 0 0.5rem !important;
+  }
+  .slider-btn {
+    width: 36px !important;
+    height: 36px !important;
+    font-size: 1.2rem !important;
+    top: 55% !important;
+  }
+  .slider-frame {
+    max-width: 100vw !important;
+    aspect-ratio: 1/1 !important;
+    min-height: 180px !important;
+    border-radius: 10px !important;
+  }
+  .slider-card-info {
+    padding: 0.7rem !important;
+  }
+  .slider-card .title {
+    font-size: 1.1rem !important;
+    text-align: center !important;
+  }
+  .slider-card .price {
+    font-size: 1rem !important;
+    text-align: center !important;
+  }
+  .game-grid-section {
+    padding: 1rem 0 !important;
+  }
+  .game-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.7rem !important;
+    padding: 0 !important;
+  }
+  .game-card {
+    border-radius: 8px !important;
+    margin-bottom: 0.7rem !important;
+  }
+  .game-card-info {
+    padding: 0.5rem !important;
+  }
+  .game-card-info h3 {
+    font-size: 1rem !important;
+    text-align: left !important;
+  }
+  .game-meta {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.3rem !important;
+  }
+  .game-platform {
+    font-size: 0.85rem !important;
+    padding: 0.2rem 0.6rem !important;
+  }
+  .game-price {
+    font-size: 1rem !important;
+  }
+  .btn, .btn-outline, .btn-primary, .btn-danger {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 6px !important;
+  }
+  .btn-lg, .btn-xl {
+    font-size: 1rem !important;
+    padding: 0.7rem 1.2rem !important;
+  }
+  .btn, .btn-outline, .btn-primary, .btn-danger, .btn-lg, .btn-xl {
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .filter-groups {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    padding: 0 !important;
+  }
+  .search-box {
+    margin: 0 0 1rem 0 !important;
+    padding: 0 !important;
+  }
+  .section-header h2 {
+    font-size: 1.1rem !important;
+    text-align: center !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .slider-frame {
+    min-height: 120px !important;
+  }
+  .slider-btn {
+    width: 28px !important;
+    height: 28px !important;
+    font-size: 1rem !important;
+  }
+  .slider-card-info {
+    padding: 0.4rem !important;
+  }
+  .game-card-info {
+    padding: 0.3rem !important;
+  }
+  .btn, .btn-outline, .btn-primary, .btn-danger, .btn-lg, .btn-xl {
+    font-size: 0.85rem !important;
+    padding: 0.4rem 0.7rem !important;
+    border-radius: 5px !important;
+  }
+}
+
+/* --- Mobile-first fixes for shoppage, tận dụng Bootstrap --- */
+@media (max-width: 600px) {
+  .slider-section {
+    padding: 1rem 0 !important;
+  }
+  .slider-header {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+    margin-bottom: 1rem !important;
+    text-align: center !important;
+  }
+  .slider-title h2 {
+    font-size: 1.1rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.2rem !important;
+  }
+  .select-all {
+    padding: 0.4rem 1rem !important;
+    font-size: 0.8rem !important;
+    border-width: 1px !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .slider-wrapper {
+    padding: 0 0.5rem !important;
+  }
+  .slider-btn {
+    width: 32px !important;
+    height: 32px !important;
+    font-size: 1.2rem !important;
+    top: 55% !important;
+    background: rgba(255,255,255,0.18) !important;
+  }
+  .slider-frame {
+    max-width: 100vw !important;
+    aspect-ratio: 1/1 !important;
+    min-height: 180px !important;
+    border-radius: 10px !important;
+  }
+  .slider-card .title {
+    font-size: 1.1rem !important;
+    word-break: break-word !important;
+    margin-bottom: 0.2rem !important;
+  }
+  .slider-card .price {
+    font-size: 1rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+  .slider-card-info {
+    padding: 0.7rem 0.7rem 0.5rem 0.7rem !important;
+  }
+  /* Game card chi tiết */
+  .game-card-info h3 {
+    font-size: 1rem !important;
+    margin-bottom: 0.3rem !important;
+  }
+  .game-meta, .game-platform {
+    font-size: 0.85rem !important;
+    padding: 0.2rem 0.5rem !important;
+  }
+  .game-price {
+    font-size: 1rem !important;
+  }
+  .game-card-info {
+    padding: 0.5rem !important;
+  }
+  /* Nút chi tiết và thêm vào giỏ hàng */
+  .btn, .btn-outline, .btn-primary, .btn-danger {
+    font-size: 0.95rem !important;
+    padding: 0.5rem 0.7rem !important;
+    border-radius: 6px !important;
+    min-width: 90px !important;
+  }
+  .btn-lg, .btn-block, .w-100 {
+    font-size: 1rem !important;
+    padding: 0.7rem 1rem !important;
+  }
+  /* Đảm bảo mọi thứ căn giữa */
+  .slider-header, .slider-title, .slider-card-info, .game-card-info {
+    text-align: center !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+  /* Fix card chiều cao dư thừa */
+  .game-card {
+    min-height: unset !important;
+    height: auto !important;
+  }
+}
+
+/* --- MOBILE BUTTON FIXES --- */
+@media (max-width: 600px) {
+  /* Chỉ set width 100% cho nút trong .game-card-info, KHÔNG áp dụng cho .hero-buttons */
+  .game-card-info .btn,
+  .game-card-info .btn-outline,
+  .game-card-info .btn-primary,
+  .game-card-info .btn-danger {
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .hero-buttons .btn,
+  .hero-buttons .btn-outline,
+  .hero-buttons .btn-primary,
+  .hero-buttons .btn-danger {
+    width: auto !important;
+    min-width: 90px !important;
+    max-width: 90vw !important;
+    margin-bottom: 0.5rem !important;
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+  }
+  /* Fix slider-card chiếm đủ khung */
+  .slider-card, .slider-card a, .slider-card img {
+    width: 100% !important;
+    height: 100% !important;
+    display: block !important;
+    object-fit: cover !important;
+  }
+  /* Fix game-card-image luôn hiển thị ảnh đúng tỉ lệ */
+  .game-card-image, .game-card-image img {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 120px !important;
+    max-height: 180px !important;
+    object-fit: cover !important;
+    display: block !important;
+  }
+  /* Fix search-box: input chiếm full, nút nhỏ lại */
+  .search-box {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+  .search-box input[type="text"] {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    width: 1% !important;
+    font-size: 1rem !important;
+  }
+  .search-box button {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    min-width: 36px !important;
+    padding: 0.4rem 0.7rem !important;
+    font-size: 0.95rem !important;
+  }
+}
+
+/* --- TABLET BUTTON FIXES: 601px - 1024px --- */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .game-card-info .btn,
+  .game-card-info .btn-outline,
+  .game-card-info .btn-primary,
+  .game-card-info .btn-danger {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    font-size: 1rem !important;
+    padding: 0.5rem 0 !important;
+    border-radius: 7px !important;
+    margin-bottom: 0.5rem !important;
+    line-height: 1.2 !important;
+    letter-spacing: 1px !important;
+    white-space: normal !important;
+    box-sizing: border-box !important;
+    word-break: keep-all !important;
+  }
+  .game-card-info .btn {
+    font-weight: 700 !important;
+  }
+  .game-card {
+    border-radius: 10px !important;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10) !important;
+    margin-bottom: 1.2rem !important;
+    background: rgba(255,255,255,0.04) !important;
+    overflow: hidden !important;
+  }
+  .game-card-image {
+    width: 100% !important;
+    height: 180px !important;
+    min-height: 120px !important;
+    max-height: 220px !important;
+    display: block !important;
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 10px 10px 0 0 !important;
+    background: #222 !important;
+  }
+  .game-card-image img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 10px 10px 0 0 !important;
+    background: #222 !important;
+  }
+  .game-card-info {
+    padding: 0.8rem 0.7rem 0.7rem 0.7rem !important;
+    text-align: left !important;
+  }
+  .game-card-info h3 {
+    font-size: 1.05rem !important;
+    margin-bottom: 0.4rem !important;
+  }
+  .game-meta {
+    font-size: 0.95rem !important;
+    margin-bottom: 0.5rem !important;
+  }
+  .game-card-info .btn,
+  .game-card-info .btn-outline,
+  .game-card-info .btn-primary,
+  .game-card-info .btn-danger {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    font-size: 0.98rem !important;
+    padding: 0.48rem 0 !important;
+    border-radius: 6px !important;
+    margin-bottom: 0.45rem !important;
+    line-height: 1.15 !important;
+    letter-spacing: 0.5px !important;
+    white-space: normal !important;
+    box-sizing: border-box !important;
+    word-break: keep-all !important;
+    font-weight: 700 !important;
+  }
+  .game-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1.2rem !important;
+    padding: 0 1rem !important;
+  }
+}
+
+@media (min-width: 900px) and (max-width: 1024px) {
+  .game-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  .game-card-info .btn {
+    font-size: 1.08rem;
+    padding: 0.7rem 0;
+    margin-bottom: 0.7rem;
+    border-radius: 8px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-shadow: 0 2px 12px rgba(255,0,60,0.08);
+    border: none;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, border 0.18s;
+    letter-spacing: 1px;
+  }
+  .game-card-info .btn-outline {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 12px rgba(255,255,255,0.08);
+  }
+  .game-card-info .btn-outline:hover {
+    background: #fff;
+    color: #18191c;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 18px rgba(255,255,255,0.18);
+  }
+  .game-card-info .btn-primary, .game-card-info .btn-danger, .game-card-info .btn-secondary {
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    font-weight: 700;
+    box-shadow: 0 4px 18px rgba(255,0,60,0.13);
+  }
+  .game-card-info .btn-primary:hover, .game-card-info .btn-danger:hover, .game-card-info .btn-secondary:hover {
+    background: var(--primary-dark);
+    color: #fff;
+    box-shadow: 0 6px 24px rgba(255,0,60,0.18);
+  }
+}

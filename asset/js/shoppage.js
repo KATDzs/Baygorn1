@@ -18,9 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Update slider card
         cardContainer.innerHTML = `
-            <div class="slider-card fade-in">
-                <a href="/Baygorn1/giaodich?id=${game.game_id}">
-                    <img src="${imagePath}" alt="${game.title}">
+            <div class="slider-card fade-in" style="width:100%;height:100%;">
+                <a href="/Baygorn1/giaodich?id=${game.game_id}" style="display:block;width:100%;height:100%;">
+                    <img src="${imagePath}" alt="${game.title}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='${defaultImage}'">
                     <div class="slider-card-info">
                         <div class="title">${game.title}</div>
                         <div class="price">${Number(game.price).toLocaleString()} VNĐ</div>
@@ -137,23 +137,16 @@ document.addEventListener('DOMContentLoaded', function() {
             return `
                 <div class="game-card">
                     <div class="game-card-image">
-                        <img src="${imagePath}" 
+                        <img src="${imagePath}"
                              alt="${game.title}"
                              loading="lazy"
                              onerror="this.src='${defaultImage}'">
                     </div>
                     <div class="game-card-info">
-                        <div class="game-card-header">
-                            <h3>${game.title}</h3>
-                            <div class="game-platform">${game.platform}</div>
-                        </div>
-                        <div class="game-card-meta">
-                            <div class="game-categories">
-                                ${game.categories.map(cat => `
-                                    <span class="game-category">${cat.name}</span>
-                                `).join('')}
-                            </div>
-                            <div class="game-price">${Number(game.price).toLocaleString()} VNĐ</div>
+                        <h3>${game.title}</h3>
+                        <div class="game-meta">
+                            <span class="game-platform">${game.platform}</span>
+                            <span class="game-price">${Number(game.price).toLocaleString()} VNĐ</span>
                         </div>
                         <a href="/Baygorn1/game/game-detail?id=${game.game_id}" class="btn btn-outline">CHI TIẾT</a>
                         <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="${game.game_id}">THÊM VÀO GIỎ HÀNG</button>
