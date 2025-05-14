@@ -41,6 +41,19 @@ require_once ROOT_PATH . '/view/layout/header.php';
             </section>
         </article>
     </main>
+    <script>
+    // Đảm bảo nội dung không bị menu che: tự động padding-top đúng chiều cao header
+    function adjustNewsPadding() {
+      var header = document.querySelector('.navbar');
+      var main = document.querySelector('.news-main-container, .news-detail-main-container, main');
+      if (header && main) {
+        var headerHeight = header.offsetHeight;
+        main.style.paddingTop = (headerHeight + 24) + 'px'; // +24 cho đẹp
+      }
+    }
+    window.addEventListener('DOMContentLoaded', adjustNewsPadding);
+    window.addEventListener('resize', adjustNewsPadding);
+    </script>
 <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
 </body>
 </html>

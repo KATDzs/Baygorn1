@@ -267,6 +267,16 @@ body {
     background-size: 1.2em;
 }
 
+/* Custom select option style */
+.filter-groups select option {
+    background: #222; /* nền tối */
+    color: #fff;      /* chữ trắng */
+}
+.filter-groups select:focus option:checked {
+    background: #e50914; /* màu đỏ khi chọn */
+    color: #fff;
+}
+
 /* Featured Games Slider */
 .slider-section {
     padding: 4rem 0;

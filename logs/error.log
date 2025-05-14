@@ -162,3 +162,11 @@ Stack trace:
 #0 C:\xampp\htdocs\Baygorn1\app\Controller\AuthController.php(51): BaseController->validateCSRF('227c943faaa824b...')
 #1 C:\xampp\htdocs\Baygorn1\index.php(118): AuthController->login()
 #2 {main}
+[2025-05-15 02:09:10] Login error
+Exception: Invalid CSRF token
+File: C:\xampp\htdocs\Baygorn1\app\Controller\BaseController.php
+Line: 53
+Stack trace:
+#0 C:\xampp\htdocs\Baygorn1\app\Controller\AuthController.php(51): BaseController->validateCSRF('f0fc6ff4cc36fd5...')
+#1 C:\xampp\htdocs\Baygorn1\index.php(118): AuthController->login()
+#2 {main}
