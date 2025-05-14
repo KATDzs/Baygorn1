@@ -169,12 +169,22 @@ class AuthController extends BaseController {
                     'full_name' => $full_name
                 ]);
 
-                if ($result) {
-                    error_log("User successfully registered: " . $username);
-                    $this->redirect('auth/login');
+                if ($result === 'duplicate_username') {
+                    $_SESSION['register_error'] = 'Tên đăng nhập đã tồn tại.';
+                    header('Location: ' . $this->config['baseURL'] . 'auth/register');
+                    exit;
+                } elseif ($result === 'duplicate_email') {
+                    $_SESSION['register_error'] = 'Email đã được sử dụng.';
+                    header('Location: ' . $this->config['baseURL'] . 'auth/register');
+                    exit;
+                } elseif ($result) {
+                    $_SESSION['register_success'] = 'Đăng ký thành công! Bạn có thể đăng nhập.';
+                    header('Location: ' . $this->config['baseURL'] . 'auth/login');
+                    exit;
                 } else {
-                    error_log("Failed to save user to database. Query might have failed.");
-                    return $this->view('auth/register', ['csrf_token' => $csrf_token, 'error' => 'Failed to register user.']);
+                    $_SESSION['register_error'] = 'Đăng ký thất bại. Vui lòng thử lại.';
+                    header('Location: ' . $this->config['baseURL'] . 'auth/register');
+                    exit;
                 }
             } catch (Exception $e) {
                 error_log("Registration error: " . $e->getMessage());

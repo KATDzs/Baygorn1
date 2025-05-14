@@ -1,15 +1,30 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 }
 $css_files = ['auth', 'header', 'footer'];
+$js_files = ['auth-register'];
 require_once ROOT_PATH . '/view/layout/header.php';
+
+$error = $error ?? ($_SESSION['register_error'] ?? null);
+$success = $success ?? ($_SESSION['register_success'] ?? null);
+unset($_SESSION['register_error'], $_SESSION['register_success']);
 ?>
 <div class="main-content">
     <div class="login-container">
-        <h2 class="login-title">Đăng ký tài khoản</h2>
-        <?php if (isset($error)): ?>
-            <div class="error-message"><?php echo $error; ?></div>
+        <h2 class="register-title">Đăng ký</h2>
+        <?php if ($error): ?>
+            <div class="error-message" style="color:#ff4655; font-weight:600; margin-bottom:16px; text-align:center;">
+                <?php echo htmlspecialchars($error); ?>
+            </div>
+        <?php endif; ?>
+        <?php if ($success): ?>
+            <div class="success-message" style="color:#4caf50; font-weight:600; margin-bottom:16px; text-align:center;">
+                <?php echo htmlspecialchars($success); ?>
+            </div>
         <?php endif; ?>
         <form action="/Baygorn1/index.php?url=auth/register" method="POST">
             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($csrf_token ?? '') ?>">

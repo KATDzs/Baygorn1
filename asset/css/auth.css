@@ -72,8 +72,48 @@
     text-decoration: underline;
 }
 
+/* Forgot password link style for login page */
+.forgot-password-link {
+    color: #888 !important;
+    font-size: 0.97em;
+    opacity: 0.7;
+    display: block;
+    margin-bottom: 16px;
+    transition: color 0.2s;
+}
+.forgot-password-link:hover {
+    color: #ff4655 !important;
+    opacity: 1;
+    text-decoration: underline;
+}
+
 /* Form control styles */
-.login-container .form-control,
+.login-container .form-control {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #ff4655 !important;
+    border-radius: 8px !important;
+    background: #23232b !important;
+    color: #fff !important;
+    font-size: 16px !important;
+    margin: 0 auto;
+    min-height: 36px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10) !important;
+    transition: border 0.2s, box-shadow 0.2s;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+}
+
+.login-container .form-control:focus {
+    outline: none !important;
+    border-color: #ff4655 !important;
+    box-shadow: 0 0 0 2px #ff465566 !important;
+    background: #23232b !important;
+    color: #fff !important;
+}
+
 .main-content .form-control,
 .form-control {
     width: 100%;
@@ -89,7 +129,6 @@
     transition: border 0.2s;
 }
 
-.login-container .form-control:focus,
 .main-content .form-control:focus,
 .form-control:focus {
     outline: none;

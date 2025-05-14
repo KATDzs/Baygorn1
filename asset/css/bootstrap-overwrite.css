@@ -150,42 +150,90 @@
     display: flex !important;
     flex-direction: column;
     gap: 0;
-    background: #232a36;
-    border-radius: 16px;
-    margin: 0 auto !important;
-    width: 92vw !important;
-    max-width: 400px !important;
-    top: 56px !important;
-    padding: 0.5rem 0;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    position: absolute;
+    background: #232a36 !important;
+    border-radius: 16px !important;
+    margin: 0.5rem auto 0 auto !important;
+    width: 96vw !important;
+    max-width: 420px !important;
+    top: 64px !important;
     left: 0 !important;
     right: 0 !important;
+    position: absolute;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.22) !important;
+    padding: 0 !important;
     z-index: 2000;
     animation: fadeInDown 0.25s;
   }
   .menu.menu-mobile li {
     width: 100%;
     text-align: left;
+    background: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   .menu.menu-mobile .menu-link {
-    padding: 1rem 2rem;
+    padding: 1.1rem 2rem !important;
     display: block;
-    color: #fff;
-    font-weight: 700;
-    font-size: 1.1rem;
-    border-bottom: 1px solid #232a36;
-    letter-spacing: 0.05em;
+    color: #fff !important;
+    font-weight: 600 !important;
+    font-size: 1.08rem !important;
+    border-radius: 0 !important;
+    border: none !important;
+    background: none !important;
+    margin: 0 !important;
     transition: background 0.18s, color 0.18s;
+    letter-spacing: 0.03em;
+    text-align: left;
+    box-shadow: none !important;
   }
-  .menu.menu-mobile .menu-link:last-child {
-    border-bottom: none;
+  .menu.menu-mobile .menu-link:hover,
+  .menu.menu-mobile .menu-link:focus {
+    background: #181c24 !important;
+    color: #ff4655 !important;
+    outline: none;
   }
-  .menu.menu-mobile .menu-link:hover {
-    background: #181c24;
-    color: #ff4655;
+  .menu.menu-mobile .menu-link.active {
+    background: #181c24 !important;
+    color: #ff4655 !important;
+    font-weight: 700 !important;
   }
-  .menu.menu-mobile .menu-link[style*="color:purple"] {
+  .menu.menu-mobile .menu-link:not(:last-child) {
+    border-bottom: 1px solid rgba(255,255,255,0.06) !important;
+  }
+  /* Admin dropdown mobile đẹp hơn */
+  .menu.menu-mobile .admin-dropdown-parent-mobile .admin-dropdown-mobile {
+    display: none;
+    flex-direction: column;
+    background: #232a36 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 24px rgba(185,122,255,0.13) !important;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+    padding: 0.2rem 0 0.4rem 0 !important;
+    animation: adminDropdownFadeIn 0.22s;
+    z-index: 10;
+    position: relative;
+    overflow: hidden;
+    transition: max-height 0.22s cubic-bezier(0.4,0,0.2,1);
+    max-height: 0;
+  }
+  .menu.menu-mobile .admin-dropdown-parent-mobile .admin-dropdown-mobile.show {
+    display: flex !important;
+    max-height: 400px !important;
+    animation: adminDropdownFadeIn 0.22s;
+  }
+  .menu.menu-mobile .admin-dropdown-mobile .menu-link {
+    padding: 0.8rem 1.3rem !important;
+    font-size: 1rem !important;
+    border-radius: 7px !important;
+    color: #fff !important;
+    background: none !important;
+    border: none !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+  }
+  .menu.menu-mobile .admin-dropdown-mobile .menu-link:hover {
+    background: #181c24 !important;
     color: #b97aff !important;
   }
   /* Avatar & dropdown */
@@ -584,11 +632,11 @@
   .menu.menu-mobile .admin-dropdown-parent-mobile .admin-dropdown-mobile {
     display: none;
     flex-direction: column;
-    background: #232a36;
-    border-radius: 0 0 14px 14px;
-    box-shadow: 0 4px 16px rgba(185,122,255,0.10);
-    margin: 0 1.5rem 0.5rem 1.5rem;
-    padding: 0.2rem 0 0.4rem 0;
+    background: #232a36 !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 24px rgba(185,122,255,0.13) !important;
+    margin: 0.5rem 0.5rem 0.5rem 0.5rem !important;
+    padding: 0.2rem 0 0.4rem 0 !important;
     animation: adminDropdownFadeIn 0.22s;
     z-index: 10;
     position: relative;
@@ -600,6 +648,20 @@
     display: flex !important;
     max-height: 400px !important;
     animation: adminDropdownFadeIn 0.22s;
+  }
+  .menu.menu-mobile .admin-dropdown-mobile .menu-link {
+    padding: 0.8rem 1.3rem !important;
+    font-size: 1rem !important;
+    border-radius: 7px !important;
+    color: #fff !important;
+    background: none !important;
+    border: none !important;
+    margin: 0 !important;
+    font-weight: 500 !important;
+  }
+  .menu.menu-mobile .admin-dropdown-mobile .menu-link:hover {
+    background: #181c24 !important;
+    color: #b97aff !important;
   }
 }
 

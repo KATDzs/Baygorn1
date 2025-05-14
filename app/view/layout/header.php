@@ -57,7 +57,7 @@
                     </li>
                 <?php endif; ?>
             </ul>
-            <ul class="menu menu-mobile" id="mobileMenu" style="display:none;">
+            <ul class="menu menu-mobile" id="mobileMenu">
                 <li><a href="/Baygorn1" class="menu-link">Home</a></li>
                 <li><a href="/Baygorn1/game" class="menu-link">Game</a></li>
                 <li><a href="/Baygorn1/news" class="menu-link">News</a></li>
@@ -111,11 +111,11 @@
     function toggleMobileMenu() {
         const menu = document.getElementById('mobileMenu');
         const adminDropdown = document.getElementById('adminMobileDropdown');
-        if (menu.style.display === 'flex') {
-            menu.style.display = 'none';
+        if (menu.classList.contains('show')) {
+            menu.classList.remove('show');
             if(adminDropdown) adminDropdown.classList.remove('show');
         } else {
-            menu.style.display = 'flex';
+            menu.classList.add('show');
             if(adminDropdown) adminDropdown.classList.remove('show'); // luôn ẩn menu con admin khi mở burger
         }
     }
@@ -153,7 +153,7 @@
         mobileMenu.querySelectorAll('a.menu-link').forEach(function(link){
           if(link !== adminBtn) {
             link.addEventListener('click', function(ev){
-              mobileMenu.style.display = 'none';
+              mobileMenu.classList.remove('show');
               adminDropdown.classList.remove('show');
             });
           }
@@ -167,14 +167,14 @@
         const toggler = document.querySelector('.navbar-toggler');
         const adminDropdown = document.getElementById('adminMobileDropdown');
         const adminBtn = document.querySelector('.admin-dropdown-parent-mobile > .menu-link');
-        if (mobileMenu && toggler && mobileMenu.style.display === 'flex') {
+        if (mobileMenu && toggler && mobileMenu.classList.contains('show')) {
             if (
                 !mobileMenu.contains(event.target) &&
                 !toggler.contains(event.target) &&
                 (!adminDropdown || !adminDropdown.contains(event.target)) &&
                 event.target !== adminBtn
             ) {
-                mobileMenu.style.display = 'none';
+                mobileMenu.classList.remove('show');
                 if(adminDropdown) adminDropdown.classList.remove('show');
             }
         }
@@ -182,6 +182,11 @@
     </script>
     <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
         <script src="/Baygorn1/asset/js/header-admin.js"></script>
+    <?php endif; ?>
+    <?php if (isset($js_files) && is_array($js_files)): ?>
+        <?php foreach ($js_files as $js): ?>
+            <script src="/Baygorn1/asset/js/<?= $js ?>.js"></script>
+        <?php endforeach; ?>
     <?php endif; ?>
 </body>
 </html>

@@ -60,9 +60,15 @@ class UserModel {
     }
 
     public function createUser($data) {
+        // Kiểm tra trùng username/email
+        if ($this->checkUsernameExists($data['username'])) {
+            return 'duplicate_username';
+        }
+        if ($this->checkEmailExists($data['email'])) {
+            return 'duplicate_email';
+        }
         $query = "INSERT INTO users (username, email, password_hash, full_name, is_admin, created_at) 
                  VALUES (?, ?, ?, ?, 0, NOW())";
-                 
         $stmt = mysqli_prepare($this->conn, $query);
         mysqli_stmt_bind_param($stmt, "ssss", 
             $data['username'],
@@ -70,15 +76,10 @@ class UserModel {
             $data['password'],
             $data['full_name']
         );
-        
         $success = mysqli_stmt_execute($stmt);
-        
-        // Thêm log chi tiết để kiểm tra dữ liệu và lỗi SQL
-        error_log("Data passed to createUser: " . print_r($data, true));
         if (!$success) {
             error_log("SQL Error: " . mysqli_error($this->conn));
         }
-        
         $userId = $success ? mysqli_insert_id($this->conn) : 0;
         mysqli_stmt_close($stmt);
         return $userId;
@@ -87,21 +88,19 @@ class UserModel {
     public function updateUser($id, $data) {
         $query = "UPDATE users SET 
                  email = ?,
-                 fullname = ?,
+                 full_name = ?,
                  phone = ?,
                  address = ?,
-                 modified_at = NOW()
+                 updated_at = NOW()
                  WHERE user_id = ?";
-                 
         $stmt = mysqli_prepare($this->conn, $query);
         mysqli_stmt_bind_param($stmt, "ssssi",
             $data['email'],
-            $data['fullname'],
+            $data['full_name'],
             $data['phone'],
             $data['address'],
             $id
         );
-        
         $success = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
         return $success;
