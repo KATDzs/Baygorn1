@@ -96,3 +96,23 @@ main {
         padding-bottom: 70px;
     }
 }
+
+.news-image {
+    width: 100%;
+    margin: 2rem 0;
+}
+
+.news-image img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    display: block;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media screen and (max-width: 768px) {
+    .news-image {
+        margin: 1rem 0;
+    }
+}

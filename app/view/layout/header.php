@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/Baygorn1/asset/css/footer.css">
     <link rel="stylesheet" href="/Baygorn1/asset/css/bootstrap-overwrite.css">
     <link rel="stylesheet" href="/Baygorn1/asset/css/header.css">
+    <link rel="stylesheet" href="/Baygorn1/asset/css/newstyle.css">
     <?php if (isset($css_files) && is_array($css_files)): ?>
         <?php foreach ($css_files as $css): ?>
             <link rel="stylesheet" href="/Baygorn1/asset/css/<?= $css ?>.css">

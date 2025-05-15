@@ -10,7 +10,9 @@ require_once ROOT_PATH . '/view/layout/header.php';
             <h1>Minecraft 1.21.5 "Spring to Life" chính thức ra mắt: Thế giới sống động hơn bao giờ hết!</h1>
             <p class="news-date">Ngày 25 tháng 3 năm 2025</p>
             <p class="news-intro">Mojang đã phát hành bản cập nhật Minecraft Java Edition 1.21.5 với tên gọi "Spring to Life" - bản cập nhật mùa xuân đầu tiên của năm, mang đến nhiều thay đổi hấp dẫn về sinh vật, thực vật và âm thanh môi trường, giúp thế giới Minecraft trở nên sống động và chân thực hơn bao giờ hết.</p>
-            
+            <div class="news-image">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSQnZGBjyObGnI0KLWwspraVEUKVOjeFGW96Q&s" alt="Minecraft 1.21.5">
+            </div>
             <section class="news-section">
                 <h2>🌿 Những điểm nổi bật trong bản cập nhật</h2>
                 

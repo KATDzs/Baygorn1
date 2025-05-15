@@ -10,7 +10,9 @@ require_once ROOT_PATH . '/view/layout/header.php';
             <h1>Brainrot Evolution - Khi Roblox không còn là chính nó</h1>
             <p class="news-date">Ngày 26 tháng 4 năm 2025</p>
             <p class="news-intro">Brainrot Evolution đang gây bão trong cộng đồng Roblox, thổi bùng làn sóng meme hóa, sáng tạo nội dung điên rồ và cả... những cuộc tranh cãi nảy lửa. Cùng khám phá hiện tượng thú vị (và hơi hỗn loạn) này!</p>
-
+            <div class="news-image">
+                <img src="https://cdn-media.sforum.vn/storage/app/media/ctv_seo4/code-brainrot-evolution-thumbnail.jpg" alt="Roblox">
+            </div>
             <section class="news-section">
                 <h2>🧠 Brainrot Evolution là gì?</h2>
                 <p>Brainrot Evolution là tên gọi không chính thức cho phong trào sáng tạo nội dung Roblox "dị", "bất chấp logic", và đôi khi cực kỳ vô nghĩa. Các trò chơi, meme, video TikTok theo phong cách Brainrot thường có đặc trưng như:</p>
