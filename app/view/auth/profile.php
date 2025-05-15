@@ -47,6 +47,27 @@ include_once BASE_PATH . '/app/view/layout/header.php';
                 <label class="form-label">Họ và tên</label>
                 <div class="form-control" readonly><?php echo htmlspecialchars($user['full_name']); ?></div>
             </div>
+            <div class="form-group mb-4">
+                <label class="form-label">Vai trò</label>
+                <div class="form-control" readonly>
+                    <?php 
+                    $role = isset($user['role']) ? $user['role'] : 'Người dùng';
+                    echo htmlspecialchars($role); 
+                    ?>
+                </div>
+            </div>
+            <div class="form-group mb-4">
+                <label class="form-label">Ngày tạo tài khoản</label>
+                <div class="form-control" readonly>
+                    <?php 
+                    $created_at = isset($user['created_at']) ? date('d/m/Y', strtotime($user['created_at'])) : 'N/A';
+                    echo htmlspecialchars($created_at); 
+                    ?>
+                </div>
+            </div>
+            <div class="form-group text-center mt-4">
+                <a href="<?php echo $config['baseURL']; ?>auth/edit-profile" class="btn btn-primary">Chỉnh sửa thông tin</a>
+            </div>
         </div>
     </div>
 </div>
