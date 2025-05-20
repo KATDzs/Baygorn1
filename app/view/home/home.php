@@ -68,6 +68,7 @@ require_once ROOT_PATH . '/view/layout/header.php';
           <a href="<?php echo $news[0]['link']; ?>" class="news-link">
             <div class="news-image">
               <img src="<?php echo $news[0]['img']; ?>" alt="<?php echo htmlspecialchars($news[0]['title']); ?>">
+              <!-- <div class="news-blur-overlay"></div> -->
             </div>
             <div class="news-overlay">
               <div class="news-content">
