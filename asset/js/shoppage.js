@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function() {
         blurBg.style.backgroundImage = `url('${imagePath}')`;
         heroTitle.textContent = game.title;
         heroDesc.textContent = game.description || '';
-        heroPlatform.textContent = game.platform;
+        heroPlatform.textContent = getGameCategories(game);
         heroPrice.textContent = `${Number(game.price).toLocaleString()} VNĐ`;
         buyNowBtn.href = `/Baygorn1/giaodich?id=${game.game_id}`;
     }
@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="game-card-info">
                         <h3>${game.title}</h3>
                         <div class="game-meta">
-                            <span class="game-platform">${game.platform}</span>
+                            <span class="game-platform">${getGameCategories(game)}</span>
                             <span class="game-price">${Number(game.price).toLocaleString()} VNĐ</span>
                         </div>
                         <a href="/Baygorn1/game/game-detail?id=${game.game_id}" class="btn btn-outline">CHI TIẾT</a>
@@ -154,6 +154,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         }).join('');
+    }
+
+    function getGameCategories(game) {
+        if (Array.isArray(game.categories) && game.categories.length) {
+            return game.categories.map(cat => typeof cat === 'string' ? cat : (cat.name || cat)).join(', ');
+        }
+        if (typeof game.categories === 'string' && game.categories.trim() !== '') {
+            return game.categories;
+        }
+        return 'Không rõ';
     }
 
     // Thêm nút tìm kiếm nếu chưa có
@@ -258,5 +268,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 showToast('Đã xảy ra lỗi khi thêm vào giỏ hàng');
             });
         });
+    });
+
+    // Cuộn mượt đến danh sách game khi bấm 'Xem tất cả'
+    document.getElementById('scrollToGameListBtn')?.addEventListener('click', function(e) {
+        e.preventDefault();
+        const gameListSection = document.getElementById('game-list');
+        if (gameListSection) {
+            gameListSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     });
 });

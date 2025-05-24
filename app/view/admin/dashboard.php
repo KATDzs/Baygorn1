@@ -3,6 +3,7 @@ if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 }
 require_once ROOT_PATH . '/app/view/layout/header.php';
+require_once APP_ROOT . '/app/view/helpers.php';
 ?>
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin.css">
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin-dashboard.css">
@@ -23,7 +24,7 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
         </div>
         <div class="stat">
             <h2>Doanh thu</h2>
-            <p><?= isset($stats['total_revenue']) ? number_format($stats['total_revenue']) : 0 ?> VNĐ</p>
+            <p><?= isset($stats['total_revenue']) ? format_price($stats['total_revenue']) : format_price(0) ?></p>
         </div>
     </div>
     <section class="recent-orders">
@@ -44,7 +45,7 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
                             <td><?= $order['order_id'] ?></td>
                             <td><?= $order['username'] ?></td>
                             <td><?= $order['order_date'] ?></td>
-                            <td><?= number_format($order['total_amount']) ?> VNĐ</td>
+                            <td><?= format_price($order['total_amount']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>

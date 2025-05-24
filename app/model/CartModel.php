@@ -7,7 +7,7 @@ class CartModel {
     }
 
     public function getCartItems($userId) {
-        $query = "SELECT ci.*, g.title, g.price, g.image_url, (g.price * ci.quantity) as subtotal 
+        $query = "SELECT ci.*, g.title, g.price, g.image_url, g.description, (g.price * ci.quantity) as subtotal 
                  FROM cart_items ci
                  JOIN carts c ON ci.cart_id = c.cart_id
                  JOIN games g ON ci.game_id = g.game_id

@@ -22,7 +22,7 @@ if (isset($errors) && isset($errors['general']) && is_array($errors['general']) 
     <div class="login-container">
         <h2 class="login-title">Đăng nhập</h2>
         <?php if (isset($error) && $error): ?>
-            <div class="error-message" style="color:#ff4655; font-weight:600; margin-bottom:16px; text-align:center;">
+            <div class="error-message">
                 <?php echo $error; ?>
             </div>
         <?php endif; ?>
@@ -35,6 +35,7 @@ if (isset($errors) && isset($errors['general']) && is_array($errors['general']) 
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password" class="form-control" required>
+                <!-- Toggle password button sẽ được JS tự động thêm vào đây -->
             </div>
             <div class="form-group text-end">
                 <a href="/Baygorn1/index.php?url=auth/forgot-password" class="forgot-password-link">Quên mật khẩu?</a>
@@ -47,3 +48,6 @@ if (isset($errors) && isset($errors['general']) && is_array($errors['general']) 
     </div>
 </div>
 <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
+<!-- FontAwesome cho icon mắt -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="/Baygorn1/asset/js/toggle-password.js"></script>

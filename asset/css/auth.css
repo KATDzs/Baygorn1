@@ -272,3 +272,62 @@ label, .form-label {
 .auth-card .mt-4 {
     margin-top: 1.5rem;
 }
+
+.form-group {
+    position: relative;
+}
+.form-group input.form-control {
+    height: 48px !important;
+    min-height: 48px !important;
+    box-sizing: border-box;
+    padding-right: 2.5em !important;
+    display: block;
+}
+.toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+    width: 40px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #ff4655;
+    padding: 0;
+    outline: none;
+    z-index: 2;
+    transition: color 0.2s;
+    pointer-events: auto;
+}
+.toggle-password i {
+    font-size: 1.25em;
+    pointer-events: none;
+    line-height: 1;
+}
+.toggle-password:hover {
+    color: #ff2d3f;
+}
+
+/* Đảm bảo input password có padding phải đủ để không bị icon che */
+input[type="password"].form-control {
+    padding-right: 2.5em !important;
+}
+
+/* Thông báo lỗi và thành công cho login/register */
+.error-message {
+    color: #ff4655;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+}
+.success-message {
+    color: #4caf50;
+    font-weight: 600;
+    margin-bottom: 16px;
+    text-align: center;
+}

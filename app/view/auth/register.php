@@ -17,12 +17,12 @@ unset($_SESSION['register_error'], $_SESSION['register_success']);
     <div class="login-container">
         <h2 class="register-title">Đăng ký</h2>
         <?php if ($error): ?>
-            <div class="error-message" style="color:#ff4655; font-weight:600; margin-bottom:16px; text-align:center;">
+            <div class="error-message">
                 <?php echo htmlspecialchars($error); ?>
             </div>
         <?php endif; ?>
         <?php if ($success): ?>
-            <div class="success-message" style="color:#4caf50; font-weight:600; margin-bottom:16px; text-align:center;">
+            <div class="success-message">
                 <?php echo htmlspecialchars($success); ?>
             </div>
         <?php endif; ?>
@@ -45,11 +45,13 @@ unset($_SESSION['register_error'], $_SESSION['register_success']);
             <div class="form-group">
                 <label for="password">Mật khẩu</label>
                 <input type="password" id="password" name="password" class="form-control" required minlength="6">
+                <!-- Toggle password button sẽ được JS tự động thêm vào đây -->
                 <div class="password-requirements">Mật khẩu phải có ít nhất 6 ký tự</div>
             </div>
             <div class="form-group">
                 <label for="confirm_password">Xác nhận mật khẩu</label>
                 <input type="password" id="confirm_password" name="confirm_password" class="form-control" required>
+                <!-- Toggle password button sẽ được JS tự động thêm vào đây -->
             </div>
             <button type="submit" class="login-btn">Đăng ký</button>
             <div class="register-link">
@@ -59,4 +61,6 @@ unset($_SESSION['register_error'], $_SESSION['register_success']);
     </div>
 </div>
 <?php require_once ROOT_PATH . '/view/layout/footer.php'; ?>
-<script src="/Baygorn1/asset/js/auth-register.js"></script>
+<!-- FontAwesome cho icon mắt -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="/Baygorn1/asset/js/toggle-password.js"></script>

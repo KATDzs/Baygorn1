@@ -3,6 +3,7 @@ if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(__DIR__, 3));
 }
 require_once ROOT_PATH . '/app/view/layout/header.php';
+require_once APP_ROOT . '/app/view/helpers.php';
 ?>
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin.css">
 <link rel="stylesheet" href="/Baygorn1/asset/css/admin-games.css">
@@ -24,7 +25,7 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
                     <tr>
                         <td><?= $game['game_id'] ?? $game['id'] ?></td>
                         <td><?= $game['title'] ?></td>
-                        <td><?= number_format($game['price']) ?> VNĐ</td>
+                        <td><?= format_price($game['price']) ?></td>
                         <td><?= $game['stock'] ?></td>
                         <td>
                             <a href="/Baygorn1/index.php?url=admin/editGame/<?= $game['game_id'] ?? $game['id'] ?>" class="action-btn">Sửa</a>

@@ -7,6 +7,7 @@ require_once APP_ROOT . '/app/view/layout/header.php';
 
 require_once APP_ROOT . '/app/Controller/GiaoDichController.php';
 require_once APP_ROOT . '/core/db_connection.php';
+require_once APP_ROOT . '/app/view/helpers.php';
 
 $giaoDichController = new GiaoDichController($conn);
 $game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
@@ -18,7 +19,7 @@ $game = $giaoDichController->getGameDetail($_GET['id'] ?? 1);
         <div class="game-info">
           <h1><?php echo $game['title']; ?></h1>
           <p class="game-description"><?php echo $game['description']; ?></p>
-          <p class="game-price">Giá: <?php echo number_format($game['price'], 0, ',', '.'); ?> VNĐ</p>
+          <p class="game-price">Giá: <?php echo format_price($game['price']); ?></p>
           <div class="buttons">
             <a href="/Baygorn1/index.php?url=giaodich/redirectPayment&id=<?php echo $game['game_id']; ?>" class="btn-buy">MUA NGAY</a>
             <a href="/Baygorn1/app/view/giaodich/pre_order.php?id=<?php echo $game['game_id']; ?>" class="btn-preorder">ĐẶT HÀNG</a>

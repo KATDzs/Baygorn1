@@ -66,7 +66,7 @@
                 <?php if (isset($_SESSION['is_admin']) && $_SESSION['is_admin']): ?>
                     <li class="admin-dropdown-parent-mobile" style="position:relative;">
                         <a href="#" class="menu-link" style="color:purple;font-weight:bold;">Admin &#9662;</a>
-                        <ul id="adminMobileDropdown" class="admin-dropdown-mobile">
+                        <ul id="adminMobileDropdown" class="admin-dropdown-mobile" style="position:absolute;left:0;right:0;top:100%;z-index:1000;background:#232a36;border-radius:10px;margin:0;padding:0.2rem 0 0.4rem 0;box-shadow:0 4px 24px rgba(185,122,255,0.13);display:none;">
                             <li><a href="/Baygorn1/index.php?url=admin" class="menu-link" style="font-size:1rem;">Dashboard</a></li>
                             <li><a href="/Baygorn1/index.php?url=admin/users" class="menu-link" style="font-size:1rem;">Quản lý người dùng</a></li>
                             <li><a href="/Baygorn1/index.php?url=admin/games" class="menu-link" style="font-size:1rem;">Quản lý game</a></li>

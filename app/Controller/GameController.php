@@ -12,6 +12,11 @@ class GameController extends BaseController {
     public function index() {
         try {
             $games = $this->gameModel->getAllGames();
+            // Gán thêm categories cho từng game
+            foreach ($games as &$game) {
+                $game['categories'] = $this->categoryModel->getGameCategories($game['game_id']);
+            }
+            unset($game); // good practice
             $categories = $this->categoryModel->getAllCategories();
             
             $this->view('shopgame/shoppage', [
@@ -309,4 +314,4 @@ class GameController extends BaseController {
         echo json_encode($data);
         exit();
     }
-} 
+}

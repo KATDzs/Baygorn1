@@ -42,6 +42,7 @@ $css_files = ['game-detail', 'header', 'footer'];
 
 // Include header
 require_once ROOT_PATH . '/view/layout/header.php';
+require_once APP_ROOT . '/app/view/helpers.php';
 ?>
 
 <div class="game-detail-container">
@@ -74,7 +75,7 @@ require_once ROOT_PATH . '/view/layout/header.php';
         <div class="game-actions">
             <div class="price-tag">
                 <i class="fas fa-tag"></i>
-                <span><?php echo number_format($game['price']); ?> VNĐ</span>
+                <span><?php echo format_price($game['price']); ?></span>
             </div>
             <a href="/Baygorn1/giaodich?id=<?php echo $game['game_id']; ?>" class="buy-button">
                 MUA NGAY

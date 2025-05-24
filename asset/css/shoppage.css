@@ -563,69 +563,100 @@ body {
 
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     gap: 1.5rem;
+    align-items: stretch;
 }
 
 .game-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
     background: rgba(255,255,255,0.03);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
-    transition: var(--transition);
-    text-decoration: none;
-    color: var(--text);
+    min-height: 420px;
+    height: 100%;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+    margin-bottom: 0;
+    transition: transform 0.18s, box-shadow 0.18s;
 }
 
 .game-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255,255,255,0.05);
+    transform: translateY(-6px) scale(1.01);
+    box-shadow: 0 8px 32px rgba(255,0,60,0.10);
+    background: rgba(255,255,255,0.06);
 }
 
 .game-card-image {
-    position: relative;
-    padding-top: 56.25%;
+    width: 100%;
+    height: 180px;
+    min-height: 180px;
+    max-height: 180px;
+    background: #222;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
 }
 
 .game-card-image img {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    background: #222;
 }
 
 .game-card-info {
-    padding: 1rem;
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.1rem 1rem 1rem 1rem;
+    text-align: left;
 }
 
 .game-card-info h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.13rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
+    color: #fff;
+    text-align: left;
 }
 
 .game-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 0.9rem;
+    font-size: 0.97rem;
+    margin-bottom: 0.7rem;
 }
 
 .game-platform {
-    color: var(--text-secondary);
-    background: rgba(255,255,255,0.05);
+    color: #fff;
+    background: #18191c;
     padding: 0.3rem 0.8rem;
     border-radius: 4px;
+    font-size: 0.97rem;
+    max-width: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .game-price {
-    color: var(--primary);
-    font-weight: 600;
+    color: #ff296a;
+    font-weight: 700;
+    font-size: 1.08rem;
 }
+
 main {
     margin-top: 80px; /* Đảm bảo khoảng cách giữa menu và nội dung */
 }
+
+
 
 /* Responsive Design */
 @media (max-width: 992px) {
@@ -1080,7 +1111,7 @@ main {
   /* Chỉ set width 100% cho nút trong .game-card-info, KHÔNG áp dụng cho .hero-buttons */
   .game-card-info .btn,
   .game-card-info .btn-outline,
-  .game-card-info .btn-primary,
+  .game-card_info .btn-primary,
   .game-card-info .btn-danger {
     width: 100% !important;
     margin-bottom: 0.5rem !important;
@@ -1141,7 +1172,7 @@ main {
 @media (min-width: 601px) and (max-width: 1024px) {
   .game-card-info .btn,
   .game-card-info .btn-outline,
-  .game-card-info .btn-primary,
+  .game-card_info .btn-primary,
   .game-card-info .btn-danger {
     width: 100% !important;
     min-width: 0 !important;
@@ -1199,7 +1230,7 @@ main {
   }
   .game-card-info .btn,
   .game-card-info .btn-outline,
-  .game-card-info .btn-primary,
+  .game-card_info .btn-primary,
   .game-card-info .btn-danger {
     width: 100% !important;
     min-width: 0 !important;
@@ -1261,7 +1292,7 @@ main {
     font-weight: 700;
     box-shadow: 0 4px 18px rgba(255,0,60,0.13);
   }
-  .game-card-info .btn-primary:hover, .game-card-info .btn-danger:hover, .game-card-info .btn-secondary:hover {
+  .game-card-info .btn-primary:hover, .game-card-info .btn-danger:hover, .game-card_info .btn-secondary:hover {
     background: var(--primary-dark);
     color: #fff;
     box-shadow: 0 6px 24px rgba(255,0,60,0.18);

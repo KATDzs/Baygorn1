@@ -24,6 +24,7 @@ if ($isLoggedIn) {
         $userData['phone'] = $user['phone'];
     }
 }
+require_once APP_ROOT . '/app/view/helpers.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,7 +42,7 @@ if ($isLoggedIn) {
                 <div class="game-info">
                     <h2><?php echo $game['title']; ?></h2>
                     <p class="game-description"><?php echo $game['description']; ?></p>
-                    <p class="game-price">Giá: <?php echo number_format($game['price'], 0, ',', '.'); ?> VNĐ</p>
+                    <p class="game-price">Giá: <?php echo format_price($game['price']); ?></p>
                 </div>
             </div>
             <div class="confirmation-container">

@@ -7,6 +7,7 @@ require_once ROOT_PATH . '/view/layout/header.php';
 
 // Get configuration
 $config = require_once __DIR__ . '/../../../config.php';
+require_once APP_ROOT . '/app/view/helpers.php';
 ?>
 
 <!-- Main Container -->
@@ -19,8 +20,15 @@ $config = require_once __DIR__ . '/../../../config.php';
             <h1 id="heroTitle"><?php echo htmlspecialchars($games[0]['title']); ?></h1>
             <p id="heroDesc"><?php echo htmlspecialchars($games[0]['description'] ?? ''); ?></p>
             <div class="hero-meta">
-                <span class="platform" id="heroPlatform"><?php echo htmlspecialchars($games[0]['platform']); ?></span>
-                <span class="price" id="heroPrice"><?php echo number_format($games[0]['price']); ?> VNĐ</span>
+                <span class="platform" id="heroPlatform"><?php 
+                    if (!empty($games[0]['categories'])) {
+                        $cats = array_slice($games[0]['categories'], 0, 3);
+                        echo htmlspecialchars(implode(', ', array_map(function($cat){return is_array($cat)?($cat['name']??$cat):$cat;}, $cats)));
+                    } else {
+                        echo 'Không rõ';
+                    }
+                ?></span>
+                <span class="price" id="heroPrice"><?php echo format_price($games[0]['price']); ?></span>
             </div>
             <div class="hero-buttons d-flex flex-column flex-md-row align-items-center gap-2 gap-md-3">
                 <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
@@ -54,7 +62,7 @@ $config = require_once __DIR__ . '/../../../config.php';
     </section>
 
     <!-- Game Grid Section -->
-    <section class="game-grid-section">
+    <section class="game-grid-section" id="game-list-section">
         <div class="container">
             <div class="section-header">
                 <h2>DANH SÁCH GAME</h2>
@@ -106,8 +114,17 @@ $config = require_once __DIR__ . '/../../../config.php';
                     <div class="game-card-info">
                         <h3><?php echo $game['title']; ?></h3>
                         <div class="game-meta">
-                            <span class="game-platform"><?php echo $game['platform']; ?></span>
-                            <span class="game-price"><?php echo number_format($game['price']); ?> VNĐ</span>
+                            <span class="game-platform">
+                                <?php 
+                                if (!empty($game['categories'])) {
+                                    $cats = array_slice($game['categories'], 0, 3);
+                                    echo htmlspecialchars(implode(', ', array_map(function($cat){return is_array($cat)?($cat['name']??$cat):$cat;}, $cats)));
+                                } else {
+                                    echo 'Không rõ';
+                                }
+                                ?>
+                            </span>
+                            <span class="game-price"><?php echo format_price($game['price']); ?></span>
                         </div>
                         <a href="/Baygorn1/game/game-detail?id=<?php echo $game['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
                         <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $game['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
@@ -129,3 +146,15 @@ window.SHOPGAMES_DATA = <?php echo json_encode(array_values($games), JSON_UNESCA
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/Baygorn1/asset/js/shoppage.js"></script>
+<script>
+// Scroll to game list when 'XEM TẤT CẢ' is clicked
+$(document).ready(function() {
+    $(".select-all").on("click", function(e) {
+        e.preventDefault();
+        const target = document.getElementById('game-list-section');
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+});
+</script>

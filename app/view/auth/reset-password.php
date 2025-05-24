@@ -1,5 +1,7 @@
 <?php require_once 'app/view/layouts/header.php'; ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-6">
@@ -51,5 +53,6 @@
 </div>
 
 <script src="/Baygorn1/asset/js/auth-reset-password.js"></script>
+<script src="/Baygorn1/asset/js/toggle-password.js"></script>
 
 <?php require_once 'app/view/layouts/footer.php'; ?>

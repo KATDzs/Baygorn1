@@ -15,14 +15,14 @@ INSERT INTO categories (name, description) VALUES
 ('FPS', 'Game bắn súng góc nhìn thứ nhất'),
 ('Sandbox', 'Game thế giới mở sáng tạo');
 
--- Insert sample games
+-- Insert sample games (giá VND)
 INSERT INTO games (title, description, detail_desc, platform, price, stock, image_url, modified_by, status, meta) VALUES
-('Minecraft', 'Game thế giới mở với đồ họa khối', 'Khám phá thế giới vô tận, xây dựng và sáng tạo trong một thế giới được tạo ra từ các khối. Sinh tồn qua những đêm đầy quái vật hoặc xây dựng những công trình vĩ đại trong chế độ sáng tạo.', 'PC, Mobile, Console', 29.99, 100, 'minecraft.jpg', 1, 'active', '{"genre": "Sandbox", "publisher": "Mojang", "release_date": "2011-11-18"}'),
-('Roblox', 'Nền tảng game trực tuyến và hệ thống tạo game', 'Roblox là nền tảng cho phép người chơi tham gia và tạo ra vô số trò chơi khác nhau. Với cộng đồng sáng tạo lớn, Roblox cung cấp trải nghiệm game đa dạng và phong phú.', 'PC, Mobile, Console', 0.00, 999, 'game_roblox.jpg', 1, 'active', '{"genre": "Platform", "publisher": "Roblox Corporation", "release_date": "2006-09-01"}'),
-('Palworld', 'Game sinh tồn thế giới mở với các sinh vật Pal', 'Khám phá thế giới kỳ diệu với những sinh vật gọi là "Pal". Thu thập, huấn luyện và chiến đấu cùng Pal trong hành trình sinh tồn đầy thú vị. Xây dựng căn cứ và phát triển đội hình Pal của riêng bạn.', 'PC', 59.99, 50, 'game_palworld.jpeg', 1, 'active', '{"genre": "Survival", "publisher": "Pocketpair", "release_date": "2024-01-19"}'),
-('Team Fortress', 'Game bắn súng đội nhóm hành động', 'Game bắn súng góc nhìn thứ nhất với 9 class nhân vật độc đáo. Mỗi class có những kỹ năng và vai trò riêng biệt, tạo nên những trận chiến chiến thuật gay cấn.', 'PC', 19.99, 75, 'game_tf.jpg', 1, 'active', '{"genre": "FPS", "publisher": "Valve", "release_date": "2007-10-10"}'),
-('I Am Legion', 'Game chiến thuật ma quỷ', 'Trở thành chúa tể bóng tối trong game chiến thuật độc đáo. Chỉ huy đội quân quỷ dữ và mở rộng lãnh địa của bạn trong thế giới đen tối.', 'PC', 24.99, 60, 'game_i_am_legion.jpg', 1, 'active', '{"genre": "Strategy", "publisher": "Dark Games", "release_date": "2024-02-01"}'),
-('Brain Rot Evolution', 'Game sinh tồn zombie độc đáo', 'Sinh tồn trong thế giới hậu tận thế với những zombie tiến hóa. Kết hợp yếu tố sinh tồn và chiến thuật, người chơi phải thích nghi và phát triển để tồn tại.', 'PC', 15.99, 80, 'brainrotevolution.webp', 1, 'active', '{"genre": "Survival", "publisher": "Zombie Studios", "release_date": "2024-01-15"}');
+('Minecraft', 'Game thế giới mở với đồ họa khối', 'Khám phá thế giới vô tận, xây dựng và sáng tạo trong một thế giới được tạo ra từ các khối. Sinh tồn qua những đêm đầy quái vật hoặc xây dựng những công trình vĩ đại trong chế độ sáng tạo.', 'PC, Mobile, Console', 720000, 100, 'minecraft.jpg', 1, 'active', '{"genre": "Sandbox", "publisher": "Mojang", "release_date": "2011-11-18"}'),
+('Roblox', 'Nền tảng game trực tuyến và hệ thống tạo game', 'Roblox là nền tảng cho phép người chơi tham gia và tạo ra vô số trò chơi khác nhau. Với cộng đồng sáng tạo lớn, Roblox cung cấp trải nghiệm game đa dạng và phong phú.', 'PC, Mobile, Console', 0, 999, 'game_roblox.jpg', 1, 'active', '{"genre": "Platform", "publisher": "Roblox Corporation", "release_date": "2006-09-01"}'),
+('Palworld', 'Game sinh tồn thế giới mở với các sinh vật Pal', 'Khám phá thế giới kỳ diệu với những sinh vật gọi là "Pal". Thu thập, huấn luyện và chiến đấu cùng Pal trong hành trình sinh tồn đầy thú vị. Xây dựng căn cứ và phát triển đội hình Pal của riêng bạn.', 'PC', 1440000, 50, 'game_palworld.jpeg', 1, 'active', '{"genre": "Survival", "publisher": "Pocketpair", "release_date": "2024-01-19"}'),
+('Team Fortress', 'Game bắn súng đội nhóm hành động', 'Game bắn súng góc nhìn thứ nhất với 9 class nhân vật độc đáo. Mỗi class có những kỹ năng và vai trò riêng biệt, tạo nên những trận chiến chiến thuật gay cấn.', 'PC', 480000, 75, 'game_tf.jpg', 1, 'active', '{"genre": "FPS", "publisher": "Valve", "release_date": "2007-10-10"}'),
+('I Am Legion', 'Game chiến thuật ma quỷ', 'Trở thành chúa tể bóng tối trong game chiến thuật độc đáo. Chỉ huy đội quân quỷ dữ và mở rộng lãnh địa của bạn trong thế giới đen tối.', 'PC', 600000, 60, 'game_i_am_legion.jpg', 1, 'active', '{"genre": "Strategy", "publisher": "Dark Games", "release_date": "2024-02-01"}'),
+('Brain Rot Evolution', 'Game sinh tồn zombie độc đáo', 'Sinh tồn trong thế giới hậu tận thế với những zombie tiến hóa. Kết hợp yếu tố sinh tồn và chiến thuật, người chơi phải thích nghi và phát triển để tồn tại.', 'PC', 384000, 80, 'brainrotevolution.webp', 1, 'active', '{"genre": "Survival", "publisher": "Zombie Studios", "release_date": "2024-01-15"}');
 
 -- Insert game categories
 INSERT INTO game_categories (game_id, category_id, modified_by) VALUES
@@ -67,27 +67,27 @@ INSERT INTO cart_items (cart_id, game_id, quantity) VALUES
 (1, 3, 1), -- User2's cart - Palworld
 (2, 4, 1); -- User3's cart - Team Fortress
 
--- Insert sample orders
+-- Insert sample orders (giá VND)
 INSERT INTO orders (user_id, status, total_amount, payment_method, payment_status) VALUES
-(2, 'completed', 89.98, 'credit_card', 'paid'),
-(3, 'completed', 19.99, 'paypal', 'paid'),
-(2, 'pending', 59.99, 'credit_card', 'pending');
+(2, 'completed', 2160000, 'credit_card', 'paid'),
+(3, 'completed', 480000, 'paypal', 'paid'),
+(2, 'pending', 1440000, 'credit_card', 'pending');
 
--- Insert sample order details
+-- Insert sample order details (giá VND)
 INSERT INTO order_details (order_id, game_id, unit_price, quantity) VALUES
-(1, 1, 29.99, 1), -- Order 1 - Minecraft
-(1, 3, 59.99, 1), -- Order 1 - Palworld
-(2, 4, 19.99, 1), -- Order 2 - Team Fortress
-(3, 3, 59.99, 1); -- Order 3 - Palworld
+(1, 1, 720000, 1), -- Order 1 - Minecraft
+(1, 3, 1440000, 1), -- Order 1 - Palworld
+(2, 4, 480000, 1), -- Order 2 - Team Fortress
+(3, 3, 1440000, 1); -- Order 3 - Palworld
 
--- Insert sample transactions
+-- Insert sample transactions (giá VND)
 INSERT INTO transactions (order_id, user_id, amount, payment_method, payment_status, transaction_code, payment_details) VALUES
-(1, 2, 89.98, 'credit_card', 'completed', 'TRX-001', '{"card_last4": "4242", "card_brand": "visa"}'),
-(2, 3, 19.99, 'paypal', 'completed', 'TRX-002', '{"paypal_email": "user2@example.com"}'),
-(3, 2, 59.99, 'credit_card', 'pending', 'TRX-003', '{"card_last4": "4242", "card_brand": "visa"}');
+(1, 2, 2160000, 'credit_card', 'completed', 'TRX-001', '{"card_last4": "4242", "card_brand": "visa"}'),
+(2, 3, 480000, 'paypal', 'completed', 'TRX-002', '{"paypal_email": "user2@example.com"}'),
+(3, 2, 1440000, 'credit_card', 'pending', 'TRX-003', '{"card_last4": "4242", "card_brand": "visa"}');
 
--- Insert sample history
+-- Insert sample history (giá VND)
 INSERT INTO history (user_id, game_id, order_id, quantity, price) VALUES
-(2, 1, 1, 1, 29.99), -- User2 bought Minecraft
-(2, 3, 1, 1, 59.99), -- User2 bought Palworld
-(3, 4, 2, 1, 19.99); -- User3 bought Team Fortress 
+(2, 1, 1, 1, 720000), -- User2 bought Minecraft
+(2, 3, 1, 1, 1440000), -- User2 bought Palworld
+(3, 4, 2, 1, 480000); -- User3 bought Team Fortress

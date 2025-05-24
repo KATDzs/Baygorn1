@@ -36,17 +36,9 @@ class AuthController extends BaseController {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $csrf_token = $_SESSION['csrf_token'] ?? bin2hex(random_bytes(32));
-        $_SESSION['csrf_token'] = $csrf_token;
-
-        // Redirect if already logged in
-        if ($this->isLoggedIn()) {
-            header('Location: ' . $this->config['base']);
-            exit;
-        }
-
-        try {
-            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $csrf_token = $_SESSION['csrf_token'] ?? bin2hex(random_bytes(32));
+            try {
                 // Validate CSRF token
                 $this->validateCSRF($_POST['csrf_token'] ?? '');
 
@@ -57,25 +49,31 @@ class AuthController extends BaseController {
                 ];
 
                 if (!$this->validate($_POST, $rules)) {
+                    $csrf_token = bin2hex(random_bytes(32));
+                    $_SESSION['csrf_token'] = $csrf_token;
                     return $this->view('auth/login', [
                         'title' => 'Đăng nhập',
                         'css_files' => ['auth'],
-                        'csrf_token' => $csrf_token
+                        'csrf_token' => $csrf_token,
+                        'errors' => $this->getErrors()
                     ]);
                 }
 
                 $username = $this->sanitize($_POST['username']);
                 $password = $_POST['password'];
                 
-                // Check login attempts
-                if ($this->isLockedOut($username)) {
-                    $this->addError('general', 'Account is temporarily locked. Please try again later.');
-                    return $this->view('auth/login', [
-                        'title' => 'Đăng nhập',
-                        'css_files' => ['auth'],
-                        'csrf_token' => $csrf_token
-                    ]);
-                }
+                // BỎ kiểm tra locked out
+                // if ($this->isLockedOut($username)) {
+                //     $this->addError('general', 'Account is temporarily locked. Please try again later.');
+                //     $csrf_token = bin2hex(random_bytes(32));
+                //     $_SESSION['csrf_token'] = $csrf_token;
+                //     return $this->view('auth/login', [
+                //         'title' => 'Đăng nhập',
+                //         'css_files' => ['auth'],
+                //         'csrf_token' => $csrf_token,
+                //         'errors' => $this->getErrors()
+                //     ]);
+                // }
 
                 // Attempt login
                     $user = $this->userModel->getUserByUsername($username);
@@ -102,28 +100,33 @@ class AuthController extends BaseController {
 
                     // Redirect based on role
                     $this->redirect($user['is_admin'] ? 'admin' : 'home');
-                        } else {
+                } else {
                     // Increment failed login attempts
                     $this->incrementLoginAttempts($username);
-                    
                     $this->addError('general', 'Invalid username or password');
-                    $this->view('auth/login', [
+                    $csrf_token = bin2hex(random_bytes(32));
+                    $_SESSION['csrf_token'] = $csrf_token;
+                    return $this->view('auth/login', [
                         'title' => 'Đăng nhập',
                         'css_files' => ['auth'],
-                        'csrf_token' => $csrf_token
+                        'csrf_token' => $csrf_token,
+                        'errors' => $this->getErrors()
                     ]);
                 }
-            } else {
+            } catch (Exception $e) {
+                $this->logError('Login error', $e);
+                $this->error500();
+            }
+        } else {
+            // GET: luôn tạo token mới khi vào trang login
+            $csrf_token = bin2hex(random_bytes(32));
+            $_SESSION['csrf_token'] = $csrf_token;
             $this->view('auth/login', [
                 'title' => 'Đăng nhập',
                 'css_files' => ['auth'],
                 'csrf_token' => $csrf_token
             ]);
-            }
-        } catch (Exception $e) {
-            $this->logError('Login error', $e);
-            $this->error500();
-        }        
+        }
     }
 
     // Hiển thị form đăng ký
