@@ -41,3 +41,6 @@ RewriteRule ^$ home [L,R=301]
 
 # Rewrite đẹp cho trang profile user
 RewriteRule ^user/profile$ index.php?url=user/profile [QSA,L]
+
+# Rewrite đẹp cho trang history user
+RewriteRule ^user/history$ index.php?url=user/history [QSA,L]

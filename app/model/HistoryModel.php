@@ -11,7 +11,7 @@ class HistoryModel {
                  FROM history h
                  JOIN users u ON h.user_id = u.user_id
                  JOIN games g ON h.game_id = g.game_id
-                 ORDER BY h.created_at DESC 
+                 ORDER BY h.purchased_at DESC 
                  LIMIT ?, ?";
                  
         $stmt = mysqli_prepare($this->conn, $query);
@@ -40,7 +40,7 @@ class HistoryModel {
                  FROM history h
                  JOIN games g ON h.game_id = g.game_id
                  WHERE h.user_id = ?
-                 ORDER BY h.created_at DESC 
+                 ORDER BY h.purchased_at DESC 
                  LIMIT ?, ?";
                  
         $stmt = mysqli_prepare($this->conn, $query);
@@ -62,7 +62,7 @@ class HistoryModel {
                  FROM history h
                  JOIN users u ON h.user_id = u.user_id
                  WHERE h.game_id = ?
-                 ORDER BY h.created_at DESC 
+                 ORDER BY h.purchased_at DESC 
                  LIMIT ?, ?";
                  
         $stmt = mysqli_prepare($this->conn, $query);
@@ -195,4 +195,4 @@ class HistoryModel {
         return $result->fetch_assoc();
     }
 }
-?> 
+?>

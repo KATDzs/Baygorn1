@@ -28,6 +28,7 @@ class UserController extends BaseController {
     }
 
     public function history() {
+        error_log("DEBUG: Đã vào UserController->history()");
         try {
             $userId = $this->requireLogin();
             
@@ -36,14 +37,16 @@ class UserController extends BaseController {
             $offset = ($page - 1) * $limit;
             
             $history = $this->historyModel->getUserHistory($userId, $limit, $offset);
-            $total = $this->historyModel->getTotalPurchases($userId);
-            $totalPages = ceil($total / $limit);
+            $totalData = $this->historyModel->getTotalPurchases($userId);
+            $total = is_array($totalData) && isset($totalData['total']) ? (int)$totalData['total'] : 0;
+            $totalPages = $total > 0 ? ceil($total / $limit) : 1;
             
             $this->view('user/history', [
                 'title' => 'Lịch sử mua hàng',
                 'history' => $history,
                 'currentPage' => $page,
                 'totalPages' => $totalPages,
+                'offset' => $offset, // Thêm dòng này để truyền offset sang view
                 'css_files' => ['user']
             ]);
         } catch (Exception $e) {
@@ -207,4 +210,4 @@ class UserController extends BaseController {
             'data' => $orders
         ];
     }
-} 
+}

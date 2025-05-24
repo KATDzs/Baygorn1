@@ -69,6 +69,9 @@ $urlArr = explode('/', $url);
 if ($urlArr[0] === 'user' && isset($urlArr[1]) && $urlArr[1] === 'profile') {
     $controllerName = 'Auth';
     $action = 'profile';
+} else if ($urlArr[0] === 'user' && isset($urlArr[1]) && $urlArr[1] === 'history') {
+    $controllerName = 'User';
+    $action = 'history';
 } else if ($urlArr[0] === 'shopgame') {
     $controllerName = 'Game';
 } else if ($urlArr[0] === 'about') {
@@ -103,6 +106,9 @@ if (!file_exists($controllerFile)) {
 } else {
     error_log("Controller file exists: " . $controllerFile);
 }
+
+error_log('DEBUG: controllerClassName = ' . $controllerClassName);
+error_log('DEBUG: controllerFile = ' . $controllerFile);
 
 try {
     error_log("DEBUG: index.php about to instantiate controller: $controllerClassName from $controllerFile");

@@ -269,13 +269,4 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         });
     });
-
-    // Cuộn mượt đến danh sách game khi bấm 'Xem tất cả'
-    document.getElementById('scrollToGameListBtn')?.addEventListener('click', function(e) {
-        e.preventDefault();
-        const gameListSection = document.getElementById('game-list');
-        if (gameListSection) {
-            gameListSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    });
 });
