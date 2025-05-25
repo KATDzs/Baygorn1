@@ -167,7 +167,8 @@ class CartController extends BaseController {
                 foreach ($cartItems as $item) {
                     $items[] = [
                         'game_id' => $item['game_id'],
-                        'quantity' => $item['quantity']
+                        'quantity' => $item['quantity'],
+                        'price' => $item['price']
                     ];
                 }
                 $total = $this->cartModel->getCartTotal($userId);

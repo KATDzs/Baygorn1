@@ -185,6 +185,35 @@ if ($isLoggedIn) {
         modal.style.display = "none";
       }
     }
+
+    // Add click event listener to QR code image
+    qrImage.onclick = function() {
+      // Send AJAX request to simulate payment
+      fetch('/Baygorn1/index.php?url=cart/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams(new FormData(document.getElementById('paymentForm')))
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          // Show success message
+          alert('Thanh toán thành công!');
+          // Close the modal
+          modal.style.display = "none";
+          // Redirect to home page
+          window.location.href = '/Baygorn1/';
+        } else {
+          alert('Thanh toán thất bại: ' + data.message);
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert('Đã xảy ra lỗi khi xử lý thanh toán');
+      });
+    }
     </script>
 
     <?php include BASE_PATH . '/app/view/layout/footer.php'; ?>
