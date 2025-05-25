@@ -178,16 +178,18 @@ class CartController extends BaseController {
                     // Clear cart after successful order
                     $this->cartModel->clearCart($userId);
                     
-                    header('Location: /Baygorn1/giaodich/payment_confirmation.php?order_id=' . $orderId);
+                    // Return success response for AJAX
+                    header('Content-Type: application/json; charset=utf-8');
+                    echo json_encode(['success' => true, 'message' => 'Thanh toán thành công!', 'order_id' => $orderId], JSON_UNESCAPED_UNICODE);
                     exit;
                 } else {
                     throw new Exception('Failed to create order');
                 }
             } catch (Exception $e) {
-                $error = $e->getMessage();
-                require_once BASE_PATH . '/app/view/layout/header.php';
-                require BASE_PATH . '/app/view/giaodich/process_transaction.php';
-                require_once BASE_PATH . '/app/view/layout/footer.php';
+                // Return error response for AJAX
+                header('Content-Type: application/json; charset=utf-8');
+                echo json_encode(['success' => false, 'message' => 'Thanh toán thất bại: ' . $e->getMessage()], JSON_UNESCAPED_UNICODE);
+                exit;
             }
         } else {
             $cartItems = $this->cartModel->getCartItems($userId);
