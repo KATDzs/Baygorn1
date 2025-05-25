@@ -15,7 +15,6 @@ require_once APP_ROOT . '/app/view/helpers.php';
                     <th>STT</th>
                     <th>Game</th>
                     <th>Ảnh</th>
-                    <th>Số lượng</th>
                     <th>Giá</th>
                     <th>Ngày mua</th>
                 </tr>
@@ -26,7 +25,6 @@ require_once APP_ROOT . '/app/view/helpers.php';
                         <td><?= $offset + $i + 1 ?></td>
                         <td style="font-weight:600; color:#7ed6df; letter-spacing:0.5px;"> <?= htmlspecialchars($item['game_title']) ?> </td>
                         <td><img src="/Baygorn1/asset/img/games/<?= htmlspecialchars($item['image_url']) ?>" alt="<?= htmlspecialchars($item['game_title']) ?>"></td>
-                        <td><?= $item['quantity'] ?></td>
                         <td style="color:#e17055; font-weight:600;"> <?= format_price($item['price']) ?> </td>
                         <td><?= date('d/m/Y H:i', strtotime($item['created_at'] ?? $item['purchased_at'] ?? '')) ?></td>
                     </tr>

@@ -223,18 +223,39 @@ class AuthController extends BaseController {
         $this->requireLogin();
 
         try {
-            // Get user data from model
+            // Lấy thông tin user
             $user = $this->userModel->getUserById($_SESSION['user_id']);
-            
-            if (!$user) {
-                throw new Exception('User not found');
+
+            // Lấy lịch sử mua game
+            $historyModel = $this->loadModel('HistoryModel');
+            $history = $historyModel->getUserHistory($_SESSION['user_id'], 1000, 0);
+
+            // Lấy danh sách game đã mua dựa trên history
+            $games = [];
+            if (!empty($history)) {
+                $gameIds = array_column($history, 'game_id');
+                $gameIds = array_unique($gameIds);
+                if (!empty($gameIds)) {
+                    $placeholders = implode(',', array_fill(0, count($gameIds), '?'));
+                    $types = str_repeat('i', count($gameIds));
+                    $conn = $this->conn;
+                    $stmt = $conn->prepare("SELECT * FROM games WHERE game_id IN ($placeholders)");
+                    $stmt->bind_param($types, ...$gameIds);
+                    $stmt->execute();
+                    $result = $stmt->get_result();
+                    while ($row = $result->fetch_assoc()) {
+                        $games[] = $row;
+                    }
+                    $stmt->close();
+                }
             }
 
-            // Pass user data to view
             $this->view('auth/profile', [
                 'title' => 'Thông tin cá nhân',
                 'css_files' => ['auth'],
-                'user' => $user
+                'user' => $user,
+                'purchasedGames' => $games,
+                'history' => $history
             ]);
         } catch (Exception $e) {
             $this->logError('Profile error', $e);

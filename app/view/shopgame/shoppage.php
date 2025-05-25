@@ -31,9 +31,15 @@ require_once APP_ROOT . '/app/view/helpers.php';
                 <span class="price" id="heroPrice"><?php echo format_price($games[0]['price']); ?></span>
             </div>
             <div class="hero-buttons d-flex flex-column flex-md-row align-items-center gap-2 gap-md-3">
-                <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
+                <?php if (isset($purchasedGameIds) && in_array((string)$games[0]['game_id'], array_map('strval', $purchasedGameIds))): ?>
+                    <span class="btn btn-success" style="pointer-events:none;opacity:0.85;">ĐÃ MUA</span>
+                <?php else: ?>
+                    <a href="/Baygorn1/giaodich?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-primary" id="buyNowBtn">MUA NGAY</a>
+                <?php endif; ?>
                 <a href="/Baygorn1/game/game-detail?id=<?php echo $games[0]['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
-                <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $games[0]['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
+                <?php if (!isset($purchasedGameIds) || !in_array((string)$games[0]['game_id'], array_map('strval', $purchasedGameIds))): ?>
+                    <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $games[0]['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
+                <?php endif; ?>
             </div>
         </div>
     </section>
@@ -127,7 +133,11 @@ require_once APP_ROOT . '/app/view/helpers.php';
                             <span class="game-price"><?php echo format_price($game['price']); ?></span>
                         </div>
                         <a href="/Baygorn1/game/game-detail?id=<?php echo $game['game_id']; ?>" class="btn btn-outline">CHI TIẾT</a>
-                        <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $game['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
+                        <?php if (isset($purchasedGameIds) && in_array((string)$game['game_id'], array_map('strval', $purchasedGameIds))): ?>
+                            <span class="btn btn-success" style="pointer-events:none;opacity:0.85;">ĐÃ MUA</span>
+                        <?php else: ?>
+                            <button type="button" class="btn btn-secondary btn-add-cart" data-game-id="<?php echo $game['game_id']; ?>">THÊM VÀO GIỎ HÀNG</button>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <?php endforeach; ?>

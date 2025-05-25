@@ -141,11 +141,15 @@ class CartController extends BaseController {
     }
 
     public function checkout() {
-        $this->checkAuth();
+        // Kiểm tra đăng nhập
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /Baygorn1/index.php?url=auth/login');
+            exit;
+        }
         $userId = $_SESSION['user_id'];
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            require_once 'model/OrderModel.php';
+            require_once BASE_PATH . '/app/model/OrderModel.php';
             global $conn;
             $orderModel = new OrderModel($conn);
             
@@ -166,9 +170,10 @@ class CartController extends BaseController {
                         'quantity' => $item['quantity']
                     ];
                 }
-                
+                $total = $this->cartModel->getCartTotal($userId);
+                $paymentMethod = $_POST['paymentMethod'] ?? 'bank';
                 // Create order
-                $orderId = $orderModel->createOrder($userId, $items);
+                $orderId = $orderModel->createOrder($userId, $items, $total, $paymentMethod);
                 if ($orderId) {
                     // Clear cart after successful order
                     $this->cartModel->clearCart($userId);
@@ -179,9 +184,10 @@ class CartController extends BaseController {
                     throw new Exception('Failed to create order');
                 }
             } catch (Exception $e) {
-                require_once 'view/layout/header.php';
-                require_once 'view/giaodich/process_transaction.php';
-                require_once 'view/layout/footer.php';
+                $error = $e->getMessage();
+                require_once BASE_PATH . '/app/view/layout/header.php';
+                require BASE_PATH . '/app/view/giaodich/process_transaction.php';
+                require_once BASE_PATH . '/app/view/layout/footer.php';
             }
         } else {
             $cartItems = $this->cartModel->getCartItems($userId);
@@ -193,9 +199,9 @@ class CartController extends BaseController {
                 error_log("Cart contains " . count($cartItems) . " items for user ID: " . $userId);
             }
 
-            require_once 'view/layout/header.php';
-            require_once 'view/giaodich/process_transaction.php';
-            require_once 'view/layout/footer.php';
+            require_once BASE_PATH . '/app/view/layout/header.php';
+            require_once BASE_PATH . '/app/view/giaodich/process_transaction.php';
+            require_once BASE_PATH . '/app/view/layout/footer.php';
         }
     }
 }

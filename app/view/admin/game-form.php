@@ -19,8 +19,6 @@ require_once ROOT_PATH . '/app/view/layout/header.php';
         <input type="text" name="platform" value="<?= isset($game['platform']) ? htmlspecialchars($game['platform']) : '' ?>">
         <label>Giá:</label>
         <input type="number" name="price" value="<?= isset($game['price']) ? $game['price'] : 0 ?>" min="0" required>
-        <label>Số lượng:</label>
-        <input type="number" name="stock" value="<?= isset($game['stock']) ? $game['stock'] : 0 ?>" min="0" required>
         <label>Ảnh:</label>
         <input type="file" name="image">
         <?php if (isset($game['image_url']) && $game['image_url']): ?>

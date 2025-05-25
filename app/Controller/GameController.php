@@ -18,11 +18,21 @@ class GameController extends BaseController {
             }
             unset($game); // good practice
             $categories = $this->categoryModel->getAllCategories();
-            
+
+            // Lấy danh sách game_id đã mua nếu đã đăng nhập
+            $purchasedGameIds = [];
+            if (isset($_SESSION['user_id'])) {
+                $historyModel = $this->loadModel('HistoryModel');
+                $userHistory = $historyModel->getUserHistory($_SESSION['user_id'], 1000, 0); // lấy tối đa 1000 game đã mua
+                foreach ($userHistory as $item) {
+                    $purchasedGameIds[] = $item['game_id'];
+                }
+            }
             $this->view('shopgame/shoppage', [
                 'title' => 'Danh sách game',
                 'games' => $games,
                 'categories' => $categories,
+                'purchasedGameIds' => $purchasedGameIds,
                 'css_files' => ['shoppage']
             ]);
         } catch (Exception $e) {

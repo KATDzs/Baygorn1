@@ -106,10 +106,6 @@ require_once APP_ROOT . '/app/view/helpers.php';
                 <div class="detail-label">Tình trạng</div>
                 <div class="detail-value"><?php echo htmlspecialchars($game['status']); ?></div>
             </div>
-            <div class="detail-item">
-                <div class="detail-label">Số lượng còn lại</div>
-                <div class="detail-value"><?php echo htmlspecialchars($game['stock']); ?></div>
-            </div>
         </div>
     </div>
 </div>

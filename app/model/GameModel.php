@@ -111,15 +111,14 @@ class GameModel {
 
     // Thêm game mới
     public function addGame($data) {
-        $query = "INSERT INTO games (title, description, price, stock, image_url, created_by, created_at, modified_by, modified_at) 
-                 VALUES (?, ?, ?, ?, ?, ?, NOW(), ?, NOW())";
+        $query = "INSERT INTO games (title, description, price, image_url, created_by, created_at, modified_by, modified_at) 
+                 VALUES (?, ?, ?, ?, ?, NOW(), ?, NOW())";
                  
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssdiiss", 
+        mysqli_stmt_bind_param($stmt, "ssdiss", 
             $data['title'],
             $data['description'],
             $data['price'],
-            $data['stock'],
             $data['image_url'],
             $data['created_by'],
             $data['modified_by']
@@ -142,18 +141,16 @@ class GameModel {
                  title = ?,
                  description = ?,
                  price = ?,
-                 stock = ?,
                  image_url = ?,
                  modified_by = ?,
                  modified_at = NOW()
                  WHERE game_id = ?";
                  
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssdiisi",
+        mysqli_stmt_bind_param($stmt, "ssdissi",
             $data['title'],
             $data['description'],
             $data['price'],
-            $data['stock'],
             $data['image_url'],
             $data['modified_by'],
             $id
@@ -239,16 +236,6 @@ class GameModel {
             mysqli_rollback($this->conn);
             throw $e;
         }
-    }
-
-    // Cập nhật số lượng game
-    public function updateStock($gameId, $quantity) {
-        $query = "UPDATE games SET stock = stock + ? WHERE game_id = ?";
-        $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "ii", $quantity, $gameId);
-        $success = mysqli_stmt_execute($stmt);
-        mysqli_stmt_close($stmt);
-        return $success;
     }
 }
 ?>

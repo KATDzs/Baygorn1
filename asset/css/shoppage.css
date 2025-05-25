@@ -185,6 +185,16 @@ body {
     box-shadow: 0 6px 20px rgba(255,255,255,0.2);
 }
 
+.btn-success {
+    background: #4caf50 !important;
+    color: #fff !important;
+    border: none !important;
+    cursor: default !important;
+    font-weight: 700;
+    opacity: 0.95;
+    pointer-events: none;
+}
+
 /* Game Filter Bar */
 .game-filter-bar {
     position: sticky;
@@ -554,7 +564,6 @@ body {
     background-repeat: no-repeat;
     background-position: right 0.5rem center;
     background-size: 1em;
-    min-width: 180px;
 }
 
 .filter-groups select:hover {
@@ -1055,6 +1064,9 @@ main {
     min-height: 180px !important;
     border-radius: 10px !important;
   }
+  .slider-card-info {
+    padding: 0.7rem !important;
+  }
   .slider-card .title {
     font-size: 1.1rem !important;
     word-break: break-word !important;
@@ -1088,10 +1100,6 @@ main {
     padding: 0.5rem 0.7rem !important;
     border-radius: 6px !important;
     min-width: 90px !important;
-  }
-  .btn-lg, .btn-block, .w-100 {
-    font-size: 1rem !important;
-    padding: 0.7rem 1rem !important;
   }
   /* Đảm bảo mọi thứ căn giữa */
   .slider-header, .slider-title, .slider-card-info, .game-card-info {

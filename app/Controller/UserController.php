@@ -15,10 +15,28 @@ class UserController extends BaseController {
         try {
             $userId = $this->requireLogin();
             $user = $this->userModel->getUserById($userId);
-            
-            $this->view('user/profile', [
+            // Lấy danh sách game đã mua
+            $history = $this->historyModel->getUserHistory($userId, 1000, 0); // lấy tối đa 1000 game đã mua
+            $gameIds = array_column($history, 'game_id');
+            $games = [];
+            if (!empty($gameIds)) {
+                // Lấy thông tin chi tiết game đã mua
+                $placeholders = implode(',', array_fill(0, count($gameIds), '?'));
+                $types = str_repeat('i', count($gameIds));
+                $stmt = $this->userModel->getConnection()->prepare("SELECT * FROM games WHERE game_id IN ($placeholders)");
+                $stmt->bind_param($types, ...$gameIds);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                while ($row = $result->fetch_assoc()) {
+                    $games[] = $row;
+                }
+                $stmt->close();
+            }
+            $this->view('auth/profile', [
                 'title' => 'Thông tin cá nhân',
                 'user' => $user,
+                'purchasedGames' => $games,
+                'history' => $history, // Truyền thêm history để fallback
                 'css_files' => ['user']
             ]);
         } catch (Exception $e) {

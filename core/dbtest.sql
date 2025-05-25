@@ -17,7 +17,6 @@ CREATE TABLE games (
     detail_desc TEXT,
     platform VARCHAR(100) NOT NULL,
     price DECIMAL(10,2) NOT NULL,
-    stock INT NOT NULL DEFAULT 0,
     image_url VARCHAR(255),
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -153,4 +152,4 @@ CREATE TABLE IF NOT EXISTS password_resets (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Add password_version column to users table if not exists
-ALTER TABLE users ADD COLUMN IF NOT EXISTS password_version INT NOT NULL DEFAULT 1; 
+ALTER TABLE users ADD COLUMN IF NOT EXISTS password_version INT NOT NULL DEFAULT 1;

@@ -48,7 +48,7 @@ require_once APP_ROOT . '/app/view/helpers.php';
             <span class="cart-total-amount"><?php echo format_price($total); ?></span>
         </div>
         <div class="cart-actions-modern">
-            <a href="/Baygorn1/index.php?url=order/checkout" class="cart-checkout-btn">Thanh toán ngay</a>
+            <a href="/Baygorn1/index.php?url=cart/checkout" class="cart-checkout-btn">Thanh toán ngay</a>
         </div>
     <?php endif; ?>
 </div>

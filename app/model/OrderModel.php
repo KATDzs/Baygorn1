@@ -145,17 +145,6 @@ class OrderModel {
                 if (!$success) {
                     throw new Exception("Failed to add order item");
                 }
-
-                // Update game stock
-                $query = "UPDATE games SET stock = stock - ? WHERE game_id = ?";
-                $stmt = mysqli_prepare($this->conn, $query);
-                mysqli_stmt_bind_param($stmt, "ii", $item['quantity'], $item['game_id']);
-                $success = mysqli_stmt_execute($stmt);
-                mysqli_stmt_close($stmt);
-                
-                if (!$success) {
-                    throw new Exception("Failed to update game stock");
-                }
             }
 
             mysqli_commit($this->conn);
@@ -230,19 +219,6 @@ class OrderModel {
                 $items[] = $row;
             }
             mysqli_stmt_close($stmt);
-
-            // Return items to stock
-            foreach ($items as $item) {
-                $query = "UPDATE games SET stock = stock + ? WHERE game_id = ?";
-                $stmt = mysqli_prepare($this->conn, $query);
-                mysqli_stmt_bind_param($stmt, "ii", $item['quantity'], $item['game_id']);
-                $success = mysqli_stmt_execute($stmt);
-                mysqli_stmt_close($stmt);
-                
-                if (!$success) {
-                    throw new Exception("Failed to return items to stock");
-                }
-            }
 
             // Update order status
             $query = "UPDATE orders SET status = 'cancelled', modified_at = NOW() WHERE order_id = ?";
