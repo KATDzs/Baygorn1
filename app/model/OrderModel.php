@@ -129,7 +129,7 @@ class OrderModel {
 
             // Add order items
             foreach ($items as $item) {
-                $query = "INSERT INTO order_items (order_id, game_id, quantity, price) 
+                $query = "INSERT INTO order_details (order_id, game_id, quantity, unit_price) 
                          VALUES (?, ?, ?, ?)";
                          
                 $stmt = mysqli_prepare($this->conn, $query);
@@ -146,6 +146,29 @@ class OrderModel {
                     throw new Exception("Failed to add order item");
                 }
             }
+
+            // Add items to history table
+            $history_query = "INSERT INTO history (user_id, game_id, order_id, quantity, price, purchased_at) 
+                             VALUES (?, ?, ?, ?, ?, NOW())";
+            $history_stmt = mysqli_prepare($this->conn, $history_query);
+
+            foreach ($items as $item) {
+                // Assuming 'price' in items array is the unit_price
+                mysqli_stmt_bind_param($history_stmt, "iiiid", 
+                    $userId, 
+                    $item['game_id'], 
+                    $orderId, 
+                    $item['quantity'], 
+                    $item['price']
+                );
+                $success = mysqli_stmt_execute($history_stmt);
+                
+                if (!$success) {
+                    // If history insertion fails, rollback the whole transaction
+                    throw new Exception("Failed to add item to history");
+                }
+            }
+            mysqli_stmt_close($history_stmt);
 
             mysqli_commit($this->conn);
             return $orderId;

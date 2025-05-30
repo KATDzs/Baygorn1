@@ -17,26 +17,28 @@ document.addEventListener('DOMContentLoaded', function() {
         const defaultImage = '/Baygorn1/asset/img/default-game.jpg';
 
         // Update slider card
-        cardContainer.innerHTML = `
-            <div class="slider-card fade-in" style="width:100%;height:100%;">
-                <a href="/Baygorn1/giaodich?id=${game.game_id}" style="display:block;width:100%;height:100%;">
-                    <img src="${imagePath}" alt="${game.title}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='${defaultImage}'">
-                    <div class="slider-card-info">
-                        <div class="title">${game.title}</div>
-                        <div class="price">${Number(game.price).toLocaleString()} VNĐ</div>
-                    </div>
-                </a>
-            </div>
-        `;
+        if (cardContainer) {
+            cardContainer.innerHTML = `
+                <div class="slider-card fade-in" style="width:100%;height:100%;">
+                    <a href="/Baygorn1/giaodich?id=${game.game_id}" style="display:block;width:100%;height:100%;">
+                        <img src="${imagePath}" alt="${game.title}" style="width:100%;height:100%;object-fit:cover;" onerror="this.src='${defaultImage}'">
+                        <div class="slider-card-info">
+                            <div class="title">${game.title}</div>
+                            <div class="price">${Number(game.price).toLocaleString()} VNĐ</div>
+                        </div>
+                    </a>
+                </div>
+            `;
+        }
 
         // Update hero section
-        heroBg.style.backgroundImage = `url('${imagePath}')`;
-        blurBg.style.backgroundImage = `url('${imagePath}')`;
-        heroTitle.textContent = game.title;
-        heroDesc.textContent = game.description || '';
-        heroPlatform.textContent = getGameCategories(game);
-        heroPrice.textContent = `${Number(game.price).toLocaleString()} VNĐ`;
-        buyNowBtn.href = `/Baygorn1/giaodich?id=${game.game_id}`;
+        if (heroBg) heroBg.style.backgroundImage = `url('${imagePath}')`;
+        if (blurBg) blurBg.style.backgroundImage = `url('${imagePath}')`;
+        if (heroTitle) heroTitle.textContent = game.title;
+        if (heroDesc) heroDesc.textContent = game.description || '';
+        if (heroPlatform) heroPlatform.textContent = getGameCategories(game);
+        if (heroPrice) heroPrice.textContent = `${Number(game.price).toLocaleString()} VNĐ`;
+        if (buyNowBtn) buyNowBtn.href = `/Baygorn1/giaodich?id=${game.game_id}`;
     }
 
     // Initial render

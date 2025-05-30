@@ -1,7 +1,11 @@
 <?php
+session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 if (!defined('ROOT_PATH')) {
     define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
 }
+
 // Get configuration
 $config = require_once __DIR__ . '/../../../config.php';
 

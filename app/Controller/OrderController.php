@@ -206,4 +206,45 @@ class OrderController extends BaseController {
 
         return ['success' => false, 'message' => 'Failed to update order status'];
     }
+
+    public function purchaseFree() {
+        try {
+            $userId = $this->requireLogin();
+
+            if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+                $this->json(['success' => false, 'message' => 'Invalid request method']);
+                return;
+            }
+
+            $gameId = $_POST['game_id'] ?? 0;
+            if (!$gameId) {
+                $this->json(['success' => false, 'message' => 'Missing game ID']);
+                return;
+            }
+
+            // Check if game is actually free (optional but recommended)
+            $game = $this->gameModel->getGameById($gameId);
+            if (!$game || $game['price'] > 0) {
+                 $this->json(['success' => false, 'message' => 'This game is not free.']);
+                 return;
+            }
+
+            // Create a new order with total 0
+            $orderId = $this->orderModel->createOrder($userId, [], 0, 'free'); // Assuming createOrder handles empty items for free
+
+            if (!$orderId) {
+                $this->json(['success' => false, 'message' => 'Failed to create free order.']);
+                return;
+            }
+
+            // Add the free game to history
+            $this->historyModel->addToHistory($userId, $gameId, $orderId, 1, 0); // Quantity 1, Price 0
+
+            $this->json(['success' => true, 'message' => 'Game purchased successfully!', 'order_id' => $orderId]);
+
+        } catch (Exception $e) {
+            error_log('Error in purchaseFree method: ' . $e->getMessage());
+            $this->json(['success' => false, 'message' => 'An error occurred during free purchase.']);
+        }
+    }
 } 
