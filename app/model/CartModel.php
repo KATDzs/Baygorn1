@@ -70,7 +70,7 @@ class CartModel {
             mysqli_stmt_bind_param($stmt, "iii", $cartId, $gameId, $quantity);
             $success = mysqli_stmt_execute($stmt);
             mysqli_stmt_close($stmt);
-            return $success;
+            return $success ? true : false;
         }
     }
 

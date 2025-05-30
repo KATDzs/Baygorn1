@@ -184,9 +184,8 @@ class CartController extends BaseController {
                     throw new Exception('Failed to create order');
                 }
             } catch (Exception $e) {
-                $error = $e->getMessage();
                 require_once BASE_PATH . '/app/view/layout/header.php';
-                require BASE_PATH . '/app/view/giaodich/process_transaction.php';
+                require_once BASE_PATH . '/app/view/giaodich/process_transaction.php';
                 require_once BASE_PATH . '/app/view/layout/footer.php';
             }
         } else {

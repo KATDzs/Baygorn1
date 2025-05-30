@@ -11,8 +11,8 @@ require_once ROOT_PATH . '/view/layout/header.php';
     <section class="hero">
       <div class="overlay"></div>
       <div class="hero-content">
-        <h1 class="hero-title">Hãy ngước nhìn lên những Tinh Tú Thăng Hoa</h1>
-        <p class="hero-subtitle">Kiếm tìm và chiến đấu cho huyền thoại đích thực của bạn từ ngày 17/04!</p>
+        <h1 class="hero-title">Baygorn</h1>
+        <p class="hero-subtitle">Nền tảng bán game và cập nhật thông tin uy tín dành riêng cho game thủ Việt</p>
       </div>
     </section>
 

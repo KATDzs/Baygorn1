@@ -36,14 +36,33 @@ class GiaoDichController extends BaseController {
             $email = $_POST['email'] ?? '';
             $phone = $_POST['phone'] ?? '';
             $paymentMethod = $_POST['paymentMethod'] ?? '';
-
-            // Xử lý thanh toán ở đây
-            // TODO: Thêm logic xử lý thanh toán
-
-            // Sau khi xử lý xong, chuyển về trang chủ
-            header("Location: /Baygorn1/");
-            exit;
+            $user_id = $_SESSION['user']['user_id'] ?? $_SESSION['user_id'] ?? null;
+            require_once __DIR__ . '/../model/HistoryModel.php';
+            $historyModel = new \HistoryModel($this->conn);
+            $game = $this->gameModel->getGameById($game_id);
+            if (!$game) {
+                header("Location: /Baygorn1/");
+                exit;
+            }
+            if (isset($game['price']) && floatval($game['price']) == 0) {
+                // Game free: mua ngay
+                $historyModel->addToHistory($user_id, $game_id, null, 1, 0);
+                // Có thể thêm thông báo thành công ở đây
+                header("Location: /Baygorn1/index.php?url=user/history&msg=free_success");
+                exit;
+            } else {
+                // Game trả phí: chuyển sang trang QR
+                $_SESSION['pending_payment'] = [
+                    'game_id' => $game_id,
+                    'fullName' => $fullName,
+                    'email' => $email,
+                    'phone' => $phone,
+                    'paymentMethod' => $paymentMethod
+                ];
+                header("Location: /Baygorn1/app/view/giaodich/show_qr.php?id=$game_id");
+                exit;
+            }
         }
     }
 }
-?> 
+?>

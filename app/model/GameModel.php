@@ -111,27 +111,33 @@ class GameModel {
 
     // Thêm game mới
     public function addGame($data) {
-        $query = "INSERT INTO games (title, description, price, image_url, created_by, created_at, modified_by, modified_at) 
-                 VALUES (?, ?, ?, ?, ?, NOW(), ?, NOW())";
-                 
+        $query = "INSERT INTO games (title, description, detail_desc, platform, price, image_url, created_at, updated_at, modified_by) 
+                 VALUES (?, ?, ?, ?, ?, ?, NOW(), NOW(), ?)";
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssdiss", 
+        if (!$stmt) {
+            echo '<b>SQL ERROR (prepare addGame):</b> ' . mysqli_error($this->conn);
+            error_log('SQL ERROR: ' . mysqli_error($this->conn));
+            return 0;
+        }
+        mysqli_stmt_bind_param($stmt, "ssssdsi", 
             $data['title'],
             $data['description'],
+            $data['detail_desc'],
+            $data['platform'],
             $data['price'],
             $data['image_url'],
-            $data['created_by'],
             $data['modified_by']
         );
-        
         $success = mysqli_stmt_execute($stmt);
+        if (!$success) {
+            echo '<b>SQL EXECUTE ERROR (addGame):</b> ' . mysqli_error($this->conn);
+            error_log('SQL EXECUTE ERROR: ' . mysqli_error($this->conn));
+        }
         $gameId = $success ? mysqli_insert_id($this->conn) : 0;
         mysqli_stmt_close($stmt);
-        
         if ($success && isset($data['categories'])) {
             $this->updateGameCategories($gameId, $data['categories'], $data['modified_by']);
         }
-        
         return $gameId;
     }
 
@@ -140,58 +146,92 @@ class GameModel {
         $query = "UPDATE games SET 
                  title = ?,
                  description = ?,
+                 detail_desc = ?,
+                 platform = ?,
                  price = ?,
                  image_url = ?,
+                 status = ?,
+                 meta = ?,
                  modified_by = ?,
-                 modified_at = NOW()
+                 updated_at = NOW()
                  WHERE game_id = ?";
-                 
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssdissi",
-            $data['title'],
-            $data['description'],
-            $data['price'],
-            $data['image_url'],
-            $data['modified_by'],
-            $id
+        if (!$stmt) {
+            error_log('SQL ERROR (prepare updateGame): ' . mysqli_error($this->conn));
+            return false;
+        }
+        $title = (string)$data['title'];
+        $description = (string)$data['description'];
+        $detail_desc = (string)$data['detail_desc'];
+        $platform = (string)$data['platform'];
+        $price = (float)$data['price'];
+        $image_url = (string)$data['image_url'];
+        $status = isset($data['status']) ? (string)$data['status'] : 'active';
+        $meta = isset($data['meta']) ? (is_array($data['meta']) ? json_encode($data['meta']) : (string)$data['meta']) : '{}';
+        $modified_by = (int)$data['modified_by'];
+        $game_id = (int)$id;
+        mysqli_stmt_bind_param($stmt, "ssssdsssii",
+            $title,
+            $description,
+            $detail_desc,
+            $platform,
+            $price,
+            $image_url,
+            $status,
+            $meta,
+            $modified_by,
+            $game_id
         );
-        
         $success = mysqli_stmt_execute($stmt);
         mysqli_stmt_close($stmt);
-        
         if ($success && isset($data['categories'])) {
             $this->updateGameCategories($id, $data['categories'], $data['modified_by']);
         }
-        
         return $success;
     }
 
     // Xóa game
     public function deleteGame($id) {
-        // Start transaction
         mysqli_begin_transaction($this->conn);
-        
         try {
-            // Delete game categories first
+            // Xóa các bản ghi liên quan trong order_details
+            $queryOrderDetails = "DELETE FROM order_details WHERE game_id = ?";
+            $stmtOrderDetails = mysqli_prepare($this->conn, $queryOrderDetails);
+            mysqli_stmt_bind_param($stmtOrderDetails, "i", $id);
+            mysqli_stmt_execute($stmtOrderDetails);
+            mysqli_stmt_close($stmtOrderDetails);
+
+            // Xóa các bản ghi liên quan trong history
+            $queryHistory = "DELETE FROM history WHERE game_id = ?";
+            $stmtHistory = mysqli_prepare($this->conn, $queryHistory);
+            mysqli_stmt_bind_param($stmtHistory, "i", $id);
+            mysqli_stmt_execute($stmtHistory);
+            mysqli_stmt_close($stmtHistory);
+
+            // Xóa các bản ghi liên quan trong cart_items
+            $queryCartItems = "DELETE FROM cart_items WHERE game_id = ?";
+            $stmtCartItems = mysqli_prepare($this->conn, $queryCartItems);
+            mysqli_stmt_bind_param($stmtCartItems, "i", $id);
+            mysqli_stmt_execute($stmtCartItems);
+            mysqli_stmt_close($stmtCartItems);
+
+            // Xóa các bản ghi liên quan trong game_categories
             $query1 = "DELETE FROM game_categories WHERE game_id = ?";
             $stmt1 = mysqli_prepare($this->conn, $query1);
             mysqli_stmt_bind_param($stmt1, "i", $id);
             mysqli_stmt_execute($stmt1);
             mysqli_stmt_close($stmt1);
-            
-            // Then delete the game
+
+            // Xóa game
             $query2 = "DELETE FROM games WHERE game_id = ?";
             $stmt2 = mysqli_prepare($this->conn, $query2);
             mysqli_stmt_bind_param($stmt2, "i", $id);
             $success = mysqli_stmt_execute($stmt2);
             mysqli_stmt_close($stmt2);
-            
-            // If everything is successful, commit the transaction
+
             mysqli_commit($this->conn);
             return $success;
-            
         } catch (Exception $e) {
-            // If there's an error, rollback the transaction
             mysqli_rollback($this->conn);
             throw $e;
         }
@@ -199,12 +239,17 @@ class GameModel {
 
     // Thêm category cho game
     public function addGameCategory($gameId, $categoryId, $modifiedBy) {
-        $query = "INSERT INTO game_categories (game_id, category_id, created_by, created_at) 
-                 VALUES (?, ?, ?, NOW())";
-                 
+        $query = "INSERT INTO game_categories (game_id, category_id, modified_by, created_at) VALUES (?, ?, ?, NOW())";
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "iis", $gameId, $categoryId, $modifiedBy);
+        if (!$stmt) {
+            error_log('SQL ERROR (addGameCategory): ' . mysqli_error($this->conn));
+            return false;
+        }
+        mysqli_stmt_bind_param($stmt, "iii", $gameId, $categoryId, $modifiedBy);
         $success = mysqli_stmt_execute($stmt);
+        if (!$success) {
+            error_log('SQL EXECUTE ERROR (addGameCategory): ' . mysqli_error($this->conn));
+        }
         mysqli_stmt_close($stmt);
         return $success;
     }

@@ -154,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         }).join('');
+        attachAddToCartListeners(); // <--- Fix: re-attach listeners after rendering
     }
 
     function getGameCategories(game) {
@@ -244,29 +245,33 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Add to cart functionality
-    const addToCartButtons = document.querySelectorAll('.btn-add-cart');
-
-    addToCartButtons.forEach(button => {
-        button.addEventListener('click', function(event) {
-            event.preventDefault();
-
-            const gameId = this.dataset.gameId;
-
-            fetch('/Baygorn1/index.php?url=cart/add', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: `game_id=${gameId}&quantity=1`
-            })
-            .then(response => response.json())
-            .then(data => {
-                showToast(data.message);
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                showToast('Đã xảy ra lỗi khi thêm vào giỏ hàng');
+    function attachAddToCartListeners() {
+        const addToCartButtons = document.querySelectorAll('.btn-add-cart');
+        addToCartButtons.forEach(button => {
+            // Remove previous listener if any
+            button.onclick = null;
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const gameId = this.dataset.gameId;
+                fetch('/Baygorn1/index.php?url=cart/add', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `game_id=${gameId}&quantity=1`
+                })
+                .then(response => response.json())
+                .then(data => {
+                    showToast(data.message);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showToast('Đã xảy ra lỗi khi thêm vào giỏ hàng');
+                });
             });
         });
-    });
+    }
+
+    // Initial attach for page load
+    attachAddToCartListeners();
 });

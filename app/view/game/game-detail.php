@@ -32,7 +32,7 @@ if (!$game) {
 }
 
 // Convert categories string to array
-$categories = explode(',', $game['categories']);
+$categories = $game['categories'] ? explode(',', $game['categories']) : [];
 
 // Decode meta information
 $meta = json_decode($game['meta'], true);
@@ -42,7 +42,9 @@ $css_files = ['game-detail', 'header', 'footer'];
 
 // Include header
 require_once ROOT_PATH . '/view/layout/header.php';
-require_once APP_ROOT . '/app/view/helpers.php';
+require_once ROOT_PATH . '/view/helpers.php';
+
+
 ?>
 
 <div class="game-detail-container">

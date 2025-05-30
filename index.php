@@ -101,6 +101,7 @@ $controllerClassName = $controllerMap[$controllerKey] ?? ($controllerName . 'Con
 $controllerFile = BASE_PATH . '/app/Controller/' . $controllerClassName . '.php';
 
 error_log("Controller file path: " . $controllerFile);
+echo "<!-- DEBUG: Controller: $controllerClassName, Action: $action -->\n";
 if (!file_exists($controllerFile)) {
     error_log("Controller file does not exist: " . $controllerFile);
 } else {
@@ -118,12 +119,25 @@ try {
         error_log("DEBUG: index.php instantiated controller: $controllerClassName");
         
         error_log("Controller: $controllerClassName, Action: $action");
-        
-        if (method_exists($controller, $action)) {
-            error_log("DEBUG: index.php about to call action: $action");
-            call_user_func_array([$controller, $action], $params);
-            error_log("DEBUG: index.php finished calling action: $action");
+        error_log("DEBUG: List controller methods: " . print_r(get_class_methods($controller), true));
+        // Tìm method không phân biệt hoa thường
+        $realAction = null;
+        foreach (get_class_methods($controller) as $method) {
+            error_log("DEBUG: So sánh method $method với action $action");
+            if (strtolower($method) === strtolower($action)) {
+                $realAction = $method;
+                break;
+            }
+        }
+        error_log("DEBUG: realAction xác định được: " . print_r($realAction, true));
+        if ($realAction && method_exists($controller, $realAction)) {
+            error_log("DEBUG: index.php about to call action: $realAction");
+            echo "<!-- DEBUG: About to call action: $realAction -->\n";
+            call_user_func_array([$controller, $realAction], $params);
+            error_log("DEBUG: index.php finished calling action: $realAction");
+            echo "<!-- DEBUG: Finished calling action: $realAction -->\n";
         } else {
+            error_log("DEBUG: Không tìm thấy action phù hợp trong controller");
             throw new Exception("Action not found: {$action}");
         }
     } else {
